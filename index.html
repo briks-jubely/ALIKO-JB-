@@ -450,6 +450,11 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("Service Worker Registered"))
     .catch(err => console.log("SW failed", err));
 }
-</script>
+</scri<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>pt>
+
 </body>
 </html>
