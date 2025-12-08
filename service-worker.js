@@ -17,3 +17,10 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+self.addEventListener("install", e => {
+  e.waitUntil(
+    caches.open("aliko-cache").then(cache => {
+      return cache.addAll(["/", "/index.html", "/style.css", "/logo.png"]);
+    })
+  );
+});
