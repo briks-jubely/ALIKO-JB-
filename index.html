@@ -374,6 +374,12 @@ function showSection(id) {
 <footer>
     <p>© 2025 ALIKO JB Automotive Engineering</p>
 </footer>
-
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js")
+    .then(() => console.log("Service Worker Registered"))
+    .catch(err => console.log("SW failed", err));
+}
+</script>
 </body>
 </html>
