@@ -1,14 +1,13 @@
-document.getElementById("loginForm")?.addEventListener("submit", function(e){
+document.getElementById("loginForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  let user = document.getElementById("username").value;
-  let pass = document.getElementById("password").value;
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
 
-  // SAMPLE ACCOUNT (mock)
-  if(user === "student" && pass === "1234"){
+  if(username === "student" && password === "1234"){
     localStorage.setItem("loggedIn", "yes");
-    window.location.href = "app.html";
+    window.location.href = "academy.html";
   } else {
-    document.getElementById("loginMsg").innerText = "Invalid login details";
+    document.getElementById("loginMsg").innerText = "Invalid username or password";
   }
 });
