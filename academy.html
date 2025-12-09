@@ -69,7 +69,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Academy</title>
+</head>
 
+<body>
+
+<script>
+  if (localStorage.getItem("loggedIn") !== "yes") {
+    window.location.replace("login.html");
+  }
+</script>
+
+<!-- ✅ UI inaanzia hapa -->
+<h1>ALIKO JB Academy</h1>
+<p>Training & Community</p>
+
+</body>
+</html>
 <!-- 🔹 TOP APP BAR -->
 <header class="app-header">
   <img src="logo.png" class="app-logo">
