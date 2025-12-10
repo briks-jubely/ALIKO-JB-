@@ -1,7 +1,7 @@
 {
   "name": "ALIKO JB APP",
   "short_name": "ALIKO JB",
-  "start_url": "index.html",
+  "start_url": "Index.html",
   "display": "standalone",
   "background_color": "#020617",
   "theme_color": "#020617",
