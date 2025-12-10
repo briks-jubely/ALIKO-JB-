@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>ALIKO JB</title>
-
   <script>
-    // App router
     if(localStorage.getItem("loggedIn") === "yes"){
-      location.href = "academy.html";
+      location.replace("academy.html");
     } else {
-      location.href = "workshop.html";
+      location.replace("workshop.html");
     }
   </script>
 </head>
-<body>
-</body>
+<body></body>
 </html>
