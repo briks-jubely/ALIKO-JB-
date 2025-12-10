@@ -1,7 +1,7 @@
 {
   "name": "ALIKO JB Academy",
   "short_name": "ALIKO JB",
-  "start_url": "login.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#020617",
   "theme_color": "#020617",
