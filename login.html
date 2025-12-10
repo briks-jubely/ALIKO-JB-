@@ -11,72 +11,48 @@
   }
 </script>
 </head>
-<style>/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-}
-
-html,body{
-  height:100%;
-  width:100%;
-  background:#020617;
-  color:#e5e7eb;
-}
-
-/* MAIN CONTAINER */
-.login-container{
+<style>.login-container{
   min-height:100vh;
-  width:100vw;
+  width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle at top, #020617, #020617);
+  padding:16px;
 }
 
-/* CARD */
 .login-card{
-  width:92%;
-  max-width:380px;
+  width:100%;
+  max-width:360px;
   background:#0f172a;
-  border-radius:22px;
-  padding:28px 22px 32px;
+  border-radius:24px;
+  padding:26px 20px 30px;
   text-align:center;
   box-shadow:0 25px 60px rgba(0,0,0,.6);
-  animation:fadeUp .6s ease;
-}
-
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(24px);}
-  to   {opacity:1; transform:translateY(0);}
 }
 
 /* LOGO */
 .logo{
-  width:78px;
-  height:78px;
-  object-fit:contain;
-  margin-bottom:14px;
+  width:72px;
+  height:72px;
+  margin-bottom:10px;
 }
 
 /* TABS */
 .login-tabs{
-  position:absolute;
-  top:24px;
   display:flex;
   gap:6px;
-  background:#0f172a;
+  margin:14px 0 10px;
+  background:#020617;
   padding:6px;
-  border-radius:28px;
+  border-radius:30px;
 }
 
 .login-tabs button{
+  flex:1;
+  padding:10px 0;
   border:none;
   background:transparent;
-  padding:8px 20px;
-  border-radius:22px;
+  border-radius:24px;
   color:#94a3b8;
   font-weight:600;
 }
@@ -90,20 +66,11 @@ html,body{
 .login-card input{
   width:100%;
   padding:15px;
-  margin-top:14px;
+  margin-top:12px;
   border-radius:16px;
   border:none;
   background:#020617;
   color:#e5e7eb;
-  font-size:15px;
-}
-
-.login-card input::placeholder{
-  color:#64748b;
-}
-
-.login-card input:focus{
-  outline:2px solid #38bdf8;
 }
 
 /* BUTTON */
@@ -112,52 +79,27 @@ html,body{
   padding:15px;
   border:none;
   border-radius:18px;
-  margin-top:18px;
-  font-size:16px;
+  margin-top:16px;
   font-weight:700;
-  color:#020617;
   background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  color:#020617;
 }
 
 /* MESSAGE */
 .msg{
+  margin-top:8px;
   font-size:14px;
-  margin-top:10px;
-  color:#f87171;
 }</style>
 <body>
-
 <div class="login-container">
-
-  <div class="login-tabs">
-    <button id="loginTab" class="active" onclick="showLogin()">Login</button>
-    <button id="registerTab" onclick="showRegister()">Register</button>
-  </div>
 
   <div class="login-card">
 
     <img src="assets/images/logo.png" class="logo">
 
-    <!-- LOGIN -->
-    <div id="loginBox">
-      <input type="text" id="loginUser" placeholder="Username">
-      <input type="password" id="loginPass" placeholder="Password">
-      <button onclick="login()">Login</button>
-      <p class="msg" id="loginMsg"></p>
+    <div class="login-tabs">
+      <button id="loginTab" class="active" onclick="showLogin()">Login</button>
+      <button id="registerTab" onclick="showRegister()">Register</button>
     </div>
-
-    <!-- REGISTER -->
-    <div id="registerBox" style="display:none;">
-      <input type="text" id="regName" placeholder="Full Name">
-      <input type="text" id="regUser" placeholder="Username">
-      <input type="password" id="regPass" placeholder="Password">
-      <button onclick="register()">Create Account</button>
-      <p class="msg" id="regMsg"></p>
-    </div>
-
-  </div>
-</div>
-
-<script src="auth.js"></script>
 </body>
 </html>
