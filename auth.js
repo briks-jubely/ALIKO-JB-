@@ -1,40 +1,17 @@
-function loginUser(e) {
-  if (e) e.preventDefault();
+function login(){
+  const user = loginUser.value.trim();
+  const pass = loginPass.value.trim();
+  const users = JSON.parse(localStorage.getItem("users"));
 
-  const username = document.getElementById("login-username").value.trim();
-  const password = document.getElementById("login-password").value.trim();
+  const found = users.find(u=>u.username===user && u.password===pass);
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-
-  const user = users.find(
-    u => u.username === username && u.password === password
-  );
-
-  if (!user) {
-    alert("Invalid username or password");
+  if(!found){
+    loginMsg.textContent = "Invalid username or password";
     return;
   }
 
-  localStorage.setItem("loggedInUser", username);
+  localStorage.setItem("loggedInUser", found.username);
+  localStorage.setItem("currentUser", JSON.stringify(found));
+
   window.location.href = "academy.html";
-}
-
-function registerUser(e) {
-  if (e) e.preventDefault();
-
-  const username = document.getElementById("reg-username").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
-
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-
-  if (users.some(u => u.username === username)) {
-    alert("Mtumiaji tayari yupo");
-    return;
-  }
-
-  users.push({ username, password });
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Usajili umefanikiwa");
-  window.location.href = "login.html";
 }
