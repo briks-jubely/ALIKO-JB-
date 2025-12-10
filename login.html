@@ -119,6 +119,13 @@ input:focus{
   <p>Automotive Engineering Learning Platform</p>
 
   <div class="tabs">
+    <form onsubmit="loginUser(event)">
+  <input id="login-username">
+  <input id="login-password" type="password">
+  <button type="submit">Login</button>
+</form>
+
+<script src="js/auth.js"></script>
     <button id="loginTab" class="active" onclick="showLogin()">Login</button>
     <button id="regTab" onclick="showRegister()">Register</button>
   </div>
