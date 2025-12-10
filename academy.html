@@ -82,6 +82,11 @@
 </head>
 
 <body>
+  <script>
+  if(localStorage.getItem("loggedIn") !== "true"){
+    location.replace("login.html");
+  }
+  </script>
 <script>
   if(localStorage.getItem("loggedIn") !== "true"){
     location.href = "login.html";
