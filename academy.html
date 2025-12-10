@@ -83,6 +83,12 @@
 
 <body>
   <script>
+  const user = localStorage.getItem("loggedInUser");
+  if(!user){
+    window.location.href = "login.html";
+  }
+  </script>
+  <script>
   if(localStorage.getItem("loggedIn") !== "true"){
     location.replace("login.html");
   }
