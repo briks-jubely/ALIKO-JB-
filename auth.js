@@ -1,55 +1,73 @@
+// Hakikisha users storage ipo
+if(!localStorage.getItem("users")){
+  localStorage.setItem("users", JSON.stringify([]));
+}
+
+// TAB SWITCH
 function showLogin(){
-  document.getElementById("loginBox").classList.remove("hidden");
-  document.getElementById("registerBox").classList.add("hidden");
+  document.getElementById("loginBox").style.display = "block";
+  document.getElementById("registerBox").style.display = "none";
   document.getElementById("loginTab").classList.add("active");
   document.getElementById("registerTab").classList.remove("active");
 }
 
 function showRegister(){
-  document.getElementById("registerBox").classList.remove("hidden");
-  document.getElementById("loginBox").classList.add("hidden");
-  document.getElementById("registerTab").classList.add("active");
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("registerBox").style.display = "block";
   document.getElementById("loginTab").classList.remove("active");
+  document.getElementById("registerTab").classList.add("active");
 }
 
-/* REGISTER */
-document.getElementById("registerForm").addEventListener("submit", function(e){
-  e.preventDefault();
+// REGISTER
+function register(){
+  let name = regName.value.trim();
+  let username = regUser.value.trim();
+  let password = regPass.value.trim();
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-  let username = document.getElementById("regUser").value;
-
-  if(users.find(u => u.username === username)){
-    document.getElementById("registerMsg").innerText = "Username already exists";
+  if(!name || !username || !password){
+    regMsg.innerText = "Fill all fields";
     return;
   }
 
-  users.push({
-    name: document.getElementById("regName").value,
-    username: username,
-    password: document.getElementById("regPass").value
-  });
+  let users = JSON.parse(localStorage.getItem("users"));
 
+  if(users.find(u => u.username === username)){
+    regMsg.innerText = "Username already exists";
+    return;
+  }
+
+  users.push({ name, username, password });
   localStorage.setItem("users", JSON.stringify(users));
-  document.getElementById("registerMsg").innerText = "Registration successful. Login now.";
+
+  regMsg.style.color = "#22c55e";
+  regMsg.innerText = "Account created! You can login";
 
   showLogin();
-});
+}
 
-/* LOGIN */
-document.getElementById("loginForm").addEventListener("submit", function(e){
-  e.preventDefault();
+// LOGIN
+function login(){
+  let username = loginUser.value.trim();
+  let password = loginPass.value.trim();
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-  let u = document.getElementById("loginUser").value;
-  let p = document.getElementById("loginPass").value;
+  let users = JSON.parse(localStorage.getItem("users"));
 
-  let match = users.find(user => user.username === u && user.password === p);
+  let user = users.find(u => u.username === username && u.password === password);
 
-  if(match){
-    localStorage.setItem("loggedIn", "yes");
-    window.location.href = "academy.html";
-  } else {
-    document.getElementById("loginMsg").innerText = "Invalid login details";
+  if(!user){
+    loginMsg.innerText = "Invalid login";
+    return;
   }
-});
+
+  localStorage.setItem("loggedIn", "true");
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  location.href = "academy.html";
+}
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("currentUser");
+  location.href = "workshop.html";
+}
