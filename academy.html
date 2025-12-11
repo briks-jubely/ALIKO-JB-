@@ -1,111 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="icon-192.png">
-
-<!-- App icons -->
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="manifest" href="manifest.json">
-  
   <meta charset="UTF-8">
   <title>ALIKO JB Automotive Academy</title>
 
-  <!-- STYLE -->
-  <style>
-    body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
-}
-
-/* APP HEADER */
-.app-header {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 15px;
-  background: #020617;
-}
-
-.app-logo {
-  width: 55px;
-}
-
-/* NAV */
-.app-nav {
-  display: flex;
-  justify-content: space-around;
-  background: #020617;
-  padding: 10px;
-}
-
-.app-nav a {
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* CONTENT */
-.content {
-  padding: 20px;
-}
-
-.card {
-  background: #020617;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 12px;
-}
-
-/* FOOTER */
-.footer {
-  text-align: center;
-  padding: 15px;
-  font-size: 13px;
-  color: #94a3b8;
-}
-          </style> 
-  <link rel="stylesheet" href="style.css">
-
-  <!-- ICON & APP -->
   <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.json">
+
   <meta name="theme-color" content="#020617">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Academy</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    .app-header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 15px;
+      background: #020617;
+    }
+
+    .app-logo {
+      width: 55px;
+    }
+
+    .app-nav {
+      display: flex;
+      justify-content: space-around;
+      background: #020617;
+      padding: 10px;
+    }
+
+    .app-nav a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .card {
+      background: #020617;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <script>
-  const user = localStorage.getItem("loggedInUser");
-  if(!user){
+
+<!-- 🔹 LOGIN CHECK (MREKEBISHO MUHIMU) -->
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
     window.location.href = "login.html";
   }
-  </script>
-  <script>
-  if(localStorage.getItem("loggedIn") !== "true"){
-    location.replace("login.html");
-  }
-  </script>
-<script>
-  if(localStorage.getItem("loggedIn") !== "true"){
-    location.href = "login.html";
-  }
-</script>
-<script>
-  if (localStorage.getItem("loggedIn") !== "yes") {
-    window.location.replace("login.html");
-  }
 </script>
 
-</body>
-</html>
 <!-- 🔹 TOP APP BAR -->
 <header class="app-header">
   <img src="logo.png" class="app-logo">
@@ -128,23 +97,17 @@
 
   <div class="card">
     <h3>Automotive Electrical Systems</h3>
-    <p>
-      CAN Bus, Sensors, ECU, Voltage & Signal analysis.
-    </p>
+    <p>CAN Bus, Sensors, ECU, Voltage & Signal analysis.</p>
   </div>
 
   <div class="card">
     <h3>Engine & Transmission Control</h3>
-    <p>
-      ECU logic, Opticruise, Automatic Gearbox systems.
-    </p>
+    <p>ECU logic, Opticruise, Automatic Gearbox systems.</p>
   </div>
 
   <div class="card">
     <h3>Diagnostics & Programming</h3>
-    <p>
-      Scanner usage, fault codes, basic programming logic.
-    </p>
+    <p>Scanner usage, fault codes, basic programming logic.</p>
   </div>
 </section>
 
@@ -154,31 +117,27 @@
 
   <div class="card">
     <h3>Ask Questions</h3>
-    <p>
-      Fundi na wanafunzi wataweza kuuliza maswali
-      na kubadilishana maarifa ya magari.
-    </p>
+    <p>Fundi na wanafunzi wataweza kuuliza maswali na kubadilishana maarifa ya magari.</p>
   </div>
 
   <div class="card">
     <h3>Knowledge Sharing</h3>
-    <p>
-      Video, diagrams, real vehicle problems & solutions.
-    </p>
+    <p>Video, diagrams, real vehicle problems & solutions.</p>
   </div>
 
-  <a class="btn-academy" href="https://wa.me/255620198672">
-    💬 Join Discussion (WhatsApp)
-  </a>
+  <a class="btn-academy" href="https://wa.me/255620198672">💬 Join Discussion (WhatsApp)</a>
 </section>
+
+<!-- LOGOUT -->
 <button onclick="logout()">Logout</button>
 <script src="auth.js"></script>
+
 <!-- 🔹 FOOTER -->
 <footer class="footer">
   <p>© 2025 ALIKO JB Automotive Engineering</p>
 </footer>
 
-<!-- 🔹 SERVICE WORKER -->
+<!-- SERVICE WORKER -->
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
@@ -186,4 +145,4 @@ if ("serviceWorker" in navigator) {
 </script>
 
 </body>
-      </html>
+  </html>
