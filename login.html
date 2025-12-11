@@ -167,8 +167,8 @@ function showRegister(){
 
 /* REGISTER */
 function registerUser(){
-  const username = reg-username.value.trim();
-  const password = reg-password.value.trim();
+  const username = document.getElementById("reg-username").value.trim();
+  const password = document.getElementById("reg-password").value.trim();
 
   const users = JSON.parse(localStorage.getItem("users"));
 
@@ -193,8 +193,8 @@ function registerUser(){
 
 /* LOGIN */
 function loginUser(){
-  const username = login-username.value.trim();
-  const password = login-password.value.trim();
+  const username = document.getElementById("login-username").value.trim();
+  const password = document.getElementById("login-password").value.trim();
 
   const users = JSON.parse(localStorage.getItem("users"));
 
@@ -213,4 +213,4 @@ function loginUser(){
 </script>
 
 </body>
-</html>
+  </html>
