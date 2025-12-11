@@ -39,5 +39,6 @@ function registerUser(e) {
   localStorage.setItem("users", JSON.stringify(users));
 
   alert("Usajili umefanikiwa");
+  localStorage.setItem("loggedInUser", username);
   window.location.href = "login.html";
         }
