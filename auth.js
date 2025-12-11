@@ -15,7 +15,10 @@ function loginUser(e) {
     return;
   }
 
+  // 🔹 MREKEBISHO MUHIMU
   localStorage.setItem("loggedInUser", username);
+  localStorage.setItem("loggedIn", "true");
+
   window.location.href = "academy.html";
 }
 
@@ -37,4 +40,4 @@ function registerUser(e) {
 
   alert("Usajili umefanikiwa");
   window.location.href = "login.html";
-}
+        }
