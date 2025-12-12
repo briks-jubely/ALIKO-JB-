@@ -7,20 +7,50 @@
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #1c1c1c, #3a3a3a); color: #fff; }
-        header { background-color: #111; padding: 25px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s, padding 0.3s; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background: radial-gradient(circle at top, #0d0d0f 0%, #111 30%, #0a0a0a 100%); color: #fff; }
+        header {
+    background: linear-gradient(180deg, #000, #111);
+    padding: 22px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    transition: top 0.3s, padding 0.3s, background 0.3s;
+}
         header.shrink { padding: 10px; }
         header img { width: 90px; height: 90px; border-radius: 15px; transition: transform 0.3s; }
         header img:hover { transform: rotate(15deg); }
         nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px 0; margin-top: 140px; }
-        nav a { text-decoration: none; background-color: #ff6600; padding: 16px 30px; border-radius: 12px; color: white; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-size: 1.1rem; }
+        nav a {
+    text-decoration: none;
+    background: linear-gradient(145deg, #ff8400, #ff4d00);
+    padding: 16px 32px;
+    border-radius: 14px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    font-size: 1.15rem;
+}
         nav a:hover { background-color: #ff3300; transform: translateY(-3px); box-shadow: 0 6px 10px rgba(0,0,0,0.4); }section { padding: 20px; max-width: 900px; margin: auto; }
     h2 { color: #ffcc00; text-align: center; }
-    .feature-card { background-color: #222; padding: 20px; margin: 20px 0; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-    .feature-card img.card-img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
-    .feature-card h3 img { width: 28px; height: 28px; }
-    footer { text-align: center; padding: 20px; background-color: #111; margin-top: 30px; }
-</style>
+    .feature-card {
+background: linear-gradient(145deg, #1a1a1d, #0e0e0f);
+padding: 22px;
+margin: 25px 0;
+border-radius: 18px;
+border: 1px solid rgba(255,255,255,0.05);
+transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+box-shadow: 0 0 20px rgba(0,0,0,0.6), inset 0 0 12px rgba(255,255,255,0.03);
+
+} .feature-card img.card-img { width: 100%; border-radius: 12px; margin-bottom: 15px; } .feature-card h3 img { width: 28px; height: 28px; } footer { text-align: center; padding: 20px; background-color: #111; margin-top: 30px; } </style>
 
 </head>
 <body><header>
@@ -31,11 +61,10 @@
     <a href="academy.html"><img src="icon-192.png" alt=""> Academy</a>
 </nav><section>
     <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
-    <p>ALIKO JB AUTOMOTIVE ENGINEERING...</p><div class="feature-card">
+    <p>Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING...</p><div class="feature-card">
     <img src="workshop_pht.png" class="card-img" alt="Workshop Image">
     <h3><img src="icon-192.png" alt=""> Workshop</h3>
     <p>ALIKO JB Workshop inatoa huduma kamili za magari...</p>
-        <a href="workshop_pht.png"></a>
     <a href="Workshop.html">Explore Workshop</a>
 </div>
 
@@ -49,4 +78,4 @@
 </section><footer>
     &copy; 2025 ALIKO JB AUTOMOTIVE ENGINEERING. All Rights Reserved.
 </footer></body>
-</html>
+            </html>
