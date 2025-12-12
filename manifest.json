@@ -1,10 +1,11 @@
 {
-  "name": "ALIKO JB APP",
+  "name": "ALIKO JB AUTOMOTIVE ENGINEERING",
   "short_name": "ALIKO JB",
+  "description": "Home of Workshop & Academy for automotive engineering innovation and training.",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#020617",
-  "theme_color": "#020617",
+  "background_color": "#1c1c1c",
+  "theme_color": "#ff6600",
   "icons": [
     {
       "src": "icon-192.png",
@@ -12,7 +13,7 @@
       "type": "image/png"
     },
     {
-      "src": "icon-192.png",
+      "src": "icon-192.png.",
       "sizes": "512x512",
       "type": "image/png"
     }
