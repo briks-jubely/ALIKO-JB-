@@ -187,6 +187,53 @@
                 font-size: 22px;
             }
         }
+        /* Header animation */
+header {
+    background-color: #111;
+    padding: 25px;
+    text-align: center;
+    position: fixed; /* sticky na auto-hide */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: top 0.3s, padding 0.3s;
+}
+
+/* Shrink header on scroll */
+header.shrink {
+    padding: 10px;
+}
+
+/* Navigation buttons bigger and flexible */
+nav a {
+    text-decoration: none;
+    background-color: #ff6600;
+    padding: 16px 30px; /* kubwa kidogo */
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    font-size: 1.1rem; /* kubwa kidogo */
+}
+
+nav a:hover {
+    background-color: #ff3300;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+}
+
+/* Make buttons responsive */
+@media (max-width: 600px) {
+    nav a {
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+            }
     </style>
 </head>
 <body>
