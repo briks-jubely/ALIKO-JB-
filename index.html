@@ -1,340 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALIKO JB AUTOMOTIVE ENGINEERING</title>
-
-    <!-- Icon -->
     <link rel="icon" href="icon-192.png" type="image/png">
     <link rel="manifest" href="manifest.json">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
     <style>
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
-            color: #fff;
-        }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #1c1c1c, #3a3a3a); color: #fff; }
+        header { background-color: #111; padding: 25px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s, padding 0.3s; }
+        header.shrink { padding: 10px; }
+        header img { width: 90px; height: 90px; border-radius: 15px; transition: transform 0.3s; }
+        header img:hover { transform: rotate(15deg); }
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px 0; margin-top: 140px; }
+        nav a { text-decoration: none; background-color: #ff6600; padding: 16px 30px; border-radius: 12px; color: white; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-size: 1.1rem; }
+        nav a:hover { background-color: #ff3300; transform: translateY(-3px); box-shadow: 0 6px 10px rgba(0,0,0,0.4); }section { padding: 20px; max-width: 900px; margin: auto; }
+    h2 { color: #ffcc00; text-align: center; }
+    .feature-card { background-color: #222; padding: 20px; margin: 20px 0; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+    .feature-card img.card-img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
+    .feature-card h3 img { width: 28px; height: 28px; }
+    footer { text-align: center; padding: 20px; background-color: #111; margin-top: 30px; }
+</style>
 
-        header {
-            background-color: #111;
-            padding: 25px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header img {
-            width: 90px;
-            height: 90px;
-            border-radius: 15px;
-            transition: transform 0.3s;
-        }
-
-        header img:hover {
-            transform: rotate(15deg);
-        }
-
-        header h1 {
-            margin: 10px 0 0 0;
-            font-size: 26px;
-            letter-spacing: 1px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        nav a {
-            text-decoration: none;
-            background-color: #ff6600;
-            padding: 12px 25px;
-            border-radius: 12px;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        nav a:hover {
-            background-color: #ff3300;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
-        }
-
-        nav a img {
-            width: 24px;
-            height: 24px;
-        }
-
-        section {
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        h2 {
-            color: #ffcc00;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        p {
-            line-height: 1.7;
-            text-align: justify;
-        }
-
-        .feature-card {
-            background-color: #222;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 15px;
-            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            background-color: #333;
-            box-shadow: 0 8px 12px rgba(0,0,0,0.5);
-        }
-
-        .feature-card h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #ff9900;
-        }
-
-        .feature-card h3 img {
-            width: 28px;
-            height: 28px;
-        }
-
-        .feature-card a {
-            margin-top: 10px;
-            display: inline-block;
-            text-decoration: none;
-            background-color: #00ccff;
-            color: #111;
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .feature-card a:hover {
-            background-color: #0099cc;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #111;
-            margin-top: 30px;
-        }
-
-        /* Install button */
-        #installBtn {
-            display: none;
-            margin: 20px auto;
-            padding: 12px 30px;
-            background-color: #00ccff;
-            color: #111;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            display: block;
-            transition: 0.3s;
-        }
-
-        #installBtn:hover {
-            background-color: #0099cc;
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-            }
-
-            .feature-card h3 {
-                font-size: 18px;
-            }
-
-            header h1 {
-                font-size: 22px;
-            }
-        }
-        /* Header animation */
-header {
-    background-color: #111;
-    padding: 25px;
-    text-align: center;
-    position: fixed; /* sticky na auto-hide */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    transition: top 0.3s, padding 0.3s;
-}
-
-/* Shrink header on scroll */
-header.shrink {
-    padding: 10px;
-}
-
-/* Navigation buttons bigger and flexible */
-nav a {
-    text-decoration: none;
-    background-color: #ff6600;
-    padding: 16px 30px; /* kubwa kidogo */
-    border-radius: 12px;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    font-size: 1.1rem; /* kubwa kidogo */
-}
-
-nav a:hover {
-    background-color: #ff3300;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
-}
-
-/* Make buttons responsive */
-@media (max-width: 600px) {
-    nav a {
-        padding: 14px 20px;
-        font-size: 1rem;
-    }
-            }
-    </style>
 </head>
-<body>
+<body><header>
+    <img src="assets/logo.png" alt="ALIKO JB Logo">
+    <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
+</header><nav>
+    <a href="workshop.html"><img src="icon-192.png" alt=""> Workshop</a>
+    <a href="academy.html"><img src="icon-192.png" alt=""> Academy</a>
+</nav><section>
+    <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
+    <p>Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING...</p><div class="feature-card">
+    <img src="workshop_pht.png" class="card-img" alt="Workshop Image">
+    <h3><img src="icon-192.png" alt=""> Workshop</h3>
+    <p>ALIKO JB Workshop inatoa huduma kamili za magari...</p>
+    <a href="Workshop.html">Explore Workshop</a>
+</div>
 
-    <!-- Header -->
-    <header>
-        <img src="assets/logo.png" alt="ALIKO JB Logo">
-        <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
-    </header>
+<div class="feature-card">
+    <img src="academy_pht.png" class="card-img" alt="Academy Image">
+    <h3><img src="icon-192.png" alt=""> Academy</h3>
+    <p>ALIKO JB Academy ni mahali pa kujifunza...</p>
+    <a href="academy.html">Explore Academy</a>
+</div>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="workshop.html"><img src="icon-192.png" alt=""> Workshop</a>
-        <a href="academy.html"><img src="icon-192.png" alt=""> Academy</a>
-    </nav>
-
-    <!-- Install button -->
-    <button id="installBtn">Install App</button>
-
-    <!-- Main Content -->
-    <section>
-        <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
-        <p>
-            Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING, mahali ambapo ubunifu na teknolojia ya kisasa ya magari hukutana. Tunajivunia kutoa huduma za kitaalamu kwenye Workshop yetu na mafunzo ya kina kwenye Academy yetu, kuhakikisha kila mteja na mwanafunzi anapata ujuzi na uzoefu wa hali ya juu.  
-        </p>
-
-        <div class="feature-card">
-            <h3><img src="icon-192.png" alt=""> Workshop</h3>
-            <p>
-                ALIKO JB Workshop inatoa huduma kamili za magari, ikijumuisha ukaguzi wa mfumo wa umeme, matengenezo ya injini, gearbox, na mashine nyingine. Wahandisi wetu wenye ujuzi wa hali ya juu hufanya kazi kuhakikisha gari lako linafanya kazi kwa ufanisi na salama.
-            </p>
-            <a href="Workshop.html">Explore Workshop</a>
-        </div>
-
-        <div class="feature-card">
-            <h3><img src="icon-192.png" alt=""> Academy</h3>
-            <p>
-                ALIKO JB Academy ni mahali pa kujifunza kuhusu teknolojia za magari na uhandisi wa umeme. Wanafunzi wanapata mafunzo ya vitendo, ufahamu wa systems za kisasa, na mbinu za ubunifu katika tasnia ya magari. Hapa, kila mtu anapata fursa ya kukuza ujuzi wake.
-            </p>
-            <a href="academy.html">Explore Academy</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 ALIKO JB AUTOMOTIVE ENGINEERING. All Rights Reserved.
-    </footer>
-
-    <!-- PWA Install Script -->
-    <script>
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'block';
-        });
-
-        installBtn.addEventListener('click', async () => {
-            installBtn.style.display = 'none';
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if(outcome === 'accepted'){
-                console.log('User accepted the install prompt');
-            }
-            deferredPrompt = null;
-        });
-
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(reg => console.log('Service Worker registered', reg))
-                    .catch(err => console.log('Service Worker registration failed', err));
-            });
-        }
-    </script>
-<script>
-    // Auto-hide / shrink header on scroll
-    let prevScrollpos = window.pageYOffset;
-    const header = document.querySelector("header");
-
-    window.onscroll = function() {
-        let currentScrollPos = window.pageYOffset;
-
-        // Shrink header when scrolling down
-        if(currentScrollPos > 50){
-            header.classList.add("shrink");
-        } else {
-            header.classList.remove("shrink");
-        }
-
-        // Hide header on scroll down, show on scroll up
-        if(prevScrollpos > currentScrollPos){
-            header.style.top = "0";
-        } else {
-            header.style.top = "-100px"; // hides header
-        }
-        prevScrollpos = currentScrollPos;
-    }
-</script>
-</body>
-    </html>
+</section><footer>
+    &copy; 2025 ALIKO JB AUTOMOTIVE ENGINEERING. All Rights Reserved.
+</footer></body>
+</html>
