@@ -8,12 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-  background: radial-gradient(circle at top, #0a0f1f, #020617 70%);
-  overflow-x: hidden;
-  background: radial-gradient(circle at top, #0a0f1f, #020617 70%);
-  overflow-x: hidden; margin: 0; font-family: 'Roboto', sans-serif; background: radial-gradient(circle at top, #0d0d0f 0%, #111 30%, #0a0a0a 100%); color: #fff; }
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #050505, #0d0f23, #000000);
+    background-attachment: fixed;
+    color: #fff;
+    letter-spacing: 0.4px;
+}
         header {
-    background: linear-gradient(180deg, #000, #111);
+    background: linear-gradient(180deg, #000428, #004e92);
     padding: 22px;
     text-align: center;
     position: fixed;
@@ -21,8 +24,8 @@
     left: 0;
     width: 100%;
     z-index: 100;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    border-bottom: 1px solid rgba(0,160,255,0.25);
+    box-shadow: 0 4px 20px rgba(0,120,255,0.4);
     transition: top 0.3s, padding 0.3s, background 0.3s;
 }
         header.shrink { padding: 10px; }
@@ -31,7 +34,7 @@
         nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px 0; margin-top: 140px; }
         nav a {
     text-decoration: none;
-    background: linear-gradient(145deg, #ff8400, #ff4d00);
+    background: linear-gradient(145deg, #003cff, #009dff);
     padding: 16px 32px;
     border-radius: 14px;
     color: white;
@@ -40,21 +43,21 @@
     align-items: center;
     gap: 10px;
     transition: 0.3s;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 0 15px rgba(0, 120, 255, 0.4);
     font-size: 1.15rem;
 }
-        nav a:hover { background-color: #ff3300; transform: translateY(-3px); box-shadow: 0 6px 10px rgba(0,0,0,0.4); }section { padding: 20px; max-width: 900px; margin: auto; }
-    h2 { color: #ffcc00; text-align: center; }
-    .feature-card {
-background: linear-gradient(145deg, #1a1a1d, #0e0e0f);
-padding: 22px;
-margin: 25px 0;
-border-radius: 18px;
-border: 1px solid rgba(255,255,255,0.05);
-transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
-box-shadow: 0 0 20px rgba(0,0,0,0.6), inset 0 0 12px rgba(255,255,255,0.03);
+nav a:hover {
+    background: linear-gradient(145deg, #0066ff, #00c8ff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 150, 255, 0.55);
+}
+        nav a:hover { background-color: #ff3300; transform: translateY(-3px); box-shadow: 0 6px 10px rgba(0,0,0,0.4); }section {
+padding: 20px;
+max-width: 900px;
+margin: auto;
+backdrop-filter: blur(4px);
 
-} .feature-card img.card-img { width: 100%; border-radius: 12px; margin-bottom: 15px; } .feature-card h3 img { width: 28px; height: 28px; } footer { text-align: center; padding: 20px; background-color: #111; margin-top: 30px; } </style>
+} h2 { color: #ffcc00; text-align: center; } .feature-card { background: linear-gradient(160deg, #0d0f1a 0%, #080810 40%, #000 100%); padding: 25px; margin: 28px 0; border-radius: 18px; border: 1px solid rgba(0, 150, 255, 0.15); box-shadow: 0 0 25px rgba(0, 140, 255, 0.15), inset 0 0 25px rgba(0, 80, 255, 0.08); transition: 0.35s; } .feature-card:hover { transform: translateY(-6px); box-shadow: 0 0 35px rgba(0, 160, 255, 0.25), inset 0 0 30px rgba(0, 110, 255, 0.12); } .feature-card img.card-img { width: 100%; border-radius: 12px; margin-bottom: 15px; } .feature-card h3 img { width: 28px; height: 28px; } footer { text-align: center; padding: 20px; background-color: #111; margin-top: 30px; } </style>
 
 </head>
 <body><header>
