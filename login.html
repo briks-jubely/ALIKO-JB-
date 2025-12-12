@@ -142,75 +142,89 @@ input:focus{
   </div>
 
 </div>
-
-
 <script>
-/* INIT */
-if(!localStorage.getItem("users")){
-  localStorage.setItem("users", JSON.stringify([]));
-}
+document.addEventListener("DOMContentLoaded", () => {
 
-/* CHANGE FORMS */
-function showLogin(){
-  loginForm.classList.add("active");
-  regForm.classList.remove("active");
-  loginTab.classList.add("active");
-  regTab.classList.remove("active");
-}
+  const loginForm = document.getElementById("loginForm");
+  const regForm = document.getElementById("regForm");
+  const loginTab = document.getElementById("loginTab");
+  const regTab = document.getElementById("regTab");
 
-function showRegister(){
-  regForm.classList.add("active");
-  loginForm.classList.remove("active");
-  regTab.classList.add("active");
-  loginTab.classList.remove("active");
-}
+  const loginUserField = document.getElementById("login-username");
+  const loginPassField = document.getElementById("login-password");
+  const regUserField = document.getElementById("reg-username");
+  const regPassField = document.getElementById("reg-password");
 
-/* REGISTER */
-function registerUser(){
-  const username = document.getElementById("reg-username").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
+  const loginMsg = document.getElementById("loginMsg");
+  const regMsg = document.getElementById("regMsg");
 
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  if(!username || !password){
-    regMsg.textContent = "Fill all fields";
-    return;
+  // Reset if corrupted
+  if(!localStorage.getItem("users")){
+      localStorage.setItem("users", JSON.stringify([]));
   }
 
-  if(users.find(u => u.username === username)){
-    regMsg.textContent = "Username already exists";
-    return;
-  }
+  // Switch tabs
+  window.showLogin = function(){
+    loginForm.classList.add("active");
+    regForm.classList.remove("active");
+    loginTab.classList.add("active");
+    regTab.classList.remove("active");
+  };
 
-  users.push({username, password});
-  localStorage.setItem("users", JSON.stringify(users));
+  window.showRegister = function(){
+    regForm.classList.add("active");
+    loginForm.classList.remove("active");
+    regTab.classList.add("active");
+    loginTab.classList.remove("active");
+  };
 
-  regMsg.textContent = "Account created! Login now";
-  regMsg.classList.add("success");
+  // REGISTER
+  window.registerUser = function(){
+    const username = regUserField.value.trim();
+    const password = regPassField.value.trim();
+    const users = JSON.parse(localStorage.getItem("users"));
 
-  setTimeout(showLogin, 700);
-}
+    if(!username || !password){
+      regMsg.textContent = "Fill all fields";
+      return;
+    }
 
-/* LOGIN */
-function loginUser(){
-  const username = document.getElementById("login-username").value.trim();
-  const password = document.getElementById("login-password").value.trim();
+    if(users.find(u => u.username === username)){
+      regMsg.textContent = "Username already exists";
+      return;
+    }
 
-  const users = JSON.parse(localStorage.getItem("users"));
+    users.push({username, password});
+    localStorage.setItem("users", JSON.stringify(users));
 
-  const found = users.find(u => u.username === username && u.password === password);
+    regMsg.textContent = "Account created! Login now";
+    regMsg.classList.add("success");
 
-  if(!found){
-    loginMsg.textContent = "Invalid username or password";
-    return;
-  }
+    setTimeout(showLogin, 700);
+  };
 
-  localStorage.setItem("loggedIn", "true");
-  localStorage.setItem("currentUser", JSON.stringify(found));
+  // LOGIN
+  window.loginUser = function(){
+    const username = loginUserField.value.trim();
+    const password = loginPassField.value.trim();
+    const users = JSON.parse(localStorage.getItem("users"));
 
-  window.location.href = "academy.html";
-}
+    const found = users.find(
+      u => u.username === username && u.password === password
+    );
+
+    if(!found){
+      loginMsg.textContent = "Invalid username or password";
+      return;
+    }
+
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("currentUser", JSON.stringify(found));
+
+    window.location.href = "academy.html";
+  };
+
+});
 </script>
-
 </body>
   </html>
