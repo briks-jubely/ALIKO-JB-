@@ -31,7 +31,7 @@
         header.shrink { padding: 10px; }
         header img { width: 90px; height: 90px; border-radius: 15px; transition: transform 0.3s; }
         header img:hover { transform: rotate(15deg); }
-        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px 0; margin-top: 140px; }
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px 0; margin-top: 170px; } }
         nav a {
     text-decoration: none;
     background: linear-gradient(145deg, #003cff, #009dff);
@@ -49,9 +49,13 @@
 nav a:hover {
     background: linear-gradient(145deg, #0066ff, #00c8ff);
     transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0, 150, 255, 0.55);
+    box-shadow: 0 0 25px rgba(0,150,255,0.55);
 }
-        nav a:hover { background-color: #ff3300; transform: translateY(-3px); box-shadow: 0 6px 10px rgba(0,0,0,0.4); }section {
+        nav a:hover {
+    background: linear-gradient(145deg, #0066ff, #00c8ff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0,150,255,0.55);
+}section {
 padding: 20px;
 max-width: 900px;
 margin: auto;
@@ -61,33 +65,28 @@ backdrop-filter: blur(4px);
 
 </head>
 <body><header>
-    <img src="icon-192.png" alt="ALIKO JB Logo">
+    <img src="assets/logo.png" alt="ALIKO JB Logo">
     <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
-</header>
-    
-    <!-- Navigation -->
-    <nav>
-        <a href="workshop.html"><img src="assets/workshop-icon.png" alt=""> Workshop</a>
-        <a href="academy.html"><img src="assets/academy-icon.png" alt=""> Academy</a>
-    </nav>
-
-    <!-- Install button -->
-    <button id="installBtn">Install App</button>
-    <section>
+</header><nav>
+    <a href="workshop.html"><img src="icon-192.png" alt=""> Workshop</a>
+    <a href="academy.html"><img src="icon-192.png" alt=""> Academy</a>
+</nav><section>
     <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
-    <p>ALIKO JB AUTOMOTIVE ENGINEERING...</p><div class="feature-card">
+    <p>Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING...</p><div class="feature-card">
     <img src="workshop_pht.png" class="card-img" alt="Workshop Image">
-    <p>ALIKO JB Workshop inatoa huduma kamili za magari...</p>
+    <h3><img src="icon-192.png" alt=""> Workshop</h3>
+    <p>ALIKO JB Workshop inatoa huduma kamili kama uchunguzi wa umeme, urekebishaji wa mifumo ya ECU, matengenezo ya sehemu kuu za magari, kusoma na kufuta error codes, calibration, reprogramming, pamoja na huduma za kitaalamu za kuboresha utendaji wa gari kwa kutumia teknolojia za kisasa.</p>
     <a href="Workshop.html">Explore Workshop</a>
 </div>
 
 <div class="feature-card">
     <img src="academy_pht.png" class="card-img" alt="Academy Image">
-    <p>ALIKO JB Academy ni mahali pa kujifunza...</p>
+    <h3><img src="icon-192.png" alt=""> Academy</h3>
+    <p>ALIKO JB Academy ni kituo cha mafunzo kinachotoa kozi za umeme wa magari, ECU coding, diagnostic systems, automotive electronics, na mafunzo ya vitendo ya kuwajengea wanafunzi uwezo wa kufanya kazi katika sekta ya magari kwa kiwango cha kitaalamu.</p>
     <a href="academy.html">Explore Academy</a>
 </div>
 
 </section><footer>
     &copy; 2025 ALIKO JB AUTOMOTIVE ENGINEERING. All Rights Reserved.
 </footer></body>
-</html>
+    </html>
