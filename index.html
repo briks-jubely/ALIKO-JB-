@@ -6,82 +6,139 @@
     <title>ALIKO JB AUTOMOTIVE ENGINEERING</title>
 
     <!-- Icon -->
-    <link rel="icon" href="icon-192.png" type="image/png">
-
-    <!-- App install prompt support -->
+    <link rel="icon" href="assets/logo.png" type="image/png">
     <link rel="manifest" href="manifest.json">
 
-    <!-- Styles (simple app-style) -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <style>
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
             color: #fff;
         }
 
         header {
             background-color: #111;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        header img:hover {
+            transform: rotate(15deg);
         }
 
         header h1 {
             margin: 10px 0 0 0;
-            font-size: 28px;
+            font-size: 26px;
+            letter-spacing: 1px;
         }
 
         nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
             margin: 20px 0;
         }
 
         nav a {
             text-decoration: none;
             background-color: #ff6600;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 12px 25px;
+            border-radius: 12px;
             color: white;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         nav a:hover {
             background-color: #ff3300;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+        }
+
+        nav a img {
+            width: 24px;
+            height: 24px;
         }
 
         section {
             padding: 20px;
             max-width: 900px;
             margin: auto;
+            animation: fadeIn 1s ease-in-out;
         }
 
         h2 {
             color: #ffcc00;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
         p {
-            line-height: 1.6;
+            line-height: 1.7;
+            text-align: justify;
         }
 
         .feature-card {
             background-color: #222;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 10px;
-            transition: 0.3s;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
             background-color: #333;
+            box-shadow: 0 8px 12px rgba(0,0,0,0.5);
+        }
+
+        .feature-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff9900;
+        }
+
+        .feature-card h3 img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .feature-card a {
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+            background-color: #00ccff;
+            color: #111;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .feature-card a:hover {
+            background-color: #0099cc;
         }
 
         footer {
@@ -91,22 +148,44 @@
             margin-top: 30px;
         }
 
-        /* Install prompt button */
+        /* Install button */
         #installBtn {
             display: none;
             margin: 20px auto;
-            padding: 10px 25px;
+            padding: 12px 30px;
             background-color: #00ccff;
             color: #111;
             font-weight: bold;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
+            display: block;
             transition: 0.3s;
         }
 
         #installBtn:hover {
             background-color: #0099cc;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .feature-card h3 {
+                font-size: 18px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
@@ -114,14 +193,14 @@
 
     <!-- Header -->
     <header>
-        <img src="icon-192.png" alt="ALIKO JB Logo">
+        <img src="assets/logo.png" alt="ALIKO JB Logo">
         <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
     </header>
 
     <!-- Navigation -->
     <nav>
-        <a href="Workshop.html">Workshop</a>
-        <a href="academy.html">Academy</a>
+        <a href="workshop.html"><img src="assets/workshop-icon.png" alt=""> Workshop</a>
+        <a href="academy.html"><img src="assets/academy-icon.png" alt=""> Academy</a>
     </nav>
 
     <!-- Install button -->
@@ -131,21 +210,21 @@
     <section>
         <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
         <p>
-            Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING, sehemu ambapo tunachanganya ujuzi wa kisasa wa magari na teknolojia za ubunifu. Hapa utapata huduma za kitaalamu za magari, ufundishaji wa kina wa mfumo wa magari, na fursa za kujifunza kupitia Academy yetu. Tunazingatia muonekano wa kisasa, utendaji bora, na uzoefu wa mtumiaji wa kirafiki.
+            Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING, mahali ambapo ubunifu na teknolojia ya kisasa ya magari hukutana. Tunajivunia kutoa huduma za kitaalamu kwenye Workshop yetu na mafunzo ya kina kwenye Academy yetu, kuhakikisha kila mteja na mwanafunzi anapata ujuzi na uzoefu wa hali ya juu.  
         </p>
 
         <div class="feature-card">
-            <h3>Workshop</h3>
+            <h3><img src="icon-192.png" alt=""> Workshop</h3>
             <p>
-                ALIKO JB Workshop inatoa huduma kamili za magari, ikiwemo ukaguzi wa mfumo wa umeme, matengenezo ya injini, gearbox, na mashine nyingine. Tuna wahandisi wenye ujuzi wa hali ya juu kuhakikisha gari lako linafanya kazi kwa ufanisi.
+                ALIKO JB Workshop inatoa huduma kamili za magari, ikijumuisha ukaguzi wa mfumo wa umeme, matengenezo ya injini, gearbox, na mashine nyingine. Wahandisi wetu wenye ujuzi wa hali ya juu hufanya kazi kuhakikisha gari lako linafanya kazi kwa ufanisi na salama.
             </p>
             <a href="Workshop.html">Explore Workshop</a>
         </div>
 
         <div class="feature-card">
-            <h3>Academy</h3>
+            <h3><img src="icon-192.png" alt=""> Academy</h3>
             <p>
-                ALIKO JB Academy ni mahali pa kujifunza kuhusu teknolojia za magari na uhandisi wa umeme. Hapa, wapenzi wa magari wanaweza kupata mafunzo ya vitendo, ufahamu wa systems za kisasa, na njia za ubunifu katika tasnia ya magari.
+                ALIKO JB Academy ni mahali pa kujifunza kuhusu teknolojia za magari na uhandisi wa umeme. Wanafunzi wanapata mafunzo ya vitendo, ufahamu wa systems za kisasa, na mbinu za ubunifu katika tasnia ya magari. Hapa, kila mtu anapata fursa ya kukuza ujuzi wake.
             </p>
             <a href="academy.html">Explore Academy</a>
         </div>
@@ -176,15 +255,16 @@
             }
             deferredPrompt = null;
         });
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
     </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('Service Worker registered', reg))
-        .catch(err => console.log('Service Worker registration failed', err));
-    });
-  }
-</script>
+
 </body>
-</html>
+    </html>
