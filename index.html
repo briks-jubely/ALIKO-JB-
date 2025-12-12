@@ -265,6 +265,29 @@
             });
         }
     </script>
+<script>
+    // Auto-hide / shrink header on scroll
+    let prevScrollpos = window.pageYOffset;
+    const header = document.querySelector("header");
 
+    window.onscroll = function() {
+        let currentScrollPos = window.pageYOffset;
+
+        // Shrink header when scrolling down
+        if(currentScrollPos > 50){
+            header.classList.add("shrink");
+        } else {
+            header.classList.remove("shrink");
+        }
+
+        // Hide header on scroll down, show on scroll up
+        if(prevScrollpos > currentScrollPos){
+            header.style.top = "0";
+        } else {
+            header.style.top = "-100px"; // hides header
+        }
+        prevScrollpos = currentScrollPos;
+    }
+</script>
 </body>
     </html>
