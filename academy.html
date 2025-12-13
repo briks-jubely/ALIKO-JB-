@@ -67,7 +67,25 @@
 </head>
 
 <body>
+<script>
+/* 🔐 ACADEMY AUTH GUARD - ADDITIVE FIX */
+(function () {
+  const loggedUser = localStorage.getItem("loggedInUser");
+  const users = JSON.parse(localStorage.getItem("users")) || [];
 
+  if (!loggedUser) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const exists = users.some(u => u.username === loggedUser);
+
+  if (!exists) {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  }
+})();
+</script>
 <!-- 🔹 LOGIN CHECK (MREKEBISHO MUHIMU) -->
 <script>
 if (!localStorage.getItem("loggedInUser")) {
