@@ -197,15 +197,26 @@ function registerUser(){
     return;
   }
 
-  users.push({username, password});
-  localStorage.setItem("users", JSON.stringify(users));
+  const newUser = {
+    username,
+    password,
+    createdAt: new Date().toISOString()
+  };
 
-  regMsg.textContent = "Account created! Login now";
+  users.push(newUser);
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("loggedInUser", username);
+
+  regMsg.textContent = "✅ Account created successfully";
   regMsg.className = "msg success";
 
-  setTimeout(showLogin, 700);
-}
+  // 🔔 USER COUNT TRACKING (for future WhatsApp)
+  localStorage.setItem("totalUsers", users.length);
 
+  setTimeout(() => {
+    window.location.href = "academy.html";
+  }, 900);
+    }
 /* LOGIN */
 function loginUser(){
   const username = document.getElementById("login-username").value.trim();
@@ -224,8 +235,12 @@ function loginUser(){
   }
 
   localStorage.setItem("loggedInUser", username);
+
+  // 📊 ACTIVE USER COUNT
+  localStorage.setItem("lastLogin", new Date().toISOString());
+
   window.location.href = "academy.html";
-}
+    }
   </script>
 </body>
   </html>
