@@ -63,4 +63,8 @@ function loginUser(){
 
   window.location.href = "academy.html";
 }
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  window.location.replace("login.html");
+}
 </script>
