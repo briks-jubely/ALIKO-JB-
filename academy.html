@@ -100,6 +100,12 @@ if (!localStorage.getItem("loggedInUser")) {
     <h1>ALIKO JB Academy</h1>
     <p>Automotive Engineering • Online Training</p>
   </div>
+  <script>
+const currentUser = localStorage.getItem("loggedInUser");
+if(currentUser){
+  console.log("Logged user:", currentUser);
+}
+  </script>
 </header>
 
 <!-- 🔹 NAVIGATION -->
