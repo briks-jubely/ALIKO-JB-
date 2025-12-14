@@ -86,4 +86,19 @@ function logout() {
   // Zuia kurudi kwa back button
   window.location.replace("login.html");
 }
+function logout() {
+  try {
+    // Ondoa user kwenye localStorage
+    localStorage.removeItem("loggedInUser");
+
+    // Ondoa session nyingine kama zipo
+    localStorage.removeItem("registeredUser");
+
+    // Redirect kwa login
+    window.location.replace("login.html");
+  } catch (e) {
+    // Fallback ya mwisho
+    window.location.href = "login.html";
+  }
+}
 </script>
