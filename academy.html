@@ -116,8 +116,11 @@
 </script>
 <!-- 🔹 LOGIN CHECK (MREKEBISHO MUHIMU) -->
 <script>
-if (!localStorage.getItem("loggedInUser")) {
-    window.location.href = "login.html";
+if (
+  !localStorage.getItem("loggedInUser") &&
+  !sessionStorage.getItem("loggingOut")
+) {
+  window.location.href = "login.html";
 }
 </script>
 
