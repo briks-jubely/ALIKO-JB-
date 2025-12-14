@@ -77,4 +77,14 @@ function logout() {
   localStorage.removeItem("loggedInUser");
   window.location.href = "login.html";
 }
+  function logout() {
+  // Futa session ya user
+  localStorage.removeItem("loggedInUser");
+
+  // (Optional lakini salama)
+  localStorage.removeItem("loggedIn");
+
+  // Zuia kurudi kwa back button
+  window.location.replace("login.html");
+}
 </script>
