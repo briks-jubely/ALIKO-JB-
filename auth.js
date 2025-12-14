@@ -1,4 +1,5 @@
 <script>
+  alert("auth.js loaded");
 /* INIT */
 if(!localStorage.getItem("users")){
   localStorage.setItem("users", JSON.stringify([]));
@@ -71,8 +72,6 @@ function logout() {
   localStorage.removeItem("loggedInUser");
   window.location.href = "login.html";
     }
-</script>
-  <script>
 function logout() {
   localStorage.removeItem("loggedInUser");
   window.location.href = "login.html";
