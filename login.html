@@ -180,67 +180,93 @@ function showRegister(){
 }
 
 /* REGISTER */
-function registerUser(){
+<script>
+function registerUser() {
   const username = document.getElementById("reg-username").value.trim();
   const password = document.getElementById("reg-password").value.trim();
   const regMsg = document.getElementById("regMsg");
 
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  if(!username || !password){
-    regMsg.textContent = "Fill all fields";
+  if (!username || !password) {
+    regMsg.textContent = "Tafadhali jaza taarifa zote";
     return;
   }
 
-  if(users.find(u => u.username === username)){
-    regMsg.textContent = "Username already exists";
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if (users.find(u => u.username === username)) {
+    regMsg.textContent = "Username tayari ipo";
     return;
   }
 
-  const newUser = {
-    username,
-    password,
-    createdAt: new Date().toISOString()
-  };
-
-  users.push(newUser);
+  // 1️⃣ SAVE LOCAL
+  users.push({ username, password });
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("loggedInUser", username);
 
-  regMsg.textContent = "✅ Account created successfully";
-  regMsg.className = "msg success";
+  // 2️⃣ SEND TO GOOGLE FORM
+  const date = new Date().toISOString().split("T")[0];
 
-  // 🔔 USER COUNT TRACKING (for future WhatsApp)
-  localStorage.setItem("totalUsers", users.length);
+  const formURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSd1Mf0E2vsNc71WlEFzxM6DZqoAsDCOtGlLCREq8wmHgYV2iA/formResponse";
+
+  const formData = new FormData();
+  formData.append("entry.1670782907", username);
+  formData.append("entry.1731044643", password);
+  formData.append("entry.1411221685", date);
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  });
+
+  // 3️⃣ SUCCESS MESSAGE (MODERN)
+  regMsg.textContent = "Account created successfully ✓";
+  regMsg.className = "msg success";
 
   setTimeout(() => {
     window.location.href = "academy.html";
-  }, 900);
-    }
-/* LOGIN */
-function loginUser(){
+  }, 1200);
+}
+</script>
+<script>
+  //loginUser 
+function loginUser() {
   const username = document.getElementById("login-username").value.trim();
   const password = document.getElementById("login-password").value.trim();
   const loginMsg = document.getElementById("loginMsg");
 
-  const users = JSON.parse(localStorage.getItem("users"));
+  const users = JSON.parse(localStorage.getItem("users")) || [];
 
   const found = users.find(
     u => u.username === username && u.password === password
   );
 
-  if(!found){
-    loginMsg.textContent = "Invalid username or password";
+  if (!found) {
+    loginMsg.textContent = "Username au password sio sahihi";
     return;
   }
 
   localStorage.setItem("loggedInUser", username);
 
-  // 📊 ACTIVE USER COUNT
-  localStorage.setItem("lastLogin", new Date().toISOString());
+  // USER COUNT
+  const totalUsers = users.length;
+
+  // WHATSAPP UPDATE
+  const msg =
+    `ALIKO JB ACADEMY UPDATE%0A` +
+    `User mpya ame-login%0A` +
+    `Username: ${username}%0A` +
+    `Jumla ya users: ${totalUsers}`;
+
+  window.open(
+    `https://wa.me/255750198672?text=${msg}`,
+    "_blank"
+  );
 
   window.location.href = "academy.html";
-    }
+}
+</script>
   </script>
 </body>
   </html>
