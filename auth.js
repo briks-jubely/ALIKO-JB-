@@ -65,40 +65,17 @@ function loginUser(){
   window.location.href = "academy.html";
 }
 function logout() {
-  localStorage.removeItem("loggedInUser");
-  window.location.replace("login.html");
-}
-function logout() {
-  localStorage.removeItem("loggedInUser");
-  window.location.href = "login.html";
-    }
-function logout() {
-  localStorage.removeItem("loggedInUser");
-  window.location.href = "login.html";
-}
-  function logout() {
-  // Futa session ya user
-  localStorage.removeItem("loggedInUser");
+  // Weka flag ya muda
+  sessionStorage.setItem("loggingOut", "true");
 
-  // (Optional lakini salama)
-  localStorage.removeItem("loggedIn");
+  // Futa user
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("registeredUser");
 
-  // Zuia kurudi kwa back button
-  window.location.replace("login.html");
-}
-function logout() {
-  try {
-    // Ondoa user kwenye localStorage
-    localStorage.removeItem("loggedInUser");
-
-    // Ondoa session nyingine kama zipo
-    localStorage.removeItem("registeredUser");
-
-    // Redirect kwa login
-    window.location.replace("login.html");
-  } catch (e) {
-    // Fallback ya mwisho
+  // Muda mfupi kabla ya redirect
+  setTimeout(() => {
+    sessionStorage.removeItem("loggingOut");
     window.location.href = "login.html";
-  }
+  }, 300);
 }
 </script>
