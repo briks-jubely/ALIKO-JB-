@@ -96,6 +96,29 @@
 
 <body>
 <script>
+(function detectUser(){
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const loggedUser = localStorage.getItem("loggedInUser");
+
+  // Kama yuko tayari logged in → Academy
+  if(loggedUser){
+    if(location.pathname.includes("login")){
+      window.location.href = "academy.html";
+    }
+    return;
+  }
+
+  // Kama hakuna users kabisa → Register mode
+  if(users.length === 0){
+    localStorage.setItem("authMode", "register");
+    return;
+  }
+
+  // Kama kuna users → Login mode
+  localStorage.setItem("authMode", "login");
+})();
+</script>  
+<script>
 /* 🔐 ACADEMY AUTH GUARD - ADDITIVE FIX */
 (function () {
   const loggedUser = localStorage.getItem("loggedInUser");
