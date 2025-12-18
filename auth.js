@@ -80,18 +80,18 @@ function loginUser() {
    LOGOUT USER (FIXED)
 ========================== */
 function logout() {
-  console.log("Logout triggered");
+  // weka alama ya logout ili kuzuia redirect loop
+  sessionStorage.setItem("loggingOut", "true");
 
-  /* Safely clear auth data */
-  localStorage.removeItem("loggedIn");
+  // futa session yote ya user
+  localStorage.removeItem("loggedInUser");
   localStorage.removeItem("currentUser");
 
-  /* Redirect */
-  window.location.href = "login.html";
-}
-/* INIT USERS */
-if(!localStorage.getItem("users")){
-  localStorage.setItem("users", JSON.stringify([]));
+  // hakikisha hakuna mabaki
+  setTimeout(() => {
+    sessionStorage.removeItem("loggingOut");
+    window.location.href = "login.html";
+  }, 200);
 }
 
 /* USER DETECTION */
