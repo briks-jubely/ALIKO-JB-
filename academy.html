@@ -251,6 +251,23 @@ body {
     max-height: 180px;
   }
     }
+  .badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 11px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.badge.free {
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+}
+
+.badge.locked {
+  background: rgba(248,113,113,0.15);
+  color: #f87171;
+  }
   </style>
 
   <link rel="stylesheet" href="style.css">
@@ -335,22 +352,26 @@ if(currentUser){
 <section id="courses" class="content">
   <h2>Online Training Programs</h2>
 
+  <p style="opacity:.6">🔒 Advanced content coming soon</p>
   <div class="card">
     <h3>Automotive Electrical Systems</h3>
     <p>CAN Bus, Sensors, ECU, Voltage & Signal analysis.</p>
  <img src="automotive-electrical-systems.jpg" alt="Automotive Electrical Systems Training">
+  <span class="badge free">FREE</span>
   </div>
 
   <div class="card">
     <h3>Engine & Transmission Control</h3>
     <p>ECU logic, Opticruise, Automatic Gearbox systems.</p>
  <img src="engine-transmission-control.jpg" alt="Engine and Transmission Control Training">
+  <span class="badge free">FREE</span>
   </div>
 
   <div class="card">
     <h3>Diagnostics & Programming</h3>
     <p>Scanner usage, fault codes, basic programming logic.</p>
   <img src="diagnostics-programming.jpg" alt="Vehicle Diagnostics and Programming Training">
+ <span class="badge free">FREE</span>
   </div>
 </section>
 
@@ -385,5 +406,17 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
 }
 </script>
+  <script>
+function logout() {
+  // Ondoa user aliye-login
+  localStorage.removeItem("loggedInUser");
+
+  // Optional: log kwa debugging
+  console.log("User logged out");
+
+  // Rudisha login page
+  window.location.href = "login.html";
+}
+    </script>
 </body>
   </html>
