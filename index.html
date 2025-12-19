@@ -190,6 +190,29 @@ if ('serviceWorker' in navigator) {
     });
 }
 </script>
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "API_KEY_YAKO",
+    authDomain: "studio-8170440896-3816f.firebaseapp.com",
+    projectId: "studio-8170440896-3816f",
+    storageBucket: "studio-8170440896-3816f.appspot.com",
+    messagingSenderId: "369237566716",
+    appId: "1:369237566716:web:b9540d7487c75fab9a379"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Services
+  window.auth = getAuth(app);
+  window.db = getFirestore(app);
+
+  console.log("🔥 Firebase imeunganishwa kikamilifu");
+</script>
 </body>
     </html>
