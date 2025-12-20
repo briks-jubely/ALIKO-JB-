@@ -1,6 +1,6 @@
 <script type="module">
 import { collection, getDocs } from 
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+"https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
 async function loadCourses() {
   const courseContainer = document.getElementById("courses");
