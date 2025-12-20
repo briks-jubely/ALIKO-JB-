@@ -163,17 +163,22 @@ input:focus{
     <button id="loginTab" class="active" onclick="showLogin()">Login</button>
     <button id="regTab" onclick="showRegister()">Register</button>
   </div>
-<div>
+  
   <!-- LOGIN -->
-  <input id="login-email" type="email" placeholder="Email"></input>
-<input id="login-password" type="password" placeholder="Password"></input>
+  <section>
+  <div>
+    <input id="login-email" type="email" placeholder="Email">
+<input id="login-password" type="password" placeholder="Password">
 </div>
+  </section>
+  <section>
   <div >
     <!-- REGISTER -->
   <input id="reg-username" placeholder="Full Name"></input>
 <input id="reg-email" type="email" placeholder="Email"><input>
 <input id="reg-password" type="password" placeholder="Password"></input>
 </div>
+  </section>
   <script>
 /* INIT */
 if(!localStorage.getItem("users")){
