@@ -7,153 +7,26 @@
 
 <style>
 /* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
-}
-
-/* BODY */
-body{
-  min-height:100vh;
-  background:#020617;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#e5e7eb;
-}
-
-/* CARD */
-.app{
-  width:100%;
-  max-width:380px;
-  padding:28px 22px 32px;
-  background:#0f172a;
-  border-radius:26px;
-  box-shadow:0 30px 70px rgba(0,0,0,.65);
-}
-
-/* HEADER */
-.app h1{
-  font-size:22px;
-  text-align:center;
-  margin-bottom:8px;
-}
-.app p{
-  text-align:center;
-  font-size:14px;
-  color:#94a3b8;
-  margin-bottom:18px;
-}
-
-/* TABS */
-.tabs{
-  display:flex;
-  background:#020617;
-  border-radius:999px;
-  padding:6px;
-  margin-bottom:20px;
-}
-.tabs button{
-  flex:1;
-  padding:10px 0;
-  background:transparent;
-  border:none;
-  border-radius:999px;
-  color:#94a3b8;
-  font-weight:600;
-  font-size:15px;
-}
-.tabs .active{
-  background:#38bdf8;
-  color:#020617;
-}
-
-/* FORMS */
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,sans-serif;}
+body{min-height:100vh;background:#020617;display:flex;justify-content:center;align-items:center;color:#e5e7eb;}
+.app{width:100%;max-width:380px;padding:28px 22px 32px;background:#0f172a;border-radius:26px;box-shadow:0 30px 70px rgba(0,0,0,.65);}
+.app h1{font-size:22px;text-align:center;margin-bottom:8px;}
+.app p{text-align:center;font-size:14px;color:#94a3b8;margin-bottom:18px;}
+.tabs{display:flex;background:#020617;border-radius:999px;padding:6px;margin-bottom:20px;}
+.tabs button{flex:1;padding:10px 0;background:transparent;border:none;border-radius:999px;color:#94a3b8;font-weight:600;font-size:15px;}
+.tabs .active{background:#38bdf8;color:#020617;}
 .form{display:none;}
 .form.active{display:block;}
-
-/* INPUTS */
-input{
-  width:100%;
-  padding:15px;
-  margin-top:14px;
-  border:none;
-  border-radius:18px;
-  background:#020617;
-  color:#e5e7eb;
-  font-size:15px;
-}
-input:focus{
-  outline:2px solid #38bdf8;
-}
-
-/* BUTTON */
-.main-btn{
-  width:100%;
-  padding:15px;
-  margin-top:18px;
-  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
-  border:none;
-  border-radius:20px;
-  font-weight:800;
-  font-size:16px;
-  color:#020617;
-}
-
-/* MESSAGE */
-.msg{
-  margin-top:10px;
-  font-size:14px;
-  text-align:center;
-  color:#f87171;
-}
+input{width:100%;padding:15px;margin-top:14px;border:none;border-radius:18px;background:#020617;color:#e5e7eb;font-size:15px;}
+input:focus{outline:2px solid #38bdf8;}
+.main-btn{width:100%;padding:15px;margin-top:18px;background:linear-gradient(135deg,#38bdf8,#0ea5e9);border:none;border-radius:20px;font-weight:800;font-size:16px;color:#020617;}
+.msg{margin-top:10px;font-size:14px;text-align:center;color:#f87171;}
 .success{color:#22c55e;}
 </style>
 
 </head>
 <body>
-  <script>
-(function detectUser(){
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const loggedUser = localStorage.getItem("loggedInUser");
 
-  // Kama yuko tayari logged in → Academy
-  if(loggedUser){
-    if(location.pathname.includes("login")){
-      window.location.href = "academy.html";
-    }
-    return;
-  }
-
-  // Kama hakuna users kabisa → Register mode
-  if(users.length === 0){
-    localStorage.setItem("authMode", "register");
-    return;
-  }
-
-  // Kama kuna users → Login mode
-  localStorage.setItem("authMode", "login");
-})();
-  </script>
-<script>
-/* 🔍 AUTO CHECK USER STATUS */
-(function () {
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const logged = localStorage.getItem("loggedInUser");
-
-  if (logged) {
-    window.location.href = "academy.html";
-    return;
-  }
-
-  // kama hakuna user yeyote bado → force register
-  if (users.length === 0) {
-    setTimeout(showRegister, 100);
-  }
-})();
-</script>
 <div class="app">
 
   <h1>ALIKO JB Academy</h1>
@@ -163,127 +36,129 @@ input:focus{
     <button id="loginTab" class="active" onclick="showLogin()">Login</button>
     <button id="regTab" onclick="showRegister()">Register</button>
   </div>
-  
-  <!-- LOGIN -->
-  <section>
-  <div>
-    <input id="login-email" type="email" placeholder="Email">
-<input id="login-password" type="password" placeholder="Password">
-</div>
-  </section>
-  <section>
-  <div >
-    <!-- REGISTER -->
-  <input id="reg-username" placeholder="Full Name"></input>
-<input id="reg-email" type="email" placeholder="Email"><input>
-<input id="reg-password" type="password" placeholder="Password"></input>
-</div>
-  </section>
-  <script>
-/* INIT */
-if(!localStorage.getItem("users")){
-  localStorage.setItem("users", JSON.stringify([]));
-}
 
-/* CHANGE FORMS */
-function showLogin(){
+  <!-- LOGIN FORM -->
+  <form id="loginForm" class="form active" onsubmit="loginUser(); return false;">
+    <input id="login-email" type="email" placeholder="Email" required>
+    <input id="login-password" type="password" placeholder="Password" required>
+    <button class="main-btn" type="submit">Login</button>
+    <p id="loginMsg" class="msg"></p>
+  </form>
+
+  <!-- REGISTER FORM -->
+  <form id="regForm" class="form" onsubmit="registerUser(); return false;">
+    <input id="reg-username" placeholder="Full Name" required>
+    <input id="reg-email" type="email" placeholder="Email" required>
+    <input id="reg-password" type="password" placeholder="Password" required>
+    <button class="main-btn" type="submit">Register</button>
+    <p id="regMsg" class="msg"></p>
+  </form>
+
+</div>
+
+<!-- FIREBASE -->
+<script type="module" src="firebase/firebase.js"></script>
+
+<script type="module">
+import { auth, db } from "../firebase/firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* ==========================
+   FORM SWITCHING
+========================== */
+window.showLogin = () => {
   document.getElementById("loginForm").classList.add("active");
   document.getElementById("regForm").classList.remove("active");
   document.getElementById("loginTab").classList.add("active");
   document.getElementById("regTab").classList.remove("active");
-}
+};
 
-function showRegister(){
+window.showRegister = () => {
   document.getElementById("regForm").classList.add("active");
   document.getElementById("loginForm").classList.remove("active");
   document.getElementById("regTab").classList.add("active");
   document.getElementById("loginTab").classList.remove("active");
-}
+};
 
-/* REGISTER */
-function registerUser() {
-  const username = document.getElementById("reg-username").value.trim();
+/* ==========================
+   REGISTER USER
+========================== */
+window.registerUser = async () => {
+  const name = document.getElementById("reg-username").value.trim();
+  const email = document.getElementById("reg-email").value.trim();
   const password = document.getElementById("reg-password").value.trim();
   const regMsg = document.getElementById("regMsg");
 
-  if (!username || !password) {
-    regMsg.textContent = "Tafadhali jaza taarifa zote";
+  if(!name || !email || !password){
+    regMsg.textContent = "Fill all fields";
     return;
   }
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
+  try{
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-  if (users.find(u => u.username === username)) {
-    regMsg.textContent = "Username tayari ipo";
-    return;
+    await setDoc(doc(db,"users", cred.user.uid), {
+      name,
+      email,
+      role: "student",
+      createdAt: serverTimestamp()
+    });
+
+    regMsg.textContent = "Account created successfully!";
+    regMsg.className = "msg success";
+
+    setTimeout(()=>{window.location.href="academy.html"},1200);
+  } catch(e){
+    regMsg.textContent = e.message;
   }
+};
 
-  // 1️⃣ SAVE LOCAL
-  users.push({ username, password });
-  localStorage.setItem("users", JSON.stringify(users));
-  localStorage.setItem("loggedInUser", username);
-
-  // 2️⃣ SEND TO GOOGLE FORM
-  const date = new Date().toISOString().split("T")[0];
-
-  const formURL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSd1Mf0E2vsNc71WlEFzxM6DZqoAsDCOtGlLCREq8wmHgYV2iA/formResponse";
-
-  const formData = new FormData();
-  formData.append("entry.1670782907", username);
-  formData.append("entry.1731044643", password);
-  formData.append("entry.1411221685", date);
-
-  fetch(formURL, {
-    method: "POST",
-    mode: "no-cors",
-    body: formData
-  });
-
-  // 3️⃣ SUCCESS MESSAGE (MODERN)
-  regMsg.textContent = "Account created successfully ✓";
-  regMsg.className = "msg success";
-
-  setTimeout(() => {
-    window.location.href = "academy.html";
-  }, 1200);
-}
-  //loginUser 
-function loginUser() {
-  const username = document.getElementById("login-username").value.trim();
+/* ==========================
+   LOGIN USER
+========================== */
+window.loginUser = async () => {
+  const email = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value.trim();
   const loginMsg = document.getElementById("loginMsg");
 
-  const users = JSON.parse(localStorage.getItem("users")) || [];
+  try{
+    const cred = await signInWithEmailAndPassword(auth,email,password);
+    const snap = await getDoc(doc(db,"users",cred.user.uid));
+    const role = snap.data().role;
 
-  const found = users.find(
-    u => u.username === username && u.password === password
-  );
+    if(role==="admin"){
+      window.location.href="admin.html";
+    } else {
+      window.location.href="academy.html";
+    }
 
-  if (!found) {
-    loginMsg.textContent = "Username au password sio sahihi";
-    return;
+  } catch(e){
+    loginMsg.textContent = "Invalid email or password";
   }
+};
 
-  localStorage.setItem("loggedInUser", username);
+/* ==========================
+   LOGOUT USER
+========================== */
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href="login.html";
+};
 
-  // USER COUNT
-  const totalUsers = users.length;
-
-  // WHATSAPP UPDATE
-  const msg =
-    `ALIKO JB ACADEMY UPDATE%0A` +
-    `User mpya ame-login%0A` +
-    `Username: ${username}%0A` +
-    `Jumla ya users: ${totalUsers}`;
-
-  window.open(
-    `https://wa.me/255750198672?text=${msg}`,
-    "_blank"
-  );
-
-  window.location.href = "academy.html";
-}
-  </script>
+/* ==========================
+   AUTO CHECK USER
+========================== */
+onAuthStateChanged(auth,(user)=>{
+  if(user && (location.pathname.includes("login") || location.pathname.includes("register"))){
+    window.location.href="academy.html";
+  }
+});
+</script>
 </body>
   </html>
