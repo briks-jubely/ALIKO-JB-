@@ -521,7 +521,7 @@ function logout() {
   // 🔹 Firebase SDKs
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
   import { getFirestore, collection, getDocs } 
-  from "https://firebase.google.com/docs/web/setup#available-libraries";
+  from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
   // 🔹 Firebase config (tumia yako)
   const firebaseConfig = {
@@ -536,7 +536,7 @@ function logout() {
   // 🔹 Init Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
+console.log("🔥 Firebase + Firestore connected", db);
   // 🔹 Load courses
   const coursesContainer = document.getElementById("coursesContainer");
 
@@ -570,6 +570,8 @@ function logout() {
   }
 
   loadCourses();
+  const snapshot = await getDocs(collection(db, "courses"));
+console.log("Courses count:", snapshot.size);
 </script>
 </body>
   </html>
