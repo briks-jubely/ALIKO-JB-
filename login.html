@@ -6,20 +6,19 @@
 <title>ALIKO JB | Login</title>
 
 <style>
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,sans-serif;}
 body{min-height:100vh;background:#020617;display:flex;justify-content:center;align-items:center;color:#e5e7eb;}
 .app{width:100%;max-width:380px;padding:28px 22px 32px;background:#0f172a;border-radius:26px;box-shadow:0 30px 70px rgba(0,0,0,.65);}
 .app h1{font-size:22px;text-align:center;margin-bottom:8px;}
 .app p{text-align:center;font-size:14px;color:#94a3b8;margin-bottom:18px;}
 .tabs{display:flex;background:#020617;border-radius:999px;padding:6px;margin-bottom:20px;}
-.tabs button{flex:1;padding:10px 0;background:transparent;border:none;border-radius:999px;color:#94a3b8;font-weight:600;font-size:15px;}
+.tabs button{flex:1;padding:10px 0;background:transparent;border:none;border-radius:999px;color:#94a3b8;font-weight:600;font-size:15px;cursor:pointer;}
 .tabs .active{background:#38bdf8;color:#020617;}
 .form{display:none;}
 .form.active{display:block;}
 input{width:100%;padding:15px;margin-top:14px;border:none;border-radius:18px;background:#020617;color:#e5e7eb;font-size:15px;}
 input:focus{outline:2px solid #38bdf8;}
-.main-btn{width:100%;padding:15px;margin-top:18px;background:linear-gradient(135deg,#38bdf8,#0ea5e9);border:none;border-radius:20px;font-weight:800;font-size:16px;color:#020617;}
+.main-btn{width:100%;padding:15px;margin-top:18px;background:linear-gradient(135deg,#38bdf8,#0ea5e9);border:none;border-radius:20px;font-weight:800;font-size:16px;color:#020617;cursor:pointer;}
 .msg{margin-top:10px;font-size:14px;text-align:center;color:#f87171;}
 .success{color:#22c55e;}
 </style>
@@ -39,20 +38,22 @@ input:focus{outline:2px solid #38bdf8;}
 
   <!-- LOGIN FORM -->
   <form id="loginForm" class="form active" onsubmit="loginUser(); return false;">
-    <input id="login-email" type="email" placeholder="Email" required/>
-    <input id="login-password" type="password" placeholder="Password" required/>
+    <input id="login-email" type="email" placeholder="Email" required />
+    <input id="login-password" type="password" placeholder="Password" required />
     <button class="main-btn" type="submit">Login</button>
     <p id="loginMsg" class="msg"></p>
   </form>
 
   <!-- REGISTER FORM -->
-<form id="regForm" class="form" onsubmit="registerUser(); return false;">
-  <input id="reg-username" placeholder="Full Name" required />
-  <input id="reg-email" type="email" placeholder="Email" required />
-  <input id="reg-password" type="password" placeholder="Password" required />
-  <button class="main-btn" type="submit">Register</button>
-  <p id="regMsg" class="msg"></p>
+  <form id="regForm" class="form" onsubmit="registerUser(); return false;">
+    <input id="reg-username" placeholder="Full Name" required />
+    <input id="reg-email" type="email" placeholder="Email" required />
+    <input id="reg-password" type="password" placeholder="Password" required />
+    <button class="main-btn" type="submit">Register</button>
+    <p id="regMsg" class="msg"></p>
   </form>
+
+</div>
 
 <!-- FIREBASE -->
 <script type="module" src="firebase/firebase.js"></script>
@@ -93,15 +94,15 @@ window.registerUser = async () => {
   const password = document.getElementById("reg-password").value.trim();
   const regMsg = document.getElementById("regMsg");
 
-  if(!name || !email || !password){
-    regMsg.textContent = "Fill all fields";
+  if (!name || !email || !password) {
+    regMsg.textContent = "Tafadhali jaza taarifa zote";
     return;
   }
 
-  try{
+  try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    await setDoc(doc(db,"users", cred.user.uid), {
+    await setDoc(doc(db, "users", cred.user.uid), {
       name,
       email,
       role: "student",
@@ -111,8 +112,11 @@ window.registerUser = async () => {
     regMsg.textContent = "Account created successfully!";
     regMsg.className = "msg success";
 
-    setTimeout(()=>{window.location.href="academy.html"},1200);
-  } catch(e){
+    setTimeout(() => {
+      window.location.href = "academy.html";
+    }, 1200);
+
+  } catch (e) {
     regMsg.textContent = e.message;
   }
 };
@@ -125,19 +129,19 @@ window.loginUser = async () => {
   const password = document.getElementById("login-password").value.trim();
   const loginMsg = document.getElementById("loginMsg");
 
-  try{
-    const cred = await signInWithEmailAndPassword(auth,email,password);
-    const snap = await getDoc(doc(db,"users",cred.user.uid));
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const snap = await getDoc(doc(db, "users", cred.user.uid));
     const role = snap.data().role;
 
-    if(role==="admin"){
-      window.location.href="admin.html";
+    if (role === "admin") {
+      window.location.href = "admin.html";
     } else {
-      window.location.href="academy.html";
+      window.location.href = "academy.html";
     }
 
-  } catch(e){
-    loginMsg.textContent = "Invalid email or password";
+  } catch (e) {
+    loginMsg.textContent = "Email au password sio sahihi";
   }
 };
 
@@ -146,17 +150,18 @@ window.loginUser = async () => {
 ========================== */
 window.logout = async () => {
   await signOut(auth);
-  window.location.href="login.html";
+  window.location.href = "login.html";
 };
 
 /* ==========================
    AUTO CHECK USER
 ========================== */
-onAuthStateChanged(auth,(user)=>{
-  if(user && (location.pathname.includes("login") || location.pathname.includes("register"))){
-    window.location.href="academy.html";
+onAuthStateChanged(auth, (user) => {
+  if (user && (location.pathname.includes("login") || location.pathname.includes("register"))) {
+    window.location.href = "academy.html";
   }
 });
 </script>
+
 </body>
   </html>
