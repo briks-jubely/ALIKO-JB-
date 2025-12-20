@@ -46,15 +46,13 @@ input:focus{outline:2px solid #38bdf8;}
   </form>
 
   <!-- REGISTER FORM -->
-  <form id="regForm" class="form" onsubmit="registerUser(); return false;">
-    <input id="reg-username" placeholder="Full Name" required>
-    <input id="reg-email" type="email" placeholder="Email" required>
-    <input id="reg-password" type="password" placeholder="Password" required>
-    <button class="main-btn" type="submit">Register</button>
-    <p id="regMsg" class="msg"></p>
+<form id="regForm" class="form" onsubmit="registerUser(); return false;">
+  <input id="reg-username" placeholder="Full Name" required />
+  <input id="reg-email" type="email" placeholder="Email" required />
+  <input id="reg-password" type="password" placeholder="Password" required />
+  <button class="main-btn" type="submit">Register</button>
+  <p id="regMsg" class="msg"></p>
   </form>
-
-</div>
 
 <!-- FIREBASE -->
 <script type="module" src="firebase/firebase.js"></script>
