@@ -432,45 +432,13 @@ if(currentUser){
 <!-- 🔹 COURSES SECTION -->
 <section id="courses" class="content">
   <h2>Online Training Programs</h2>
+  <p style="opacity:.6">🔒 Advanced content coming soon</p>
 
-  <!-- GRID MOJA TU -->
+  <!-- FIREBASE COURSES ZITAKAA HAPA -->
   <div class="courses-grid" id="coursesContainer">
-
-    <!-- COURSE CARD 1 -->
-    <div class="course-card">
-      <img src="automotive-electrical-systems.jpg">
-      <div class="course-content">
-        <span class="badge free">FREE</span>
-        <h3>Automotive Electrical Systems</h3>
-        <p>CAN Bus, Sensors, ECU, Voltage & Signal analysis.</p>
-        <div class="course-meta">Beginner</div>
-      </div>
-    </div>
-
-    <!-- COURSE CARD 2 -->
-    <div class="course-card">
-      <img src="engine-transmission-control.jpg">
-      <div class="course-content">
-        <span class="badge free">FREE</span>
-        <h3>Engine & Transmission Control</h3>
-        <p>ECU logic, Opticruise, Automatic Gearbox systems.</p>
-        <div class="course-meta">Intermediate</div>
-      </div>
-    </div>
-
-    <!-- COURSE CARD 3 -->
-    <div class="course-card">
-      <img src="diagnostics-programming.jpg">
-      <div class="course-content">
-        <span class="badge free">FREE</span>
-        <h3>Diagnostics & Programming</h3>
-        <p>Scanner usage, fault codes, programming basics.</p>
-        <div class="course-meta">Beginner</div>
-      </div>
-    </div>
-
+    <p>Loading courses...</p>
   </div>
-          </section>
+</section>
 
 <!-- 🔹 COMMUNITY SECTION -->
 <section id="community" class="content">
@@ -515,41 +483,47 @@ function logout() {
   window.location.href = "login.html";
 }
     </script>
-<script src="firebase/firebase.js" type="module"></script>
-<script src="js/courses.js" type="module"></script>
 <script type="module">
-  // 🔹 Firebase SDKs
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  import { getFirestore, collection, getDocs } 
-  from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { 
+  getFirestore, 
+  collection, 
+  getDocs 
+} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-  // 🔹 Firebase config (tumia yako)
-  const firebaseConfig = {
-    apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
-    authDomain: "aliko-jb-academy.firebaseapp.com",
-    projectId: "aliko-jb-academy",
-    storageBucket: "aliko-jb-academy.firebasestorage.app",
-    messagingSenderId: "282712708896",
-    appId: "1:282712708896:web:c526d620f468a233f82945"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
+  authDomain: "aliko-jb-academy.firebaseapp.com",
+  projectId: "aliko-jb-academy",
+  storageBucket: "aliko-jb-academy.firebasestorage.app",
+  messagingSenderId: "282712708896",
+  appId: "1:282712708896:web:c526d620f468a233f82945"
+};
 
-  // 🔹 Init Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-console.log("🔥 Firebase + Firestore connected", db);
-  // 🔹 Load courses
-  const coursesContainer = document.getElementById("coursesContainer");
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  async function loadCourses() {
+const coursesContainer = document.getElementById("coursesContainer");
+
+async function loadCourses() {
+  try {
     coursesContainer.innerHTML = "Loading courses...";
 
-    const querySnapshot = await getDocs(collection(db, "courses"));
+    const snapshot = await getDocs(collection(db, "courses"));
+
+    console.log("📦 Courses found:", snapshot.size);
+
+    if (snapshot.empty) {
+      coursesContainer.innerHTML = "<p>No courses available yet.</p>";
+      return;
+    }
+
     coursesContainer.innerHTML = "";
 
-    querySnapshot.forEach((doc) => {
+    snapshot.forEach((doc) => {
       const course = doc.data();
 
-      if (!course.published) return;
+      if (course.published === false) return;
 
       const card = document.createElement("div");
       card.className = "course-card";
@@ -557,19 +531,27 @@ console.log("🔥 Firebase + Firestore connected", db);
       card.innerHTML = `
         <img src="${course.image}" alt="${course.title}">
         <div class="course-content">
+          <span class="badge ${course.price === 0 ? 'free' : 'locked'}">
+            ${course.price === 0 ? "FREE" : "PAID"}
+          </span>
           <h3>${course.title}</h3>
           <p>${course.description}</p>
           <div class="course-meta">
-            Level: ${course.level} • ${course.price === 0 ? "Free" : "Paid"}
+            Level: ${course.level}
           </div>
         </div>
       `;
 
       coursesContainer.appendChild(card);
     });
-  }
 
-  loadCourses();
+  } catch (error) {
+    console.error("❌ Error loading courses:", error);
+    coursesContainer.innerHTML = "<p>Error loading courses</p>";
+  }
+}
+
+loadCourses();
   const snapshot = await getDocs(collection(db, "courses"));
 console.log("Courses count:", snapshot.size);
 </script>
