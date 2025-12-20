@@ -190,13 +190,14 @@ if ('serviceWorker' in navigator) {
     });
 }
 </script>
-    <script type="module">
-  // Import the functions you need from the SDKs you need
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { 
+    getFirestore, 
+    collection, 
+    getDocs 
+  } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
     authDomain: "aliko-jb-academy.firebaseapp.com",
@@ -206,38 +207,38 @@ if ('serviceWorker' in navigator) {
     appId: "1:282712708896:web:c526d620f468a233f82945"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-window.auth = getAuth(app);
-  window.db = getFirestore(app);
+  const db = getFirestore(app);
 
-  console.log("🔥 Firebase imeunganishwa kikamilifu");        
-async function addCourse() {
-  try {
-    const docRef = await addDoc(collection(db, "courses"), {
-      title: "Automotive Electrical Systems",
-      description: "Basic to advanced automotive electrical training",
-      image: "https://example.com/image.jpg",
-      level: "Beginner",
-      price: 0,
-      published: true,
-      createdAt: new Date()
+  const coursesContainer = document.getElementById("coursesContainer");
+
+  async function loadCourses() {
+    coursesContainer.innerHTML = "Loading courses...";
+
+    const snapshot = await getDocs(collection(db, "courses"));
+
+    coursesContainer.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const c = doc.data();
+      if (!c.published) return;
+
+      coursesContainer.innerHTML += `
+        <div class="course-card">
+          <img src="${c.image}">
+          <div class="course-content">
+            <h3>${c.title}</h3>
+            <p>${c.description}</p>
+            <div class="course-meta">
+              Level: ${c.level} • ${c.price === 0 ? "FREE" : "PAID"}
+            </div>
+          </div>
+        </div>
+      `;
     });
-
-    console.log("✅ Course imehifadhiwa, ID:", docRef.id);
-  } catch (error) {
-    console.error("❌ Error kuhifadhi course:", error);
   }
-        }
-        addCourse();
-   async function getCourses() {
-  const querySnapshot = await getDocs(collection(db, "courses"));
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, doc.data());
-  });
-}
 
-getCourses();
-    </script>
+  loadCourses();
+</script>
 </body>
     </html>
