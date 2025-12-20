@@ -529,15 +529,15 @@ async function loadCourses() {
       card.className = "course-card";
 
       card.innerHTML = `
-  <img src="${course.image || 'automotive-electrical-systems.jpg'}" alt="${course.title}">
+  <img src="${course.image || 'default-course.png}" alt="${course.title}">
   <div class="course-content">
     <span class="badge ${course.price === 0 ? 'free' : 'locked'}">
-      ${course.price === 0 ? "FREE" : "PAID"}
+      ${course.price === 0 ? "FREE" : ""}
     </span>
-    <h3>${course.title || "Automotive Electrical Systems"}</h3>
-    <p>${course.description || "CAN Bus, Sensors, ECU, Voltage & Signal Analysis"}</p>
+    <h3>${course.title || ""}</h3>
+    <p>${course.description ||""}</p>
     <div class="course-meta">
-      Level: ${course.level || "Beginner"}
+      Level: ${course.level || ""}
     </div>
   </div>
 `;
