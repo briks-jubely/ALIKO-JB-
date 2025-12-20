@@ -1,21 +1,24 @@
-<!-- firebase/firebase.js -->
-<script type="module">
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// firebase/firebase.js
 
-// Your web app's Firebase configuration
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import { getAuth } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import { getFirestore } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
   authDomain: "aliko-jb-academy.firebaseapp.com",
   projectId: "aliko-jb-academy",
-  storageBucket: "aliko-jb-academy.firebasestorage.app",
+  storageBucket: "aliko-jb-academy.appspot.com",
   messagingSenderId: "282712708896",
   appId: "1:282712708896:web:c526d620f468a233f82945"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-  window.db = getFirestore(app);
-</script>
+
+export const auth = getAuth(app);
+export const db = getFirestore(app);
