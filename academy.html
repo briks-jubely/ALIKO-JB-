@@ -438,9 +438,6 @@ if(currentUser){
   <div class="courses-grid" id="coursesContainer">
     <p>Loading courses...</p>
   </div>
-  <div class="courses-grid" id="courses 2">
-    <p>Loading courses </p>
-  </div>
 </section>
 
 <!-- 🔹 COMMUNITY SECTION -->
@@ -555,7 +552,7 @@ async function loadCourses() {
 }
 
 loadCourses();
-  const snapshot = await getDocs(collection(db, "courses"));
+  const querySnapshot = await getDocs(collection(db, "courses"));
 console.log("Courses count:", snapshot.size);
 </script>
 </body>
