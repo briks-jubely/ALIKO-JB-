@@ -20,6 +20,11 @@ import {
 /* ==========================
    FORM SWITCHING (UNCHANGED)
 ========================== */
+const loginForm = document.getElementById("loginForm");
+const regForm = document.getElementById("regForm");
+const loginTab = document.getElementById("loginTab");
+const regTab = document.getElementById("regTab");
+
 window.showLogin = function () {
   loginForm.classList.add("active");
   regForm.classList.remove("active");
