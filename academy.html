@@ -1,202 +1,519 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ALIKO JB Automotive Academy</title>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <title>ALIKO JB Automotive Academy</title>    <link rel="icon" href="icon-192.png">  
+  <link rel="apple-touch-icon" href="icon-192.png">  
+  <link rel="manifest" href="manifest.json">    <meta name="theme-color" content="#020617">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    <style>  
+    body {  
+      margin: 0;  
+      font-family: Arial, sans-serif;  
+      background: #0f172a;  
+      color: white;  
+    }  
+  
+    .app-header {  
+      display: flex;  
+      gap: 12px;  
+      align-items: center;  
+      padding: 15px;  
+      background: #020617;  
+    }  
+  
+    .app-logo {  
+      width: 55px;  
+    }  
+  
+    .app-nav {  
+      display: flex;  
+      justify-content: space-around;  
+      background: #020617;  
+      padding: 10px;  
+    }  
+  
+    .app-nav a {  
+      color: #38bdf8;  
+      text-decoration: none;  
+      font-weight: bold;  
+    }  
+  
+    .content {  
+      padding: 20px;  
+    }  
+  
+    .card {  
+      background: #020617;  
+      padding: 15px;  
+      margin-bottom: 15px;  
+      border-radius: 12px;  
+    }  
+  
+    .footer {  
+      text-align: center;  
+      padding: 15px;  
+      font-size: 13px;  
+      color: #94a3b8;  
+    }  
+    .logout-btn {  
+  background: #020617;  
+  color: #e5e7eb;  
+  border: 1px solid #1e293b;  
+  padding: 10px 18px;  
+  font-size: 14px;  
+  font-weight: 500;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  transition: all 0.25s ease;  
+  display: inline-flex;  
+  align-items: center;  
+  gap: 8px;  
+}  
+  
+.logout-btn:hover {  
+  background: #020617;  
+  border-color: #38bdf8;  
+  color: #38bdf8;  
+}  
+  
+.logout-btn:active {  
+  transform: scale(0.96);  
+}  
+  
+.logout-btn i {  
+  font-size: 15px;  
+      }  
+    /* ===============================  
+   MODERN ACADEMY UI ENHANCEMENT  
+   =============================== */  
+  
+/* GLOBAL SMOOTHNESS */  
+* {  
+  transition: all 0.25s ease;  
+}  
+  
+/* BODY GLOW */  
+body {  
+  background: radial-gradient(circle at top, #020617, #000);  
+}  
+  
+/* HEADER – GLASS EFFECT */  
+.app-header {  
+  backdrop-filter: blur(12px);  
+  background: rgba(2, 6, 23, 0.85);  
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);  
+}  
+  
+.app-header h1 {  
+  font-size: 22px;  
+  color: #38bdf8;  
+  letter-spacing: 1px;  
+}  
+  
+.app-header p {  
+  font-size: 13px;  
+  color: #94a3b8;  
+}  
+  
+/* NAVIGATION – APP STYLE */  
+.app-nav {  
+  border-top: 1px solid rgba(56, 189, 248, 0.1);  
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1);  
+}  
+  
+.app-nav a {  
+  padding: 8px 14px;  
+  border-radius: 20px;  
+}  
+  
+.app-nav a:hover {  
+  background: rgba(56, 189, 248, 0.15);  
+  color: #7dd3fc;  
+}  
+  
+/* SECTION TITLES */  
+.content h2 {  
+  font-size: 20px;  
+  margin-bottom: 16px;  
+  color: #7dd3fc;  
+  border-left: 4px solid #38bdf8;  
+  padding-left: 10px;  
+}  
+  
+/* CARDS – GLASS + DEPTH */  
+.card {  
+  background: linear-gradient(  
+    145deg,  
+    rgba(2, 6, 23, 0.9),  
+    rgba(15, 23, 42, 0.95)  
+  );  
+  border: 1px solid rgba(56, 189, 248, 0.15);  
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);  
+}  
+  
+.card:hover {  
+  transform: translateY(-4px) scale(1.01);  
+  border-color: #38bdf8;  
+  box-shadow: 0 18px 45px rgba(56, 189, 248, 0.25);  
+}  
+  
+.card h3 {  
+  color: #a5f3fc;  
+  margin-bottom: 6px;  
+}  
+  
+.card p {  
+  font-size: 14px;  
+  color: #cbd5f5;  
+}  
+  
+/* WHATSAPP BUTTON – PREMIUM CTA */  
+.btn-academy {  
+  display: block;  
+  text-align: center;  
+  margin-top: 20px;  
+  padding: 14px;  
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);  
+  color: #020617;  
+  font-weight: 800;  
+  border-radius: 16px;  
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.4);  
+}  
+  
+.btn-academy:hover {  
+  transform: scale(1.05);  
+  box-shadow: 0 18px 40px rgba(56, 189, 248, 0.6);  
+}  
+  
+/* LOGOUT BUTTON – FLOATING */  
+.logout-btn {  
+  position: fixed;  
+  bottom: 80px;  
+  right: 18px;  
+  background: rgba(2, 6, 23, 0.9);  
+  border: 1px solid rgba(248, 113, 113, 0.4);  
+  color: #f87171;  
+  backdrop-filter: blur(10px);  
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);  
+}  
+  
+.logout-btn:hover {  
+  background: rgba(248, 113, 113, 0.15);  
+  border-color: #f87171;  
+  color: #fecaca;  
+}  
+  
+/* FOOTER */  
+.footer {  
+  border-top: 1px solid rgba(56, 189, 248, 0.15);  
+  background: rgba(2, 6, 23, 0.85);  
+}  
+  
+/* MOBILE POLISH */  
+@media (max-width: 480px) {  
+  .card {  
+    margin-bottom: 18px;  
+  }  
+  
+  .logout-btn {  
+    bottom: 70px;  
+    right: 14px;  
+  }  
+  }  
+    /* 🔹 COURSE IMAGES CONTROL */  
+.course-card img,  
+.card img {  
+  width: 100%;  
+  max-height: 220px;       /* kimo cha picha */  
+  object-fit: cover;       /* inakata bila kupinda */  
+  border-radius: 10px;  
+  margin-bottom: 12px;  
+}  
+  
+/* 🔹 COURSE CARD IMPROVEMENT */  
+.card {  
+  overflow: hidden;        /* muhimu sana */  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  
+}  
+  
+.card:hover {  
+  transform: translateY(-4px);  
+  box-shadow: 0 10px 30px rgba(56,189,248,0.15);  
+  }  
+    @media (max-width: 600px) {  
+  .card img {  
+    max-height: 180px;  
+  }  
+    }  
+  .badge {  
+  display: inline-block;  
+  padding: 4px 10px;  
+  font-size: 11px;  
+  border-radius: 12px;  
+  margin-bottom: 8px;  
+}  
+  
+.badge.free {  
+  background: rgba(34,197,94,0.15);  
+  color: #4ade80;  
+}  
+  
+.badge.locked {  
+  background: rgba(248,113,113,0.15);  
+  color: #f87171;  
+  }  
+/* ===============================  
+   COURSES GRID – STABLE LAYOUT  
+   =============================== */  
+  
+.courses-grid {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));  
+  gap: 22px;  
+  margin-top: 25px;  
+}  
+  
+/* COURSE CARD */  
+.course-card {  
+  background: linear-gradient(  
+    145deg,  
+    rgba(2, 6, 23, 0.95),  
+    rgba(15, 23, 42, 0.95)  
+  );  
+  border-radius: 16px;  
+  overflow: hidden;  
+  border: 1px solid rgba(56,189,248,0.15);  
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);  
+  display: flex;  
+  flex-direction: column;  
+  height: 100%;  
+}  
+  
+/* IMAGE FIX */  
+.course-card img {  
+  width: 100%;  
+  height: 190px;            /* FIXED HEIGHT */  
+  object-fit: cover;        /* Hakuna distortion */  
+  display: block;  
+}  
+  
+/* CONTENT AREA */  
+.course-content {  
+  padding: 16px;  
+  flex-grow: 1;  
+  display: flex;  
+  flex-direction: column;  
+}  
+  
+/* TITLE */  
+.course-content h3 {  
+  font-size: 17px;  
+  color: #7dd3fc;  
+  margin: 0 0 8px;  
+  line-height: 1.3;  
+}  
+  
+/* DESCRIPTION */  
+.course-content p {  
+  font-size: 14px;  
+  color: #cbd5f5;  
+  line-height: 1.5;  
+  margin-bottom: auto;     /* Inasukuma meta chini */  
+}  
+  
+/* META INFO */  
+.course-meta {  
+  margin-top: 12px;  
+  font-size: 12px;  
+  color: #94a3b8;  
+  border-top: 1px solid rgba(56,189,248,0.15);  
+  padding-top: 8px;  
+}  
+  
+/* HOVER EFFECT */  
+.course-card:hover {  
+  transform: translateY(-6px);  
+  border-color: #38bdf8;  
+  box-shadow: 0 18px 40px rgba(56,189,248,0.25);  
+}  
+  
+/* MOBILE TUNING */  
+@media (max-width: 480px) {  
+  .course-card img {  
+    height: 170px;  
+  }  
+    }      
+  </style>    <link rel="stylesheet" href="style.css">  
+</head>  <body>  
+<script>  
+(function detectUser(){  
+  const users = JSON.parse(localStorage.getItem("users")) || [];  
+  const loggedUser = localStorage.getItem("loggedInUser");  // Kama yuko tayari logged in → Academy
+if(loggedUser){
+if(location.pathname.includes("login")){
+window.location.href = "academy.html";
+}
+return;
+}
 
-  <link rel="icon" href="icon-192.png">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="manifest" href="manifest.json">
+// Kama hakuna users kabisa → Register mode
+if(users.length === 0){
+localStorage.setItem("authMode", "register");
+return;
+}
 
-  <meta name="theme-color" content="#020617">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    /* CSS YAKO YOTE – HAIJABADILISHWA */
-    /* (imeachwa kama ulivyotoa) */
-  </style>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<script>
-(function detectUser(){
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const loggedUser = localStorage.getItem("loggedInUser");
-
-  if(loggedUser){
-    if(location.pathname.includes("login")){
-      window.location.href = "academy.html";
-    }
-    return;
-  }
-
-  if(users.length === 0){
-    localStorage.setItem("authMode", "register");
-    return;
-  }
-
-  localStorage.setItem("authMode", "login");
+// Kama kuna users → Login mode
+localStorage.setItem("authMode", "login");
 })();
-</script>  
-
-<script>
-(function () {
-  const loggedUser = localStorage.getItem("loggedInUser");
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-
-  if (!loggedUser) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  const exists = users.some(u => u.username === loggedUser);
-
-  if (!exists) {
-    localStorage.removeItem("loggedInUser");
-    window.location.href = "login.html";
-  }
-})();
 </script>
 
-<script>
-if (
-  !localStorage.getItem("loggedInUser") &&
-  !sessionStorage.getItem("loggingOut")
-) {
-  window.location.href = "login.html";
-}
-</script>
+<script>  
+/* 🔐 ACADEMY AUTH GUARD - ADDITIVE FIX */  
+(function () {  
+  const loggedUser = localStorage.getItem("loggedInUser");  
+  const users = JSON.parse(localStorage.getItem("users")) || [];  
+  
+  if (!loggedUser) {  
+    window.location.href = "login.html";  
+    return;  
+  }  
+  
+  const exists = users.some(u => u.username === loggedUser);  
+  
+  if (!exists) {  
+    localStorage.removeItem("loggedInUser");  
+    window.location.href = "login.html";  
+  }  
+})();  
+</script>  <!-- 🔹 LOGIN CHECK (MREKEBISHO MUHIMU) -->  <script>  
+if (  
+  !localStorage.getItem("loggedInUser") &&  
+  !sessionStorage.getItem("loggingOut")  
+) {  
+  window.location.href = "login.html";  
+}  
+</script>  <!-- 🔹 TOP APP BAR -->  <header class="app-header">  
+  <img src="icon-192.png" class="app-logo">  
+  <div>  
+    <h1>ALIKO JB Academy</h1>  
+    <p>Automotive Engineering • Online Training</p>  
+  </div>  
+  <script>  
+const currentUser = localStorage.getItem("loggedInUser");  
+if(currentUser){  
+  console.log("Logged user:", currentUser);  
+}  
+  </script>  
+</header>  <!-- 🔹 NAVIGATION -->  <nav class="app-nav">  
+  <a href="index.html">🔧 Workshop</a>  
+  <a href="#courses">🎓 Courses</a>  
+  <a href="#community">💬 Community</a>  
+</nav>  <!-- 🔹 COURSES SECTION -->  <section id="courses" class="content">  
+  <h2>Online Training Programs</h2>  
+  <p style="opacity:.6">🔒 Advanced content coming soon</p>    <!-- FIREBASE COURSES ZITAKAA HAPA -->    <div id="coursesContainer">  
+    <p>Loading courses...</p>  
+  </div>  
+</section>  <!-- 🔹 COMMUNITY SECTION -->  <section id="community" class="content">  
+  <h2>Automotive Community & Discussions</h2>    <div class="card">  
+    <h3>Ask Questions</h3>  
+    <p>Fundi na wanafunzi wataweza kuuliza maswali na kubadilishana maarifa ya magari.</p>  
+  </div>    <div class="card">  
+    <h3>Knowledge Sharing</h3>  
+    <p>Video, diagrams, in real vehicle problems & solutions.</p>  
+  </div>  <a class="btn-academy" href="https://wa.me/255620198672">💬 Join Discussion (WhatsApp)</a>
 
-<header class="app-header">
-  <img src="icon-192.png" class="app-logo">
-  <div>
-    <h1>ALIKO JB Academy</h1>
-    <p>Automotive Engineering • Online Training</p>
-  </div>
-</header>
-
-<nav class="app-nav">
-  <a href="index.html">🔧 Workshop</a>
-  <a href="#courses">🎓 Courses</a>
-  <a href="#community">💬 Community</a>
-</nav>
-
-<section id="courses" class="content">
-  <h2>Online Training Programs</h2>
-  <p style="opacity:.6">🔒 Advanced content coming soon</p>
-
-  <div id="coursesContainer">
-    <p>Loading courses...</p>
-  </div>
-</section>
-
-<section id="community" class="content">
-  <h2>Automotive Community & Discussions</h2>
-
-  <div class="card">
-    <h3>Ask Questions</h3>
-    <p>Fundi na wanafunzi wataweza kuuliza maswali na kubadilishana maarifa ya magari.</p>
-  </div>
-
-  <div class="card">
-    <h3>Knowledge Sharing</h3>
-    <p>Video, diagrams, in real vehicle problems & solutions.</p>
-  </div>
-
-  <a class="btn-academy" href="https://wa.me/255620198672">💬 Join Discussion (WhatsApp)</a>
-</section>
-
-<button class="logout-btn" onclick="logout()">
-  <i>⎋</i> Logout
-</button>
-
-<footer class="footer">
-  <p>© 2025 ALIKO JB Automotive Engineering</p>
-</footer>
-
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
-
-<script>
-function logout() {
-  localStorage.removeItem("loggedInUser");
-  window.location.href = "login.html";
-}
-</script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import { getFirestore, collection, getDocs } 
-from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
-  authDomain: "aliko-jb-academy.firebaseapp.com",
-  projectId: "aliko-jb-academy",
-  storageBucket: "aliko-jb-academy.firebasestorage.app",
-  messagingSenderId: "282712708896",
-  appId: "1:282712708896:web:c526d620f468a233f82945"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const coursesContainer = document.getElementById("coursesContainer");
-
-async function loadCourses() {
-  try {
-    coursesContainer.innerHTML = "Loading courses...";
-
-    const snapshot = await getDocs(collection(db, "courses"));
-
-    console.log("📦 Courses found:", snapshot.size);
-
-    if (snapshot.empty) {
-      coursesContainer.innerHTML = "<p>No courses available yet.</p>";
-      return;
-    }
-
-    coursesContainer.innerHTML = "";
-
-    snapshot.forEach((doc) => {
-      const course = doc.data();
-
-      if (course.published === false) return;
-
-      const card = document.createElement("div");
-      card.className = "course-card";
-
-      card.innerHTML = `
-        <img src="${course.image || 'default-course.png'}" alt="${course.title || ''}">
-        <div class="course-content">
-          <span class="badge ${course.price === 0 ? 'free' : 'locked'}">
-            ${course.price === 0 ? "FREE" : "PAID"}
-          </span>
-          <h3>${course.title || ""}</h3>
-          <p>${course.description || ""}</p>
-          <div class="course-meta">
-            Level: ${course.level || ""}
-          </div>
-        </div>
-      `;
-
-      coursesContainer.appendChild(card);
-    });
-
-  } catch (error) {
-    console.error("❌ Error loading courses:", error);
-    coursesContainer.innerHTML = "<p>Error loading courses</p>";
-  }
-}
-
-loadCourses();
-</script>
-
-</body>
-</html>
+</section>  
+  <!-- LOGOUT -->  
+<button class="logout-btn" onclick="logout()">  
+  <i>⎋</i> Logout  
+</button>  
+<!-- 🔹 FOOTER -->  
+<footer class="footer">  
+  <p>© 2025 ALIKO JB Automotive Engineering</p>  
+</footer>  <!-- SERVICE WORKER -->  <script>  
+if ("serviceWorker" in navigator) {  
+  navigator.serviceWorker.register("service-worker.js");  
+}  
+</script>    <script>  
+function logout() {  
+  // Ondoa user aliye-login  
+  localStorage.removeItem("loggedInUser");  
+  
+  // Optional: log kwa debugging  
+  console.log("User logged out");  
+  
+  // Rudisha login page  
+  window.location.href = "login.html";  
+}  
+    </script>  <script type="module">  
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";  
+import {   
+  getFirestore,   
+  collection,   
+  getDocs   
+} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";  
+  
+const firebaseConfig = {  
+  apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",  
+  authDomain: "aliko-jb-academy.firebaseapp.com",  
+  projectId: "aliko-jb-academy",  
+  storageBucket: "aliko-jb-academy.firebasestorage.app",  
+  messagingSenderId: "282712708896",  
+  appId: "1:282712708896:web:c526d620f468a233f82945"  
+};  
+  
+const app = initializeApp(firebaseConfig);  
+const db = getFirestore(app);  
+  
+const coursesContainer = document.getElementById("coursesContainer");  
+  
+async function loadCourses() {  
+  try {  
+    coursesContainer.innerHTML = "Loading courses...";  
+  
+    const snapshot = await getDocs(collection(db, "courses"));  
+  
+    console.log("📦 Courses found:", snapshot.size);  
+  
+    if (snapshot.empty) {  
+      coursesContainer.innerHTML = "<p>No courses available yet.</p>";  
+      return;  
+    }  
+  
+    coursesContainer.innerHTML = "";  
+  
+    snapshot.forEach((doc) => {  
+      const course = doc.data();  
+  
+      if (course.published === false) return;  
+  
+      const card = document.createElement("div");  
+      card.className = "course-card";  
+  
+      card.innerHTML = `  
+  <img src="${course.image || 'default-course.png}" alt="${course.title}">  
+  <div class="course-content">  
+    <span class="badge ${course.price === 0 ? 'free' : 'locked'}">  
+      ${course.price === 0 ? "FREE" : ""}  
+    </span>  
+    <h3>${course.title || ""}</h3>  
+    <p>${course.description ||""}</p>  
+    <div class="course-meta">  
+      Level: ${course.level || ""}  
+    </div>  
+  </div>  
+`;  
+  
+      coursesContainer.appendChild(card);  
+    });  
+  
+  } catch (error) {  
+    console.error("❌ Error loading courses:", error);  
+    coursesContainer.innerHTML = "<p>Error loading courses</p>";  
+  }  
+}  
+  
+loadCourses();  
+  const querySnapshot = await getDocs(collection(db, "courses"));  
+console.log("Courses count:", snapshot.size);  
+</script>  </body>  
+  </html> 
