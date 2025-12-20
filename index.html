@@ -190,55 +190,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 </script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  import { 
-    getFirestore, 
-    collection, 
-    getDocs 
-  } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
-    authDomain: "aliko-jb-academy.firebaseapp.com",
-    projectId: "aliko-jb-academy",
-    storageBucket: "aliko-jb-academy.firebasestorage.app",
-    messagingSenderId: "282712708896",
-    appId: "1:282712708896:web:c526d620f468a233f82945"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  const coursesContainer = document.getElementById("coursesContainer");
-
-  async function loadCourses() {
-    coursesContainer.innerHTML = "Loading courses...";
-
-    const snapshot = await getDocs(collection(db, "courses"));
-
-    coursesContainer.innerHTML = "";
-
-    snapshot.forEach(doc => {
-      const c = doc.data();
-      if (!c.published) return;
-
-      coursesContainer.innerHTML += `
-        <div class="course-card">
-          <img src="${c.image}">
-          <div class="course-content">
-            <h3>${c.title}</h3>
-            <p>${c.description}</p>
-            <div class="course-meta">
-              Level: ${c.level} • ${c.price === 0 ? "FREE" : "PAID"}
-            </div>
-          </div>
-        </div>
-      `;
-    });
-  }
-
-  loadCourses();
-</script>
+<script type="module" src="firebase/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
 </body>
     </html>
