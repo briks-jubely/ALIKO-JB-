@@ -1,182 +1,113 @@
-<script>
-alert("auth.js loaded");
+// js/auth.js
+alert("auth.js (Firebase) loaded");
+
+import { auth, db } from "../firebase/firebase.js";
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /* ==========================
-   INIT USERS STORAGE
+   FORM SWITCHING (UNCHANGED)
 ========================== */
-if (!localStorage.getItem("users")) {
-  localStorage.setItem("users", JSON.stringify([]));
-}
-
-/* ==========================
-   FORM SWITCHING
-========================== */
-function showLogin() {
+window.showLogin = function () {
   loginForm.classList.add("active");
   regForm.classList.remove("active");
   loginTab.classList.add("active");
   regTab.classList.remove("active");
-}
+};
 
-function showRegister() {
+window.showRegister = function () {
   regForm.classList.add("active");
   loginForm.classList.remove("active");
   regTab.classList.add("active");
   loginTab.classList.remove("active");
-}
+};
 
 /* ==========================
-   REGISTER USER
+   REGISTER USER (FIREBASE)
 ========================== */
-function registerUser() {
-  const username = document.getElementById("reg-username").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  if (!username || !password) {
-    regMsg.textContent = "Fill all fields";
-    return;
-  }
-
-  if (users.find(u => u.username === username)) {
-    regMsg.textContent = "Username already exists";
-    return;
-  }
-
-  users.push({ username, password });
-  localStorage.setItem("users", JSON.stringify(users));
-
-  regMsg.textContent = "Account created successfully!";
-  regMsg.classList.add("success");
-
-  setTimeout(showLogin, 800);
-}
-
-/* ==========================
-   LOGIN USER
-========================== */
-function loginUser() {
-  const username = document.getElementById("login-username").value.trim();
-  const password = document.getElementById("login-password").value.trim();
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  const found = users.find(
-    u => u.username === username && u.password === password
-  );
-
-  if (!found) {
-    loginMsg.textContent = "Invalid username or password";
-    return;
-  }
-
-  /* 🔐 AUTH KEYS (STANDARDIZED) */
-  localStorage.setItem("loggedIn", "true");
-  localStorage.setItem("currentUser", JSON.stringify(found));
-
-  window.location.href = "academy.html";
-}
-
-/* ==========================
-   LOGOUT USER (FIXED)
-========================== */
-function logout() {
-  // weka alama ya logout ili kuzuia redirect loop
-  sessionStorage.setItem("loggingOut", "true");
-
-  // futa session yote ya user
-  localStorage.removeItem("loggedInUser");
-  localStorage.removeItem("currentUser");
-
-  // hakikisha hakuna mabaki
-  setTimeout(() => {
-    sessionStorage.removeItem("loggingOut");
-    window.location.href = "login.html";
-  }, 200);
-}
-
-/* USER DETECTION */
-function detectUser(){
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const loggedUser = localStorage.getItem("loggedInUser");
-
-  if(loggedUser) return;
-
-  if(users.length === 0){
-    localStorage.setItem("authMode", "register");
-  } else {
-    localStorage.setItem("authMode", "login");
-  }
-}
-
-/* REGISTER */
-function registerUser(){
-  const username = document.getElementById("reg-username").value.trim();
+window.registerUser = async function () {
+  const name = document.getElementById("reg-username").value.trim();
+  const email = document.getElementById("reg-email").value.trim();
   const password = document.getElementById("reg-password").value.trim();
   const regMsg = document.getElementById("regMsg");
 
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  if(!username || !password){
+  if (!name || !email || !password) {
     regMsg.textContent = "Fill all fields";
     return;
   }
 
-  if(users.find(u => u.username === username)){
-    regMsg.textContent = "Username already exists";
-    return;
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+    await setDoc(doc(db, "users", cred.user.uid), {
+      name: name,
+      email: email,
+      role: "student", // default
+      createdAt: serverTimestamp()
+    });
+
+    regMsg.textContent = "Account created successfully!";
+    regMsg.className = "msg success";
+
+    setTimeout(() => {
+      window.location.href = "academy.html";
+    }, 800);
+
+  } catch (e) {
+    regMsg.textContent = e.message;
   }
+};
 
-  users.push({ username, password });
-  localStorage.setItem("users", JSON.stringify(users));
-
-  localStorage.setItem("loggedInUser", username);
-
-  regMsg.textContent = "Account created successfully!";
-  regMsg.className = "msg success";
-
-  notifyAdmin();
-  setTimeout(() => {
-    window.location.href = "academy.html";
-  }, 800);
-}
-
-/* LOGIN */
-function loginUser(){
-  const username = document.getElementById("login-username").value.trim();
+/* ==========================
+   LOGIN USER (FIREBASE)
+========================== */
+window.loginUser = async function () {
+  const email = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value.trim();
   const loginMsg = document.getElementById("loginMsg");
 
-  const users = JSON.parse(localStorage.getItem("users"));
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
 
-  const found = users.find(
-    u => u.username === username && u.password === password
-  );
+    const snap = await getDoc(doc(db, "users", cred.user.uid));
+    const role = snap.data().role;
 
-  if(!found){
-    loginMsg.textContent = "Invalid username or password";
-    return;
+    if (role === "admin") {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "academy.html";
+    }
+
+  } catch (e) {
+    loginMsg.textContent = "Invalid email or password";
   }
+};
 
-  localStorage.setItem("loggedInUser", username);
-  window.location.href = "academy.html";
-}
-
-/* LOGOUT */
-function logout(){
-  localStorage.removeItem("loggedInUser");
+/* ==========================
+   LOGOUT USER
+========================== */
+window.logout = async function () {
+  await signOut(auth);
   window.location.href = "login.html";
-}
+};
 
-/* USER COUNT */
-function getUserCount(){
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  return users.length;
-}
-
-/* WHATSAPP NOTIFY */
-function notifyAdmin(){
-  const count = getUserCount();
-  const msg = `ALIKO JB ACADEMY UPDATE:%0A👥 Total Users: ${count}`;
-  window.open(`https://wa.me/255620198672?text=${msg}`, "_blank");
-}
-</script>
+/* ==========================
+   AUTH GUARD (AUTO CHECK)
+========================== */
+onAuthStateChanged(auth, (user) => {
+  if (!user && !location.pathname.includes("login")) {
+    location.href = "login.html";
+  }
+});
