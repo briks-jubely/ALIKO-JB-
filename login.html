@@ -6,6 +6,9 @@
 <title>ALIKO JB | Login</title>
 
 <style>
+/* ======================
+   CSS INTEGRATED
+====================== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,sans-serif;}
 body{min-height:100vh;background:#020617;display:flex;justify-content:center;align-items:center;color:#e5e7eb;}
 .app{width:100%;max-width:380px;padding:28px 22px 32px;background:#0f172a;border-radius:26px;box-shadow:0 30px 70px rgba(0,0,0,.65);}
@@ -27,7 +30,6 @@ input:focus{outline:2px solid #38bdf8;}
 <body>
 
 <div class="app">
-
   <h1>ALIKO JB Academy</h1>
   <p>Automotive Engineering Learning Platform</p>
 
@@ -55,12 +57,36 @@ input:focus{outline:2px solid #38bdf8;}
 
 </div>
 
-<!-- FIREBASE -->
-<script type="module" src="auth.js"></script>
-  <script>
-/* ==========================
-   FORM SWITCHING
-========================== */
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
+  authDomain: "aliko-jb-academy.firebaseapp.com",
+  projectId: "aliko-jb-academy",
+  storageBucket: "aliko-jb-academy.firebasestorage.app",
+  messagingSenderId: "282712708896",
+  appId: "1:282712708896:web:c526d620f468a233f82945"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+/* FORM SWITCHING */
 window.showLogin = () => {
   document.getElementById("loginForm").classList.add("active");
   document.getElementById("regForm").classList.remove("active");
@@ -75,9 +101,7 @@ window.showRegister = () => {
   document.getElementById("loginTab").classList.remove("active");
 };
 
-/* ==========================
-   REGISTER USER
-========================== */
+/* REGISTER */
 window.registerUser = async () => {
   const name = document.getElementById("reg-username").value.trim();
   const email = document.getElementById("reg-email").value.trim();
@@ -91,7 +115,6 @@ window.registerUser = async () => {
 
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-
     await setDoc(doc(db, "users", cred.user.uid), {
       name,
       email,
@@ -103,21 +126,15 @@ window.registerUser = async () => {
     regMsg.className = "msg success";
 
     setTimeout(() => {
-      
-    }, 1200);
-if (role === "student") {
       window.location.href = "academy.html";
-    } else {
-      window.location.href = "academy.html";
-      }
+    }, 1000);
+
   } catch (e) {
     regMsg.textContent = e.message;
   }
 };
 
-/* ==========================
-   LOGIN USER
-========================== */
+/* LOGIN */
 window.loginUser = async () => {
   const email = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value.trim();
@@ -139,23 +156,13 @@ window.loginUser = async () => {
   }
 };
 
-/* ==========================
-   LOGOUT USER
-========================== */
-window.logout = async () => {
-  await signOut(auth);
-  window.location.href = "login.html";
-};
-
-/* ==========================
-   AUTO CHECK USER
-========================== */
+/* AUTO REDIRECT IF LOGGED IN */
 onAuthStateChanged(auth, (user) => {
-  if (user && (location.pathname.includes("login") || location.pathname.includes("register"))) {
+  if (user && location.pathname.includes("login")) {
     window.location.href = "academy.html";
   }
 });
 </script>
 
 </body>
-  </html>
+</html>
