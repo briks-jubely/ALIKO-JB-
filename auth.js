@@ -61,7 +61,7 @@ window.registerUser = async () => {
     setTimeout(() => {
       location.href = "academy.html";
     }, 800);
-
+window.location.href = "academy.html";
   } catch (e) {
     msg.textContent = e.message;
   }
@@ -82,7 +82,7 @@ window.loginUser = async () => {
     } else {
       location.href = "academy.html";
     }
-
+window.location.href = "academy.html";
   } catch (e) {
     msg.textContent = "Email or password incorrect";
   }
