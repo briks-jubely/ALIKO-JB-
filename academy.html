@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ALIKO JB Automotive Academy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#020617">
-  <link rel="icon" href="icon-192.png">
-  <link rel="manifest" href="manifest.json">
-
-  <!-- ⚠️ CSS YAKO YOTE ILIACHWA KAMA ILIVYO -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIKO JB Academy</title>
+  
   <link rel="stylesheet" href="style.css">
-</head>
 
+</head>
 <body>
 
-<!-- 🔐 FIREBASE AUTH GUARD -->
+<header class="app-header">
+  <img src="icon-192.png" class="app-logo">
+  <div>
+    <h1>ALIKO JB Academy</h1>
+    <p>Automotive Engineering • Online Training</p>
+  </div>
+</header>
+
+<nav class="app-nav">
+  <a href="index.html">🔧 Workshop</a>
+  <a href="#courses">🎓 Courses</a>
+  <a href="#community">💬 Community</a>
+</nav>
+
+<section id="courses" class="content">
+  <h2>Online Training Programs</h2>
+  <p style="opacity:.6">🔒 Advanced content coming soon</p>
+  <div id="coursesContainer"><p>Loading courses...</p></div>
+</section>
+
+<section id="community" class="content">
+  <h2>Automotive Community & Discussions</h2>
+  <div class="card">
+    <h3>Ask Questions</h3>
+    <p>Fundi na wanafunzi wataweza kuuliza maswali na kubadilishana maarifa ya magari.</p>
+  </div>
+  <div class="card">
+    <h3>Knowledge Sharing</h3>
+    <p>Video, diagrams, in real vehicle problems & solutions.</p>
+  </div>
+  <a class="btn-academy" href="https://wa.me/255620198672">💬 Join Discussion (WhatsApp)</a>
+</section>
+
+<button class="logout-btn" id="logoutBtn">⎋ Logout</button>
+
+<footer class="footer">
+  <p>© 2025 ALIKO JB Automotive Engineering</p>
+</footer>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
@@ -32,100 +66,58 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const coursesContainer = document.getElementById("coursesContainer");
 
-/* 🔐 AUTH GUARD */
+// AUTH GUARD
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.href = "login.html";
+  } else {
+    loadCourses();
   }
 });
 
-/* 🔓 LOGOUT */
-window.logout = async () => {
+// LOGOUT
+document.getElementById("logoutBtn").addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "login.html";
-};
+});
 
-/* 📚 LOAD COURSES */
-const coursesContainer = document.getElementById("coursesContainer");
-
+// LOAD COURSES
 async function loadCourses() {
+  coursesContainer.innerHTML = "Loading courses...";
   try {
-    coursesContainer.innerHTML = "<p>Loading courses...</p>";
     const snapshot = await getDocs(collection(db, "courses"));
-
     if (snapshot.empty) {
       coursesContainer.innerHTML = "<p>No courses available yet.</p>";
       return;
     }
-
     coursesContainer.innerHTML = "";
-
-    snapshot.forEach(doc => {
-      const c = doc.data();
-      if (c.published === false) return;
+    snapshot.forEach((doc) => {
+      const course = doc.data();
+      if (course.published === false) return;
 
       const card = document.createElement("div");
       card.className = "course-card";
-
       card.innerHTML = `
-        <img src="${c.image ?? 'default-course.png'}">
+        <img src="${course.image || 'default-course.png'}" alt="${course.title}">
         <div class="course-content">
-          <span class="badge ${c.price === 0 ? 'free' : 'locked'}">
-            ${c.price === 0 ? "FREE" : "PAID"}
+          <span class="badge ${course.price === 0 ? 'free' : 'locked'}">
+            ${course.price === 0 ? "FREE" : ""}
           </span>
-          <h3>${c.title ?? ""}</h3>
-          <p>${c.description ?? ""}</p>
-          <div class="course-meta">
-            Level: ${c.level ?? "Beginner"}
-          </div>
+          <h3>${course.title || ""}</h3>
+          <p>${course.description || ""}</p>
+          <div class="course-meta">Level: ${course.level || ""}</div>
         </div>
       `;
       coursesContainer.appendChild(card);
     });
-
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
     coursesContainer.innerHTML = "<p>Error loading courses</p>";
+    console.error(e);
   }
 }
-
-document.addEventListener("DOMContentLoaded", loadCourses);
 </script>
 
-<!-- 🔹 UI YAKO -->
-<header class="app-header">
-  <img src="icon-192.png" class="app-logo">
-  <div>
-    <h1>ALIKO JB Academy</h1>
-    <p>Automotive Engineering • Online Training</p>
-  </div>
-</header>
-
-<nav class="app-nav">
-  <a href="index.html">🔧 Workshop</a>
-  <a href="#courses">🎓 Courses</a>
-  <a href="#community">💬 Community</a>
-</nav>
-
-<section id="courses" class="content">
-  <h2>Online Training Programs</h2>
-  <div id="coursesContainer"></div>
-</section>
-
-<section id="community" class="content">
-  <h2>Automotive Community</h2>
-  <div class="card">
-    <h3>Ask Questions</h3>
-    <p>Share and learn from real automotive cases.</p>
-  </div>
-</section>
-
-<button class="logout-btn" onclick="logout()">⎋ Logout</button>
-
-<footer class="footer">
-  <p>© 2025 ALIKO JB Automotive Engineering</p>
-</footer>
-
 </body>
-</html>
+    </html>
