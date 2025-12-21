@@ -1,7 +1,7 @@
 // js/auth.js
 console.log("auth.js loaded");
 
-import { auth, db } from "../firebase/firebase.js";
+import { auth, db } from "firebase.js";
 
 import {
   createUserWithEmailAndPassword,
