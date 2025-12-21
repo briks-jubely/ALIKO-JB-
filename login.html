@@ -103,9 +103,13 @@ window.registerUser = async () => {
     regMsg.className = "msg success";
 
     setTimeout(() => {
-      window.location.href = "academy.html";
+      
     }, 1200);
-
+if (role === "student") {
+      window.location.href = "academy.html";
+    } else {
+      window.location.href = "academy.html";
+      }
   } catch (e) {
     regMsg.textContent = e.message;
   }
