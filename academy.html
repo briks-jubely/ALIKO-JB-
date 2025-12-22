@@ -84,62 +84,49 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 
 // LOAD COURSES
 async function loadCourses() {
-  coursesContainer.innerHTML = "";
+  coursesContainer.innerHTML = "Loading courses...";
 
   try {
     const snapshot = await getDocs(collection(db, "courses"));
 
     if (snapshot.empty) {
-      coursesContainer.innerHTML = `
-        <p style="opacity:.6;margin-top:10px">
-          📭 No courses available yet
-        </p>
-      `;
+      coursesContainer.innerHTML = "<p>Courses will be available soon</p>";
       return;
     }
 
-    let hasCourses = false;
+    coursesContainer.innerHTML = "";
 
-    snapshot.forEach((doc) => {
-      const course = doc.data();
+    snapshot.forEach((docSnap) => {
+      const course = docSnap.data();
 
-      // ONYESHA TU ZILIZO PUBLISHED
-      
+      console.log("COURSE:", course); // DEBUG
+
       const card = document.createElement("div");
       card.className = "course-card";
 
       card.innerHTML = `
-        <img src="${course.image || 'default-course.jpg'}" alt="${course.title}">
-        <h3>${course.title}</h3>
-        <p>${course.description}</p>
+        <img src="${course.image || 'default-course.jpg'}">
 
-        <div class="course-meta">
-          Level: ${course.level}
+        <div class="course-content">
+          <span class="badge ${course.paid ? 'locked' : 'free'}">
+            ${course.paid ? "PAID" : "FREE"}
+          </span>
+
+          <h3>${course.title || "Untitled Course"}</h3>
+          <p>${course.description || "No description available"}</p>
+
+          <div class="course-meta">
+            Level: ${course.level || "N/A"}
+          </div>
         </div>
-
-        <span class="badge ${course.paid ? 'locked' : 'free'}">
-          ${course.paid ? "PAID" : "FREE"}
-        </span>
       `;
 
       coursesContainer.appendChild(card);
     });
 
-    if (!hasCourses) {
-      coursesContainer.innerHTML = `
-        <p style="opacity:.6;margin-top:10px">
-          🔒 Courses will be available soon
-        </p>
-      `;
-    }
-
   } catch (error) {
-    console.error(error);
-    coursesContainer.innerHTML = `
-      <p style="color:#f87171">
-        ⚠️ Failed to load courses
-      </p>
-    `;
+    console.error("Error loading courses:", error);
+    coursesContainer.innerHTML = "<p>Error loading courses</p>";
   }
   }
 </script>
