@@ -100,11 +100,17 @@ async function loadCourses() {
       const card = document.createElement("div");
       card.className = "course-card";
       card.innerHTML = `
-        <img src="${course.image || 'default-course.png'}" alt="${course.title}">
-        <div class="course-content">
-          <span class="badge ${course.price === 0 ? 'free' : 'locked'}">
-            ${course.price === 0 ? "FREE" : ""}
-          </span>
+        <img src="${course.imageUrl || 'default-course.png'}">
+<h3>${course.courseName || ""}</h3>
+<p>${course.desc || ""}</p>
+<div class="course-meta">
+  Level: ${course.courseLevel || ""}
+</div>
+
+<span class="badge ${course.paid ? 'locked' : 'free'}">
+  ${course.paid ? "PAID" : "FREE"}
+</span>
+          
           <h3>${course.title || ""}</h3>
           <p>${course.description || ""}</p>
           <div class="course-meta">Level: ${course.level || ""}</div>
