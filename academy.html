@@ -27,7 +27,7 @@
 <section id="courses" class="content">
   <h2>Online Training Programs</h2>
   <p style="opacity:.6">🔒 Advanced content coming soon</p>
-  <div id="coursesContainer"><p>Loading courses...</p></div>
+  <div id="coursesContainer"></div>
 </section>
 
 <section id="community" class="content">
@@ -85,44 +85,67 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 
 // LOAD COURSES
 async function loadCourses() {
-  coursesContainer.innerHTML = "Loading courses...";
+  coursesContainer.innerHTML = "";
+
   try {
     const snapshot = await getDocs(collection(db, "courses"));
+
     if (snapshot.empty) {
-      coursesContainer.innerHTML = "<p>No courses available yet.</p>";
+      coursesContainer.innerHTML = `
+        <p style="opacity:.6;margin-top:10px">
+          📭 No courses available yet
+        </p>
+      `;
       return;
     }
-    coursesContainer.innerHTML = "";
+
+    let hasCourses = false;
+
     snapshot.forEach((doc) => {
       const course = doc.data();
-      if (course.published === false) return;
+
+      // ONYESHA TU ZILIZO PUBLISHED
+      if (!course.published) return;
+
+      hasCourses = true;
 
       const card = document.createElement("div");
       card.className = "course-card";
-      card.innerHTML = `
-        <img src="${course.imageUrl || 'default-course.jpg'}">
-<h3>${course.courseName || ""}</h3>
-<p>${course.desc || ""}</p>
-<div class="course-meta">
-  Level: ${course.courseLevel || ""}
-</div>
 
-<span class="badge ${course.paid ? 'locked' : 'free'}">
-  ${course.paid ? "PAID" : "FREE"}
-</span>
-          
-          <h3>${course.title || ""}</h3>
-          <p>${course.description || ""}</p>
-          <div class="course-meta">Level: ${course.level || ""}</div>
+      card.innerHTML = `
+        <img src="${course.image || 'default-course.jpg'}" alt="${course.title}">
+        <h3>${course.title}</h3>
+        <p>${course.description}</p>
+
+        <div class="course-meta">
+          Level: ${course.level}
         </div>
+
+        <span class="badge ${course.paid ? 'locked' : 'free'}">
+          ${course.paid ? "PAID" : "FREE"}
+        </span>
       `;
+
       coursesContainer.appendChild(card);
     });
-  } catch (e) {
-    coursesContainer.innerHTML = "<p>Error loading courses</p>";
-    console.error(e);
+
+    if (!hasCourses) {
+      coursesContainer.innerHTML = `
+        <p style="opacity:.6;margin-top:10px">
+          🔒 Courses will be available soon
+        </p>
+      `;
+    }
+
+  } catch (error) {
+    console.error(error);
+    coursesContainer.innerHTML = `
+      <p style="color:#f87171">
+        ⚠️ Failed to load courses
+      </p>
+    `;
   }
-}
+  }
 </script>
 
 </body>
