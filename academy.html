@@ -105,18 +105,18 @@ async function loadCourses() {
       card.className = "course-card";
 
       card.innerHTML = `
-        <img src="${course.image || 'default-course.jpg'}">
+        <img src="${image || 'default-course.jpg'}">
 
         <div class="course-content">
           <span class="badge ${course.paid ? 'locked' : 'free'}">
             ${course.paid ? "PAID" : "FREE"}
           </span>
 
-          <h3>${course.title || "Untitled Course"}</h3>
-          <p>${course.description || "No description available"}</p>
+          <h3>${title || "Untitled Course"}</h3>
+          <p>${description || "No description available"}</p>
 
           <div class="course-meta">
-            Level: ${course.level || "N/A"}
+            Level: ${level || "N/A"}
           </div>
         </div>
       `;
