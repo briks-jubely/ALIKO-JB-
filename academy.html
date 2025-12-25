@@ -99,27 +99,29 @@ async function loadCourses() {
     snapshot.forEach((docSnap) => {
       const course = docSnap.data();
 
-      console.log("COURSE:", course); // DEBUG
+      // trim image URL
+      const image = (course.image || 'default-course.jpg').trim();
 
       const card = document.createElement("div");
       card.className = "course-card";
 
       card.innerHTML = `
-  <img src="${course.image || 'default-course.jpg'}">
+        <img src="${image}" alt="${course.title || 'Course Image'}">
 
-  <div class="course-content">
-    <span class="badge ${course.paid ? 'locked' : 'free'}">
-      ${course.paid ? "PAID" : "FREE"}
-    </span>
+        <div class="course-content">
+          <span class="badge ${course.paid ? 'locked' : 'free'}">
+            ${course.paid ? "PAID" : "FREE"}
+          </span>
 
-    <h3>${course.title || "Untitled Course"}</h3>
-    <p>${course.description || "No description available"}</p>
+          <h3>${course.title || "Untitled Course"}</h3>
+          <p>${course.description || "No description available"}</p>
 
-    <div class="course-meta">
-      Level: ${course.level || "N/A"}
-    </div>
-  </div>
-`;
+          <div class="course-meta">
+            Level: ${course.level || "N/A"}
+          </div>
+        </div>
+      `;
+
       coursesContainer.appendChild(card);
     });
 
@@ -127,7 +129,7 @@ async function loadCourses() {
     console.error("Error loading courses:", error);
     coursesContainer.innerHTML = "<p>Error loading courses</p>";
   }
-  }
+    }
 </script>
 
 </body>
