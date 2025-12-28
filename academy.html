@@ -26,7 +26,8 @@
 
 <section id="courses" class="content">
   <h2>Online Training Programs</h2>
-  <div id="coursesContainer"></div>
+<div id="courses" class="courses-container"></div>
+<p id="status"></p>
 </section>
 
 <section id="community" class="content">
@@ -84,52 +85,47 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 
 // LOAD COURSES
 async function loadCourses() {
-  coursesContainer.innerHTML = "Loading courses...";
+  const coursesDiv = document.getElementById("courses");
+  const status = document.getElementById("status");
+
+  coursesDiv.innerHTML = "";
+  status.textContent = "Loading courses...";
 
   try {
-    const snapshot = await getDocs(collection(db, "courses"));
+    const querySnapshot = await getDocs(collection(db, "courses"));
 
-    if (snapshot.empty) {
-      coursesContainer.innerHTML = "<p>Courses will be available soon</p>";
+    if (querySnapshot.empty) {
+      status.textContent = "No courses found in Firestore";
       return;
     }
 
-    coursesContainer.innerHTML = "";
+    status.textContent = "";
 
-    snapshot.forEach((docSnap) => {
-      const course = docSnap.data();
+    querySnapshot.forEach((doc) => {
+      const course = doc.data();
 
-      // trim image URL
-      const image = (course.image || 'automotive-electrical-systems.jpg').trim();
+      // DEBUG (iona console)
+      console.log("Course:", course);
 
       const card = document.createElement("div");
       card.className = "course-card";
 
       card.innerHTML = `
-        <img src="${image}" alt="${course.title || 'Course Image'}">
-
-        <div class="course-content">
-          <span class="badge ${course.paid ? 'locked' : 'free'}">
-            ${course.paid ? "PAID" : "FREE"}
-          </span>
-
-          <h3>${course.title || "Automotive Electrical Systems basics"}</h3>
-          <p>${course.description || "learn about circuit Electrical charge and Ecu"}</p>
-
-          <div class="course-meta">
-            Level: ${course.level || "Beginner"}
-          </div>
-        </div>
+        <h3>${course.title || "No title"}</h3>
+        <p>${course.description || ""}</p>
+        <p><strong>Price:</strong> ${course.price ?? "Free"}</p>
       `;
 
-      coursesContainer.appendChild(card);
+      coursesDiv.appendChild(card);
     });
 
   } catch (error) {
     console.error("Error loading courses:", error);
-    coursesContainer.innerHTML = "<p>Error loading courses</p>";
+    status.textContent = "Error loading courses";
   }
-    }
+}
+
+loadCourses();
 </script>
 
 </body>
