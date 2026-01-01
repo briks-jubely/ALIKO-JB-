@@ -1,522 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="icon-192.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- App icons -->
+<title>ALIKO JB Automotive Engineering</title>
+
+<link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
-  <meta charset="UTF-8">
-  <title>ALIKO JB Automotive</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- favicon -->
-  <link rel="icon" type="image/png" href="icon-192.png">
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#020617">
-</head>
-<body>
 
-<header class="header">
-  <div class="logo-area">
-    <img src="icon-192.png" alt="ALIKO JB Automotive Logo">
-    <h1>ALIKO JB</h1>
-    <p>Automotive Engineering</p>
-  </div>
-</header>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+  line-height: 1.6;
+}
 
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALIKO JB Automotive Engineering</title>
+/* HEADER */
+.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(90deg,#020617,#1e293b);
+  padding: 15px;
+  text-align: center;
+  z-index: 1000;
+}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #0f172a;
-            color: white;
-        }
+.app-header h1 {
+  margin: 0;
+  color: #38bdf8;
+  font-size: 24px;
+}
 
-        header {
-            background-color: black;
-            padding: 20px;
-            text-align: center;
-        }
+.app-header p {
+  margin: 5px 0 0;
+  color: #cbd5f5;
+  font-size: 14px;
+}
 
-        header h1 {
-            color: #facc15;
-            margin: 0;
-        }
+/* CONTENT */
+.app-content {
+  margin-top: 90px;
+  margin-bottom: 70px;
+}
 
-        header p {
-            color: #cbd5f5;
-        }
+section {
+  background: #020617;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(56,189,248,0.15);
+}
 
-        section {
-            padding: 30px;
-        }
+h2 {
+  color: #22d3ee;
+  border-bottom: 2px solid #22d3ee;
+}
 
-        .services {
-            background-color: #020617;
-        }
+.service-box {
+  background: #111827;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid #facc15;
+}
 
-        .service-box {
-            background-color: #111827;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #facc15;
-        }
-
-        footer {
-            background-color: black;
-            text-align: center;
-            padding: 15px;
-            color: #9ca3af;
-        }
-    </style>
-    <style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #0f172a; /* Dark blue */
-        color: #e5e7eb; /* Light gray */
-        line-height: 1.6;
-    }
-
-    header {
-        background: linear-gradient(90deg, #020617, #1e293b);
-        padding: 40px 20px;
-        text-align: center;
-    }
-
-    header h1 {
-        margin: 0;
-        color: #38bdf8;
-        font-size: 32px;
-        letter-spacing: 2px;
-    }
-
-    header p {
-        margin-top: 10px;
-        font-size: 16px;
-        color: #cbd5f5;
-    }
-
-    section {
-        padding: 30px 20px;
-        max-width: 900px;
-        margin: auto;
-    }
-
-    h2 {
-        color: #22d3ee;
-        border-bottom: 2px solid #22d3ee;
-        padding-bottom: 6px;
-    }
-
-    ul, ol {
-        margin-left: 20px;
-    }
-
-    li {
-        margin: 8px 0;
-    }
-
-    hr {
-        border: 0;
-        height: 1px;
-        background: #334155;
-        margin: 40px 0;
-    }
-
-    footer {
-        background: #020617;
-        text-align: center;
-        padding: 20px;
-        font-size: 14px;
-        color: #94a3b8;
-    }
-        
-    button {
-    background: #38bdf8;
-    color: #020617;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
+button {
+  background: #38bdf8;
+  color: #020617;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 button:hover {
-    background: #22d3ee;
-}
-    h3 {
-    color: #a5f3fc;
-    margin-top: 20px;
-}
-        /* ================================
-   RESPONSIVE DESIGN
-================================ */
-
-@media (max-width: 768px) {
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    header p {
-        font-size: 14px;
-    }
-
-    section {
-        padding: 20px 15px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-
-    button {
-        width: 100%;
-        padding: 14px;
-    }
-
-    form input,
-    form textarea {
-        width: 100%;
-        padding: 10px;
-    }
+  background: #22d3ee;
 }
 
-@media (min-width: 769px) {
-    section {
-        font-size: 18px;
-    }
-    }
-        section {
-    background: #020617;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(56,189,248,0.15);
-        }
-        .app-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #020617;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    z-index: 1000;
-}
-
-.app-content {
-    margin-top: 60px;
-    margin-bottom: 70px;
-}
-
+/* NAV */
 .app-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    background: #020617;
-    border-top: 1px solid #334155;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background: #020617;
+  border-top: 1px solid #334155;
 }
 
 .app-nav button {
-    flex: 1;
-    background: none;
-    color: #e5e7eb;
-    border: none;
-    padding: 12px;
+  flex: 1;
+  background: none;
+  color: #e5e7eb;
 }
 
-.app-nav button:hover {
-    background: #1e293b;
-        }
-      body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #ffffff;
-}
-
-.header {
+/* FOOTER */
+footer {
   background: #020617;
-  padding: 20px;
   text-align: center;
-}
-
-.logo-area img {
-  width: 120px;
-  margin-bottom: 10px;
-}
-
-.logo-area h1 {
-  margin: 0;
-  font-size: 28px;
-  letter-spacing: 2px;
-}
-
-.logo-area p {
-  margin: 0;
-  font-size: 14px;
+  padding: 15px;
   color: #94a3b8;
-      }
-      .logo-area img {
-  animation: zoomIn 1.5s ease;
 }
-
-@keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-      }
-      .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #020617;
-  padding: 12px 20px;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-logo img {
-  width: 40px;
-}
-
-.nav-logo span {
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-.nav ul {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav ul li a {
-  color: #cbd5f5;
-  text-decoration: none;
-}
-
-.nav ul li a:hover {
-  color: #38bdf8;
-      }
-      .btn-academy {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 18px;
-  background: #38bdf8;
-  color: #020617;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-          }
-                 </style>
-    <link rel="icon" href="logo.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#020617">
-<link rel="icon" href="/favicon".ico" />
-<!-- Kama unatumia PNG -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png-32x32.png">
-<link rel="manifest" href="/manifest.json">
+</style>
 </head>
-<script>
-    function contactUs() {
-        alert(
-            "Karibu ALIKO JB Automotive Engineering!\n\n" +
-            "📍 Location: dodoma,mbeya,ruvuma-Tanzania\n" +
-            "📞 Simu: 0750 198 672\n" +
-            "📧 Email: jubelybriks@gmail.com\n\n" +
-            "Tuwasiliane kwa huduma bora za magari."
-        );
-    }
-</script>
-<script>
-    function contactUs() {
-        alert(
-            "✅ ALIKO JB AUTOMOTIVE\n\n" +
-            "Huduma yako imeanzishwa.\n" +
-            "Tutawasiliana nawe muda mfupi baada ya kupokea ujumbe."
-        );
-    }
 
-    window.onload = function () {
-        console.log("ALIKO JB App loaded successfully");
-    };
-            
-</script>
-    <script>
-function showSection(id) {
-    document.getElementById("home").style.display = "none";
-    document.getElementById("services").style.display = "none";
-    document.getElementById("contact").style.display = "none";
-
-    document.getElementById(id).style.display = "block";
-}
-        </script>
 <body>
 
-<header 
-    class="app-header">    <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
-    <p>Professional Vehicle Diagnostics & Electrical Solutions</p>
+<header class="app-header">
+  <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
+  <p>Professional Vehicle Diagnostics & Electrical Solutions</p>
 </header>
+
 <main class="app-content">
-<section>
-    
-    <h2>About Us</h2>
-    <p>
-        ALIKO JB Automotive Engineering ni workshop ya kitaalamu
-        inayojihusisha na utambuzi wa magari (diagnostics),
-        mifumo ya umeme wa magari, ECU, transmission na technology ya kisasa ya magari.
-    </p>
-</section
-<section id="home">Home Content</section>
-  <a href="#" onclick="goToAcademy()" class="btn-academy">🎓CLICK TO JOIN ALIKO JB Academy </a> 
-<section id="services" style="display:none;">Services Content</section>
-<section id="contact" style="display:none;">Contact Content</section>
-<section class="services">
-    <h2>Our Services</h2>
 
-    <div class="service-box">
-        <h3>Vehicle Diagnostics</h3>
-        <p>Scanning ECU, reading fault codes, live data analysis.</p>
-    </div>
-
-    <div class="service-box">
-        <h3>Automotive Electrical Systems</h3>
-        <p>Wiring, sensors, actuators, CAN bus troubleshooting.</p>
-    </div>
-
-    <div class="service-box">
-        <h3>ECU Programming</h3>
-        <p>ECU testing, repair, coding & software related issues.</p>
-    </div>
-
-    <div class="service-box">
-        <h3>Transmission & Gear Systems</h3>
-        <p>Automatic & manual transmission diagnostics and repair.</p>
-    </div>
+<section id="home">
+<h2>About Us</h2>
+<p>
+ALIKO JB Automotive Engineering ni workshop ya kitaalamu
+inayojihusisha na utambuzi wa magari (diagnostics),
+mifumo ya umeme wa magari, ECU, transmission na technology ya kisasa ya magari.
+</p>
+<a href="#" onclick="goToAcademy()" class="btn-academy">🎓 CLICK TO JOIN ALIKO JB Academy</a>
 </section>
-<hr>
 
-<section>
-    <h2>Workshop & Garage Yetu</h2>
+<section id="services">
+<h2>Our Services</h2>
 
-    <p>
-        ALIKO JB Automotive ina workshop ya kisasa inayoshughulika na 
-        matengenezo ya magari ya kawaida, ya kibiashara na heavy duty.
-        Kila kazi inafanywa kwa kufuata viwango vya usalama na 
-        uhandisi wa kisasa.
-    </p>
+<div class="service-box">
+<h3>Vehicle Diagnostics</h3>
+<p>Scanning ECU, reading fault codes, live data analysis.</p>
+</div>
 
-    <h3>Shughuli Kuu za Workshop</h3>
-    <ul>
-        <li>🔧 Engine diagnostics & repair</li>
-        <li>⚡ Electrical wiring & troubleshooting</li>
-        <li>🖥️ ECU scanning, programming & fault clearing</li>
-        <li>🔁 Gearbox & transmission systems</li>
-        <li>🛞 Brake, suspension & steering systems</li>
-        <li>🚚 Maintenance ya magari makubwa (trucks & buses)</li>
-    </ul>
+<div class="service-box">
+<h3>Automotive Electrical Systems</h3>
+<p>Wiring, sensors, actuators, CAN bus troubleshooting.</p>
+</div>
 
-    <h3>Vifaa & Teknolojia Tunazotumia</h3>
-    <ul>
-        <li>🛠️ Professional diagnostic scanners</li>
-        <li>🧪 Multimeters & oscilloscopes</li>
-        <li>💻 Laptop based diagnostic software</li>
-        <li>📡 CAN Bus testing tools</li>
-        <li>🔋 Battery & charging system testers</li>
-    </ul>
+<div class="service-box">
+<h3>ECU Programming</h3>
+<p>ECU testing, repair, coding & software related issues.</p>
+</div>
 
-    <h3>Muda wa Kazi</h3>
-    <p>
-        🕰️ Jumatatu – Jumamosi: 08:00 – 18:00 <br>
-        ❌ Jumapili: Tumezuiwa
-    </p>
-
-    <p>
-        Kipaumbele chetu ni <strong>usalama wa mteja</strong>, 
-        <strong>ubora wa kazi</strong> na 
-        <strong>uhakika wa matokeo</strong>.
-    </p>
-    </section>
-<section>
-    <h2>Contact</h2>
-    <p>Email: jubelybriks@gmail.com</p>
-    <p>Location: Tanzania</p>
+<div class="service-box">
+<h3>Transmission & Gear Systems</h3>
+<p>Automatic & manual transmission diagnostics and repair.</p>
+</div>
 </section>
-<section style="text-align:center;">
-    <h2>Wasiliana Nasi</h2>
-    <p>Bonyeza hapa kuwasiliana na ALIKO JB Automotive Engineering</p>
 
-    <button onclick="contactUs()">
-        📞 Wasiliana Sasa
-    </button>
-    <form action="https://formsubmit.co/jubelybriks@gmail.com" method="POST">
-    <input type="hidden" name="_subject" value="Ujumbe Mpya - ALIKO JB">
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: jubelybriks@gmail.com</p>
+<p>Location: Tanzania</p>
 
-    <input type="text" name="name" placeholder="Jina lako" required><br><br>
-    <input type="tel" name="phone" placeholder="Namba ya simu" required><br><br>
-    <textarea name="message" placeholder="Ujumbe wako" required></textarea><br><br>
-
-    <button type="submit">Tuma Ujumbe</button>
-  <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
-    </form>
-    <a href="https://wa.me/255750198672" target="_blank">
-    <button>💬 Wasiliana WhatsApp</button>
-    </a>
+<button onclick="contactUs()">📞 Wasiliana Sasa</button>
 </section>
+
 </main>
-    <nav class ="app-nav">
-        <button onclick="showSection('home')">🏠 Home</button>
+
+<nav class="app-nav">
+<button onclick="showSection('home')">🏠 Home</button>
 <button onclick="showSection('services')">🛠 Services</button>
 <button onclick="showSection('contact')">📞 Contact</button>
-    </nav>
-<footer>
-    <p>© 2025 ALIKO JB Automotive Engineering</p>
-</footer>
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js")
-    .then(() => console.log("Service Worker Registered"))
-    .catch(err => console.log("SW failed", err));
-}
-</script>
-  <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
-  <script>
-function goToAcademy() {
-    const user = localStorage.getItem("loggedInUser");
+</nav>
 
-    if (!user) {
-        window.location.href = "login.html"; 
-    } else {
-        window.location.href = "academy.html";
-    }
+<footer>
+<p>© 2025 ALIKO JB Automotive Engineering</p>
+</footer>
+
+<script>
+function contactUs() {
+ alert("📞 ALIKO JB AUTOMOTIVE\n0750 198 672\n📧 jubelybriks@gmail.com");
+}
+
+function showSection(id) {
+ document.querySelectorAll("section").forEach(s=>s.style.display="none");
+ document.getElementById(id).style.display="block";
+}
+
+function goToAcademy() {
+ const user = localStorage.getItem("loggedInUser");
+ window.location.href = user ? "academy.html" : "login.html";
 }
 </script>
 
