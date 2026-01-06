@@ -49,4 +49,4 @@ async function loadCourses() {
     console.error("Error loading courses:", error);
     status.textContent = "Error loading courses";
   }
-      }
+}
