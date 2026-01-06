@@ -26,8 +26,11 @@
 
 <section id="courses" class="content">
   <h2>Online Training Programs</h2>
-<div id="courses" class="courses-container"></div>
-<p id="status"></p>
+
+  <!-- HII NDIO CONTAINER SAHIHI -->
+  <div id="coursesContainer" class="courses-container"></div>
+
+  <p id="status"></p>
 </section>
 
 <section id="community" class="content">
@@ -85,7 +88,7 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 
 // LOAD COURSES
 async function loadCourses() {
-  const coursesDiv = document.getElementById("courses");
+  const coursesDiv = document.getElementById("coursesContainer");
   const status = document.getElementById("status");
 
   coursesDiv.innerHTML = "";
@@ -93,6 +96,8 @@ async function loadCourses() {
 
   try {
     const querySnapshot = await getDocs(collection(db, "courses"));
+
+    console.log("Courses found:", querySnapshot.size);
 
     if (querySnapshot.empty) {
       status.textContent = "No courses found in Firestore";
@@ -104,7 +109,6 @@ async function loadCourses() {
     querySnapshot.forEach((doc) => {
       const course = doc.data();
 
-      // DEBUG (iona console)
       console.log("Course:", course);
 
       const card = document.createElement("div");
@@ -113,7 +117,9 @@ async function loadCourses() {
       card.innerHTML = `
         <h3>${course.title || "No title"}</h3>
         <p>${course.description || ""}</p>
-        <p><strong>Price:</strong> ${course.price ?? "Free"}</p>
+        <p><strong>Price:</strong> ${
+          course.paid ? "TZS " + course.price : "Free"
+        }</p>
       `;
 
       coursesDiv.appendChild(card);
@@ -123,9 +129,7 @@ async function loadCourses() {
     console.error("Error loading courses:", error);
     status.textContent = "Error loading courses";
   }
-}
-
-loadCourses();
+  }
 </script>
 
 </body>
