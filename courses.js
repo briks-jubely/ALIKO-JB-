@@ -1,77 +1,52 @@
-// courses.js
+import { initializeApp } from "...firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "...firebase-auth.js";
+import { getFirestore, collection, getDocs } from "...firebase-firestore.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
-
-// 🔹 FIREBASE CONFIG YAKO (ULIYOITUMA)
-const firebaseConfig = {
-  apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
-  authDomain: "aliko-jb-academy.firebaseapp.com",
-  projectId: "aliko-jb-academy",
-  storageBucket: "aliko-jb-academy.firebasestorage.app",
-  messagingSenderId: "282712708896",
-  appId: "1:282712708896:web:c526d620f468a233f82945"
-};
-
-// 🔹 INIT FIREBASE
+const firebaseConfig = { /* config yako */ };
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-// 🔹 DOM READY
-document.addEventListener("DOMContentLoaded", loadCourses);
+const coursesContainer = document.getElementById("coursesContainer");
 
-// 🔹 LOAD COURSES
-async function loadCourses() {
-  console.log("loadCourses() imeitwa");
-
-  const container = document.getElementById("coursesContainer");
-  if (!container) {
-    console.error("coursesContainer haipo");
-    return;
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  } else {
+    loadCourses();
   }
+});
 
-  container.innerHTML = "Loading courses...";
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "login.html";
+});
+
+async function loadCourses() {
+  const status = document.getElementById("status");
+  coursesContainer.innerHTML = "";
+  status.textContent = "Loading courses...";
 
   try {
-    const snapshot = await getDocs(collection(db, "courses"));
-    console.log("Courses found:", snapshot.size);
-
-    if (snapshot.empty) {
-      container.innerHTML = "Hakuna kozi zilizopo.";
+    const querySnapshot = await getDocs(collection(db, "courses"));
+    if (querySnapshot.empty) {
+      status.textContent = "No courses found in Firestore";
       return;
     }
-
-    container.innerHTML = "";
-
-    snapshot.forEach((doc) => {
+    status.textContent = "";
+    querySnapshot.forEach((doc) => {
       const course = doc.data();
-
       const card = document.createElement("div");
-      card.style.border = "1px solid #ccc";
-      card.style.padding = "10px";
-      card.style.marginBottom = "10px";
-
+      card.className = "course-card";
       card.innerHTML = `
-        <h3>${course.title}</h3>
-        <p>${course.description}</p>
-        <p><strong>Type:</strong> ${course.paid ? "Paid" : "Free"}</p>
-        ${
-          course.paid
-            ? `<p><strong>Price:</strong> TZS ${course.price}</p>`
-            : ""
-        }
-        <button>${course.paid ? "Buy Course" : "Start Learning"}</button>
+        <h3>${course.title || "No title"}</h3>
+        <p>${course.description || ""}</p>
+        <p><strong>Price:</strong> ${course.price ?? "Free"}</p>
       `;
-
-      container.appendChild(card);
+      coursesContainer.appendChild(card);
     });
-
   } catch (error) {
     console.error("Error loading courses:", error);
-    container.innerHTML = "Error loading courses.";
+    status.textContent = "Error loading courses";
   }
-    }
+      }
