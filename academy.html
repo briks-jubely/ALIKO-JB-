@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ALIKO JB Academy</title>
   
-  <link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header class="app-header">
@@ -27,7 +27,7 @@
 <section id="courses" class="content">
   <h2>Online Training Programs</h2>
 
-  <!-- HII NDIO CONTAINER SAHIHI -->
+  <!-- ⚠️ HII NDIO CONTAINER PEKEE YA COURSES -->
   <div id="coursesContainer" class="courses-container"></div>
 
   <p id="status"></p>
@@ -35,15 +35,20 @@
 
 <section id="community" class="content">
   <h2>Automotive Community & Discussions</h2>
+
   <div class="card">
     <h3>Ask Questions</h3>
     <p>Fundi na wanafunzi wataweza kuuliza maswali na kubadilishana maarifa ya magari.</p>
   </div>
+
   <div class="card">
     <h3>Knowledge Sharing</h3>
     <p>Video, diagrams, in real vehicle problems & solutions.</p>
   </div>
-  <a class="btn-academy" href="https://wa.me/255620198672">💬 Join Discussion (WhatsApp)</a>
+
+  <a class="btn-academy" href="https://wa.me/255620198672">
+    💬 Join Discussion (WhatsApp)
+  </a>
 </section>
 
 <button class="logout-btn" id="logoutBtn">⎋ Logout</button>
@@ -52,85 +57,8 @@
   <p>© 2025 ALIKO JB Automotive Engineering</p>
 </footer>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAZDwTWKduwhVD9lDNcin_ZCur4kMlWkUA",
-  authDomain: "aliko-jb-academy.firebaseapp.com",
-  projectId: "aliko-jb-academy",
-  storageBucket: "aliko-jb-academy.firebasestorage.app",
-  messagingSenderId: "282712708896",
-  appId: "1:282712708896:web:c526d620f468a233f82945"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const coursesContainer = document.getElementById("coursesContainer");
-
-// AUTH GUARD
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-  } else {
-    loadCourses();
-  }
-});
-
-// LOGOUT
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  await signOut(auth);
-  window.location.href = "login.html";
-});
-
-// LOAD COURSES
-async function loadCourses() {
-  const coursesDiv = document.getElementById("coursesContainer");
-  const status = document.getElementById("status");
-
-  coursesDiv.innerHTML = "";
-  status.textContent = "Loading courses...";
-
-  try {
-    const querySnapshot = await getDocs(collection(db, "courses"));
-
-    console.log("Courses found:", querySnapshot.size);
-
-    if (querySnapshot.empty) {
-      status.textContent = "No courses found in Firestore";
-      return;
-    }
-
-    status.textContent = "";
-
-    querySnapshot.forEach((doc) => {
-      const course = doc.data();
-
-      console.log("Course:", course);
-
-      const card = document.createElement("div");
-      card.className = "course-card";
-
-      card.innerHTML = `
-        <h3>${course.title || "No title"}</h3>
-        <p>${course.description || ""}</p>
-        <p><strong>Price:</strong> ${
-          course.paid ? "TZS " + course.price : "Free"
-        }</p>
-      `;
-
-      coursesDiv.appendChild(card);
-    });
-
-  } catch (error) {
-    console.error("Error loading courses:", error);
-    status.textContent = "Error loading courses";
-  }
-  }
-</script>
+<!-- 🔥 LINK YA COURSES.JS (HII TU NDIO IMEONGEZWA) -->
+<script type="module" src="courses.js"></script>
 
 </body>
-    </html>
+</html>
