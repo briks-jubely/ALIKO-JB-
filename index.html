@@ -4,125 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ALIKO JB AUTOMOTIVE ENGINEERING</title>
+
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="manifest" href="manifest.json">
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #050505, #0d0f23, #000000);
-    background-attachment: fixed;
-    color: #fff;
-    letter-spacing: 0.4px;
-}
-
-header {
-    background: linear-gradient(180deg, #000428, #004e92);
-    padding: 10px;  /* imeshuka kutoka 22px */
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    border-bottom: 1px solid rgba(0,160,255,0.25);
-    box-shadow: 0 4px 20px rgba(0,120,255,0.4);
-}
-
-header img {
-    width: 40px;   /* imeshuka kutoka 90px */
-    height: 40px;
-    border-radius: 12px;
-}
-
-header h1 {
-    font-size: 1.35rem;   /* heading imepunguzwa */
-    margin-top: 5px;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 190px; /* avoid overlap with fixed header */
-}
-nav a {
-    text-decoration: none;
-    background: linear-gradient(145deg, #003cff, #009dff);
-    padding: 16px 32px;
-    border-radius: 14px;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(0, 120, 255, 0.4);
-    font-size: 1.15rem;
-}
-nav a:hover {
-    background: linear-gradient(145deg, #0066ff, #00c8ff);
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0,150,255,0.55);
-}
-
-#installBtn {
-    display: block;
-    margin: 25px auto;
-    background: linear-gradient(145deg, #003cff, #009dff);
-    color: #fff;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 14px;
-    font-size: 1.15rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(0, 120, 255, 0.4);
-}
-#installBtn:hover {
-    background: linear-gradient(145deg, #0066ff, #00c8ff);
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0,150,255,0.55);
-}
-#installBtn {
-    margin-top: 05px; /* imepunguzwa ili isiguswe na header */
-    }
-section {
-    padding: 20px;
-    max-width: 900px;
-    margin: auto;
-    backdrop-filter: blur(4px);
-}
-
-h2 { color: #ffcc00; text-align: center; }
-
-.feature-card {
-    background: linear-gradient(160deg, #0d0f1a 0%, #080810 40%, #000 100%);
-    padding: 25px;
-    margin: 28px 0;
-    border-radius: 18px;
-    border: 1px solid rgba(0, 150, 255, 0.15);
-    box-shadow: 0 0 25px rgba(0, 140, 255, 0.15), inset 0 0 25px rgba(0, 80, 255, 0.08);
-    transition: 0.35s;
-}
-.feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 35px rgba(0, 160, 255, 0.25), inset 0 0 30px rgba(0, 110, 255, 0.12);
-}
-.feature-card img.card-img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
-.feature-card h3 img { width: 28px; height: 28px; }
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #111;
-    margin-top: 30px;
-}
-</style>
+<link rel="stylesheet" href="index.css">
 </head>
+
 <body>
 
 <header>
@@ -132,27 +21,35 @@ footer {
 
 <nav>
     <a href="Workshop.html"><img src="assets/logo.png" alt=""> Workshop</a>
-    <a href="academy.html"> <img src="assets/logo.png" alt=""> Academy</a>
+    <a href="academy.html"><img src="assets/logo.png" alt=""> Academy</a>
 </nav>
 
-<!-- Install App Button -->
 <button id="installBtn">Install App</button>
 
 <section>
     <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
-    <p>Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING, tunatoa huduma za hali ya juu katika urekebishaji wa magari, mafunzo ya umeme wa magari, na teknolojia za kisasa.</p>
+    <p>
+        Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING, tunatoa huduma za hali ya juu
+        katika urekebishaji wa magari, mafunzo ya umeme wa magari, na teknolojia za kisasa.
+    </p>
 
     <div class="feature-card">
         <img src="workshop_pht.png" class="card-img" alt="Workshop Image">
         <h3><img src="icon-192.png" alt=""> Workshop</h3>
-        <p>ALIKO JB Workshop inatoa huduma kamili za magari, ikijumuisha uchunguzi wa umeme, urekebishaji wa mifumo ya ECU, matengenezo ya sehemu kuu za magari, kusoma na kufuta error codes, calibration, reprogramming, pamoja na huduma za kitaalamu za kuboresha utendaji wa gari kwa kutumia teknolojia za kisasa.</p>
+        <p>
+            ALIKO JB Workshop inatoa huduma kamili za magari ikijumuisha ECU diagnostics,
+            calibration, reprogramming na matengenezo ya kitaalamu.
+        </p>
         <a href="Workshop.html">Explore Workshop</a>
     </div>
 
     <div class="feature-card">
         <img src="academy_pht.png" class="card-img" alt="Academy Image">
         <h3><img src="icon-192.png" alt=""> Academy</h3>
-        <p>ALIKO JB Academy ni kituo cha mafunzo kinachotoa kozi za umeme wa magari, ECU coding, diagnostic systems, automotive electronics, na mafunzo ya vitendo ya kuwajengea wanafunzi uwezo wa kufanya kazi katika sekta ya magari kwa kiwango cha kitaalamu.</p>
+        <p>
+            ALIKO JB Academy inatoa mafunzo ya umeme wa magari, ECU coding,
+            diagnostics na automotive electronics.
+        </p>
         <a href="academy.html">Explore Academy</a>
     </div>
 </section>
@@ -161,36 +58,10 @@ footer {
     &copy; 2025 ALIKO JB AUTOMOTIVE ENGINEERING. All Rights Reserved.
 </footer>
 
-<script>
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = 'block';
-});
-
-installBtn.addEventListener('click', async () => {
-    installBtn.style.display = 'none';
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if(outcome === 'accepted'){
-        console.log('User accepted the install prompt');
-    }
-    deferredPrompt = null;
-});
-
-// Register service worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('Service Worker registered', reg))
-        .catch(err => console.log('Service Worker registration failed', err));
-    });
-}
-</script>
+<!-- JS -->
+<script src="js/main.js"></script>
 <script type="module" src="firebase/firebase.js"></script>
 <script type="module" src="js/auth.js"></script>
+
 </body>
-    </html>
+        </html>
