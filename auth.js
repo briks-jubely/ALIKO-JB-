@@ -15,8 +15,11 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-/* REGISTER */
-export async function registerUser(name, email, password) {
+/* =========================
+   AUTH API (NO DOM)
+========================= */
+
+export async function registerUser({ name, email, password }) {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
 
   await setDoc(doc(db, "users", cred.user.uid), {
@@ -29,19 +32,20 @@ export async function registerUser(name, email, password) {
   return cred.user;
 }
 
-/* LOGIN */
-export async function loginUser(email, password) {
+export async function loginUser({ email, password }) {
   const cred = await signInWithEmailAndPassword(auth, email, password);
   const snap = await getDoc(doc(db, "users", cred.user.uid));
-  return snap.exists() ? snap.data() : null;
+
+  return {
+    user: cred.user,
+    role: snap.exists() ? snap.data().role : "student"
+  };
 }
 
-/* LOGOUT */
-export function logoutUser() {
-  return signOut(auth);
+export async function logoutUser() {
+  await signOut(auth);
 }
 
-/* AUTH WATCHER */
-export function watchAuth(callback) {
+export function observeAuth(callback) {
   return onAuthStateChanged(auth, callback);
-                   }
+}
