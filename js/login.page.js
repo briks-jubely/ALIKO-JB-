@@ -1,67 +1,46 @@
-// login.page.js
-import { registerUser, loginUser, observeAuth } from "./auth.js";
+// login.page.js (module)
+import { auth, db, registerUser, loginUser } from './auth.js';
 
-// DOM
-const loginForm = document.getElementById("loginForm");
-const regForm = document.getElementById("regForm");
-const loginTab = document.getElementById("loginTab");
-const regTab = document.getElementById("regTab");
-const loginMsg = document.getElementById("loginMsg");
-const regMsg = document.getElementById("regMsg");
+// DOM elements
+const loginForm = document.getElementById('loginForm');
+const regForm = document.getElementById('regForm');
+const loginMsg = document.getElementById('loginMsg');
+const regMsg = document.getElementById('regMsg');
 
-// SWITCH TABS
+// Form switching
 window.showLogin = () => {
-  loginForm.classList.add("active");
-  regForm.classList.remove("active");
-  loginTab.classList.add("active");
-  regTab.classList.remove("active");
+  loginForm.classList.add('active');
+  regForm.classList.remove('active');
 };
-
 window.showRegister = () => {
-  regForm.classList.add("active");
-  loginForm.classList.remove("active");
-  regTab.classList.add("active");
-  loginTab.classList.remove("active");
+  regForm.classList.add('active');
+  loginForm.classList.remove('active');
 };
 
-// HANDLERS
+// Handlers
 window.registerUserHandler = async () => {
-  const name = document.getElementById("reg-username").value.trim();
-  const email = document.getElementById("reg-email").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
-
-  if (!name || !email || !password) {
-    regMsg.textContent = "Tafadhali jaza taarifa zote";
-    return;
-  }
+  const name = document.getElementById('reg-username').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value.trim();
+  if (!name || !email || !password) return regMsg.textContent = "Jaza taarifa zote";
 
   try {
-    await registerUser(email, password, name);
+    await registerUser(email, password, name); // function from auth.js
     regMsg.textContent = "Account created successfully!";
     regMsg.className = "msg success";
-    setTimeout(() => { window.location.href = "academy.html"; }, 1000);
+    setTimeout(() => window.location.href = 'academy.html', 1000);
   } catch (e) {
     regMsg.textContent = e.message;
   }
 };
 
 window.loginUserHandler = async () => {
-  const email = document.getElementById("login-email").value.trim();
-  const password = document.getElementById("login-password").value.trim();
-
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value.trim();
   try {
-    const { role } = await loginUser(email, password);
-    if (role === "admin") {
-      window.location.href = "admin.html";
-    } else {
-      window.location.href = "academy.html";
-    }
+    const { role } = await loginUser(email, password); // function from auth.js
+    window.location.href = role === 'admin' ? 'admin.html' : 'academy.html';
   } catch (e) {
     loginMsg.textContent = "Email au password sio sahihi";
   }
 };
-
-// AUTO REDIRECT IF LOGGED IN
-observeAuth((user) => {
-  if (user) window.location.href = "academy.html";
-});
