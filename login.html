@@ -18,14 +18,14 @@
     <button id="regTab" onclick="showRegister()">Register</button>
   </div>
 
-  <form id="loginForm" class="form active" onsubmit="loginUser(); return false;">
+  <form id="loginForm" class="form active" onclick="loginUser(); return false;">
     <input id="login-email" type="email" placeholder="Email" required>
     <input id="login-password" type="password" placeholder="Password" required>
     <button class="main-btn">Login</button>
     <p id="loginMsg" class="msg"></p>
   </form>
 
-  <form id="regForm" class="form" onsubmit="registerUser(); return false;">
+  <form id="regForm" class="form" onclick="registerUser(); return false;">
     <input id="reg-username" placeholder="Full Name" required>
     <input id="reg-email" type="email" placeholder="Email" required>
     <input id="reg-password" type="password" placeholder="Password" required>
