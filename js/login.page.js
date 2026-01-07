@@ -1,6 +1,7 @@
 // login.page.js
 import { registerUser, loginUser, observeAuth } from "./auth.js";
 
+// DOM
 const loginForm = document.getElementById("loginForm");
 const regForm = document.getElementById("regForm");
 const loginTab = document.getElementById("loginTab");
@@ -8,7 +9,7 @@ const regTab = document.getElementById("regTab");
 const loginMsg = document.getElementById("loginMsg");
 const regMsg = document.getElementById("regMsg");
 
-// FORM SWITCH
+// SWITCH TABS
 window.showLogin = () => {
     loginForm.classList.add("active");
     regForm.classList.remove("active");
@@ -23,7 +24,7 @@ window.showRegister = () => {
     loginTab.classList.remove("active");
 };
 
-// REGISTER
+// HANDLERS
 window.registerUserHandler = async () => {
     const name = document.getElementById("reg-username").value.trim();
     const email = document.getElementById("reg-email").value.trim();
@@ -44,7 +45,6 @@ window.registerUserHandler = async () => {
     }
 };
 
-// LOGIN
 window.loginUserHandler = async () => {
     const email = document.getElementById("login-email").value.trim();
     const password = document.getElementById("login-password").value.trim();
