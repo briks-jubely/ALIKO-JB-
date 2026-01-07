@@ -21,7 +21,7 @@
   <form id="loginForm" class="form active" onclick="loginUser(); return false;">
     <input id="login-email" type="email" placeholder="Email" required>
     <input id="login-password" type="password" placeholder="Password" required>
-    <button class="main-btn">Login</button>
+    <button type="button" class="main-btn" onclick="loginUserHandler()">Login</button>
     <p id="loginMsg" class="msg"></p>
   </form>
 
@@ -29,7 +29,7 @@
     <input id="reg-username" placeholder="Full Name" required>
     <input id="reg-email" type="email" placeholder="Email" required>
     <input id="reg-password" type="password" placeholder="Password" required>
-    <button class="main-btn">Register</button>
+    <button type="button" class="main-btn" onclick="registerUserHandler()">Register</button>
     <p id="regMsg" class="msg"></p>
   </form>
 </div>
