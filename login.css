@@ -1,0 +1,103 @@
+/* css/login.css */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#e5e7eb;
+}
+
+.app{
+  width:100%;
+  max-width:380px;
+  padding:28px 22px 32px;
+  background:#0f172a;
+  border-radius:26px;
+  box-shadow:0 30px 70px rgba(0,0,0,.65);
+}
+
+.app h1{
+  font-size:22px;
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.app p{
+  text-align:center;
+  font-size:14px;
+  color:#94a3b8;
+  margin-bottom:18px;
+}
+
+.tabs{
+  display:flex;
+  background:#020617;
+  border-radius:999px;
+  padding:6px;
+  margin-bottom:20px;
+}
+
+.tabs button{
+  flex:1;
+  padding:10px 0;
+  background:transparent;
+  border:none;
+  border-radius:999px;
+  color:#94a3b8;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.tabs .active{
+  background:#38bdf8;
+  color:#020617;
+}
+
+.form{display:none;}
+.form.active{display:block;}
+
+input{
+  width:100%;
+  padding:15px;
+  margin-top:14px;
+  border:none;
+  border-radius:18px;
+  background:#020617;
+  color:#e5e7eb;
+  font-size:15px;
+}
+
+input:focus{
+  outline:2px solid #38bdf8;
+}
+
+.main-btn{
+  width:100%;
+  padding:15px;
+  margin-top:18px;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  border:none;
+  border-radius:20px;
+  font-weight:800;
+  font-size:16px;
+  color:#020617;
+  cursor:pointer;
+}
+
+.msg{
+  margin-top:10px;
+  font-size:14px;
+  text-align:center;
+  color:#f87171;
+}
+
+.success{color:#22c55e;}
