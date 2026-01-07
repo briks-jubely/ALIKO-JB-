@@ -1,0 +1,172 @@
+/* =========================
+   GLOBAL (INDEX ONLY)
+========================= */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #050505, #0d0f23, #000000);
+  background-attachment: fixed;
+  color: #ffffff;
+  letter-spacing: 0.4px;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+  background: linear-gradient(180deg, #000428, #004e92);
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0,160,255,0.25);
+  box-shadow: 0 4px 20px rgba(0,120,255,0.4);
+}
+
+header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+header h1 {
+  font-size: 1.35rem;
+  margin-top: 5px;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 190px; /* avoid overlap with fixed header */
+}
+
+nav a {
+  text-decoration: none;
+  background: linear-gradient(145deg, #003cff, #009dff);
+  padding: 16px 32px;
+  border-radius: 14px;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 120, 255, 0.4);
+  font-size: 1.15rem;
+}
+
+nav a:hover {
+  background: linear-gradient(145deg, #0066ff, #00c8ff);
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0,150,255,0.55);
+}
+
+/* =========================
+   INSTALL BUTTON (PWA)
+========================= */
+#installBtn {
+  display: block;
+  margin: 5px auto 25px auto;
+  background: linear-gradient(145deg, #003cff, #009dff);
+  color: #ffffff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 14px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 120, 255, 0.4);
+}
+
+#installBtn:hover {
+  background: linear-gradient(145deg, #0066ff, #00c8ff);
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0,150,255,0.55);
+}
+
+/* =========================
+   MAIN SECTION
+========================= */
+section {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  backdrop-filter: blur(4px);
+}
+
+h2 {
+  color: #ffcc00;
+  text-align: center;
+}
+
+/* =========================
+   FEATURE CARDS
+========================= */
+.feature-card {
+  background: linear-gradient(
+    160deg,
+    #0d0f1a 0%,
+    #080810 40%,
+    #000000 100%
+  );
+  padding: 25px;
+  margin: 28px 0;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 150, 255, 0.15);
+  box-shadow:
+    0 0 25px rgba(0, 140, 255, 0.15),
+    inset 0 0 25px rgba(0, 80, 255, 0.08);
+  transition: 0.35s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 35px rgba(0, 160, 255, 0.25),
+    inset 0 0 30px rgba(0, 110, 255, 0.12);
+}
+
+.feature-card img.card-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature-card h3 img {
+  width: 28px;
+  height: 28px;
+}
+
+.feature-card a {
+  display: inline-block;
+  margin-top: 12px;
+  text-decoration: none;
+  color: #00c8ff;
+  font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #111111;
+  margin-top: 30px;
+  font-size: 14px;
+}
