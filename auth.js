@@ -1,77 +1,51 @@
 // js/auth.js
-
 import { auth, db } from "./firebase.js";
 
 import {
-
-createUserWithEmailAndPassword,
-
-signInWithEmailAndPassword,
-
-signOut,
-
-onAuthStateChanged
-
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
 import {
-
-doc,
-
-setDoc,
-
-getDoc,
-
-serverTimestamp
-
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-/* REGISTER */
+/* =========================
+   AUTH API (NO DOM)
+========================= */
 
-export async function registerUser(name, email, password) {
+export async function registerUser({ name, email, password }) {
+  const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-const cred = await createUserWithEmailAndPassword(auth, email, password);
+  await setDoc(doc(db, "users", cred.user.uid), {
+    name,
+    email,
+    role: "student",
+    createdAt: serverTimestamp()
+  });
 
-await setDoc(doc(db, "users", cred.user.uid), {
-
-name,
-
-email,
-
-role: "student",
-
-createdAt: serverTimestamp()
-
-});
-
-return cred.user;
-
+  return cred.user;
 }
 
-/* LOGIN */
+export async function loginUser({ email, password }) {
+  const cred = await signInWithEmailAndPassword(auth, email, password);
+  const snap = await getDoc(doc(db, "users", cred.user.uid));
 
-export async function loginUser(email, password) {
-
-const cred = await signInWithEmailAndPassword(auth, email, password);
-
-const snap = await getDoc(doc(db, "users", cred.user.uid));
-
-return snap.exists() ? snap.data() : null;
-
+  return {
+    user: cred.user,
+    role: snap.exists() ? snap.data().role : "student"
+  };
 }
 
-/* LOGOUT */
-
-export function logoutUser() {
-
-return signOut(auth);
-
+export async function logoutUser() {
+  await signOut(auth);
 }
 
-/* AUTH WATCHER */
-
-export function watchAuth(callback) {
-
-return onAuthStateChanged(auth, callback);
-
-  }
+export function observeAuth(callback) {
+  return onAuthStateChanged(auth, callback);
+}
