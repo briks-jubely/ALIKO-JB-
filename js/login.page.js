@@ -1,46 +1,100 @@
-// login.page.js (module)
-import { auth, db, registerUser, loginUser } from './auth.js';
+// js/login.page.js
+import { registerUser, loginUser, observeAuth } from "./auth.js";
 
-// DOM elements
-const loginForm = document.getElementById('loginForm');
-const regForm = document.getElementById('regForm');
-const loginMsg = document.getElementById('loginMsg');
-const regMsg = document.getElementById('regMsg');
+/* ======================
+   DOM REFERENCES
+====================== */
+const loginForm = document.getElementById("loginForm");
+const regForm = document.getElementById("regForm");
 
-// Form switching
+const loginTab = document.getElementById("loginTab");
+const regTab = document.getElementById("regTab");
+
+const loginEmail = document.getElementById("login-email");
+const loginPassword = document.getElementById("login-password");
+const loginMsg = document.getElementById("loginMsg");
+
+const regUsername = document.getElementById("reg-username");
+const regEmail = document.getElementById("reg-email");
+const regPassword = document.getElementById("reg-password");
+const regMsg = document.getElementById("regMsg");
+
+/* ======================
+   TAB SWITCHING
+====================== */
 window.showLogin = () => {
-  loginForm.classList.add('active');
-  regForm.classList.remove('active');
-};
-window.showRegister = () => {
-  regForm.classList.add('active');
-  loginForm.classList.remove('active');
+  loginForm.classList.add("active");
+  regForm.classList.remove("active");
+
+  loginTab.classList.add("active");
+  regTab.classList.remove("active");
 };
 
-// Handlers
+window.showRegister = () => {
+  regForm.classList.add("active");
+  loginForm.classList.remove("active");
+
+  regTab.classList.add("active");
+  loginTab.classList.remove("active");
+};
+
+/* ======================
+   REGISTER HANDLER
+====================== */
 window.registerUserHandler = async () => {
-  const name = document.getElementById('reg-username').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const password = document.getElementById('reg-password').value.trim();
-  if (!name || !email || !password) return regMsg.textContent = "Jaza taarifa zote";
+  regMsg.textContent = "";
+
+  const name = regUsername.value.trim();
+  const email = regEmail.value.trim();
+  const password = regPassword.value.trim();
+
+  if (!name || !email || !password) {
+    regMsg.textContent = "Tafadhali jaza taarifa zote";
+    return;
+  }
 
   try {
-    await registerUser(email, password, name); // function from auth.js
+    await registerUser({ name, email, password });
+
     regMsg.textContent = "Account created successfully!";
     regMsg.className = "msg success";
-    setTimeout(() => window.location.href = 'academy.html', 1000);
-  } catch (e) {
-    regMsg.textContent = e.message;
+
+    setTimeout(() => {
+      window.location.href = "academy.html";
+    }, 800);
+
+  } catch (err) {
+    regMsg.textContent = err.message;
   }
 };
 
+/* ======================
+   LOGIN HANDLER
+====================== */
 window.loginUserHandler = async () => {
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value.trim();
+  loginMsg.textContent = "";
+
+  const email = loginEmail.value.trim();
+  const password = loginPassword.value.trim();
+
+  if (!email || !password) {
+    loginMsg.textContent = "Weka email na password";
+    return;
+  }
+
   try {
-    const { role } = await loginUser(email, password); // function from auth.js
-    window.location.href = role === 'admin' ? 'admin.html' : 'academy.html';
-  } catch (e) {
+    await loginUser({ email, password });
+    window.location.href = "academy.html";
+  } catch (err) {
     loginMsg.textContent = "Email au password sio sahihi";
   }
 };
+
+/* ======================
+   AUTO REDIRECT IF LOGGED IN
+====================== */
+observeAuth((user) => {
+  if (user && location.pathname.includes("login")) {
+    window.location.href = "academy.html";
+  }
+});
