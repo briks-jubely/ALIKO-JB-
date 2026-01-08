@@ -1,5 +1,5 @@
 // js/login.page.js
-import { registerUser, loginUser, observeAuth } from "./auth.js";
+import { registerUser, loginUser, observeAuth } from "auth.js";
 
 /* ======================
    DOM REFERENCES
