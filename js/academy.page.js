@@ -1,24 +1,35 @@
-import { watchAuth, logoutUser } from "./auth.js";
+import { logoutUser, observeAuth } from "./auth.js";
+import { loadCourses } from "./courses.js";
 
-console.log("academy.page.js loaded");
+/* DOM Refs */
+const logoutBtn = document.getElementById("logoutBtn");
+const coursesContainer = document.getElementById("coursesContainer");
+const statusMsg = document.getElementById("status");
 
 /* AUTH GUARD */
-watchAuth((user) => {
+let authObserver = observeAuth((user) => {
   if (!user) {
-    window.location.href = "login.html";
+    window.location.replace("login.html");
   }
 });
 
 /* LOGOUT */
-const logoutBtn = document.getElementById("logoutBtn");
-
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
-    console.log("Logout clicked");
+    try {
+      // 🚨 STOP observer BEFORE logout
+      if (authObserver) authObserver();
 
-    await logoutUser();
+      await logoutUser();
 
-    // IMPORTANT: force reload
-    window.location.replace("login.html");
+      window.location.replace("login.html");
+    } catch (e) {
+      console.error("Logout failed:", e);
+    }
   });
 }
+
+/* LOAD COURSES */
+if (coursesContainer) {
+  loadCourses(coursesContainer, statusMsg);
+        }
