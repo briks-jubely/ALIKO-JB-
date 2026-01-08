@@ -65,6 +65,11 @@ export async function logoutUser() {
 }
 
 /* 👁️ AUTH OBSERVER */
-export function observeAuth(callback) {
-  return onAuthStateChanged(auth, callback);
+import { onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+export function watchAuth(callback) {
+  onAuthStateChanged(auth, (user) => {
+    callback(user);
+  });
 }
