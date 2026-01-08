@@ -1,35 +1,43 @@
-import { logoutUser, observeAuth } from "./auth.js";
+// js/academy.page.js
+
+import { auth, logoutUser } from "./auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 import { loadCourses } from "./courses.js";
 
-/* DOM Refs */
+/* =========================
+   DOM REFERENCES
+========================= */
 const logoutBtn = document.getElementById("logoutBtn");
 const coursesContainer = document.getElementById("coursesContainer");
 const statusMsg = document.getElementById("status");
 
-/* AUTH GUARD */
-let authObserver = observeAuth((user) => {
+/* =========================
+   AUTH GUARD (RUN ONCE)
+   👉 Hakuna observeAuth hapa
+========================= */
+onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.replace("login.html");
   }
 });
 
-/* LOGOUT */
+/* =========================
+   LOGOUT (SAFE & CLEAN)
+========================= */
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
     try {
-      // 🚨 STOP observer BEFORE logout
-      if (authObserver) authObserver();
-
       await logoutUser();
-
       window.location.replace("login.html");
-    } catch (e) {
-      console.error("Logout failed:", e);
+    } catch (err) {
+      console.error("Logout failed:", err);
     }
   });
 }
 
-/* LOAD COURSES */
+/* =========================
+   LOAD COURSES
+========================= */
 if (coursesContainer) {
   loadCourses(coursesContainer, statusMsg);
-        }
+      }
