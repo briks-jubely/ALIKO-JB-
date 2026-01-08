@@ -93,8 +93,10 @@ window.loginUserHandler = async () => {
 /* ======================
    AUTO REDIRECT IF LOGGED IN
 ====================== */
-observeAuth((user) => {
-  if (user && location.pathname.includes("login")) {
-    window.location.href = "academy.html";
+import { observeAuth } from "./auth.js";
+
+observeAuth(user => {
+  if (user) {
+    location.replace("academy.html");
   }
 });
