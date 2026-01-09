@@ -2,10 +2,10 @@ import { auth } from "./auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
 /* Academy button */
-const academyBtn = document.getElementById("academyBtn");
+const academyBtn = document.getElementById("academyLink");
 
 /* Workshop button */
-const workshopBtn = document.getElementById("workshopBtn");
+const workshopBtn = document.getElementById("workshopLink");
 
 function goAcademy() {
   onAuthStateChanged(auth, (user) => {
