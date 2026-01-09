@@ -1,5 +1,6 @@
 // js/login.page.js
-import { registerUser, loginUser, observeAuth } from "./auth.js";
+import { registerUser, loginUser, auth } from "./auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
 /* ======================
    DOM REFERENCES
@@ -25,7 +26,6 @@ const regMsg = document.getElementById("regMsg");
 window.showLogin = () => {
   loginForm.classList.add("active");
   regForm.classList.remove("active");
-
   loginTab.classList.add("active");
   regTab.classList.remove("active");
 };
@@ -33,13 +33,12 @@ window.showLogin = () => {
 window.showRegister = () => {
   regForm.classList.add("active");
   loginForm.classList.remove("active");
-
   regTab.classList.add("active");
   loginTab.classList.remove("active");
 };
 
 /* ======================
-   REGISTER HANDLER
+   REGISTER
 ====================== */
 window.registerUserHandler = async () => {
   regMsg.textContent = "";
@@ -55,21 +54,14 @@ window.registerUserHandler = async () => {
 
   try {
     await registerUser({ name, email, password });
-
-    regMsg.textContent = "Account created successfully!";
-    regMsg.className = "msg success";
-
-    setTimeout(() => {
-      window.location.href = "academy.html";
-    }, 800);
-
+    location.href = "academy.html";
   } catch (err) {
     regMsg.textContent = err.message;
   }
 };
 
 /* ======================
-   LOGIN HANDLER
+   LOGIN
 ====================== */
 window.loginUserHandler = async () => {
   loginMsg.textContent = "";
@@ -84,18 +76,16 @@ window.loginUserHandler = async () => {
 
   try {
     await loginUser({ email, password });
-    window.location.href = "academy.html";
-  } catch (err) {
+    location.href = "academy.html";
+  } catch {
     loginMsg.textContent = "Email au password sio sahihi";
   }
 };
 
 /* ======================
-   AUTO REDIRECT IF LOGGED IN
+   CHECK ONCE IF LOGGED IN
 ====================== */
-import { observeAuth } from "./auth.js";
-
-observeAuth(user => {
+onAuthStateChanged(auth, (user) => {
   if (user) {
     location.replace("academy.html");
   }
