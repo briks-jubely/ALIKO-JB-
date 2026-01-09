@@ -20,7 +20,7 @@ function goAcademy() {
 function goWorkshop() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      window.location.href = "workshop.html";
+      window.location.href = "Workshop.html";
     } else {
       window.location.href = "login.html";
     }
