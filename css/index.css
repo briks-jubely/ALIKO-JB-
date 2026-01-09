@@ -159,6 +159,27 @@ h2 {
   color: #00c8ff;
   font-weight: bold;
 }
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ICON SIZE CONTROL */
+nav a img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+   }
 
 /* =========================
    FOOTER
