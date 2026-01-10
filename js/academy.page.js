@@ -38,6 +38,10 @@ if (logoutBtn) {
 /* =========================
    LOAD COURSES
 ========================= */
+import { loadCourses } from "./courses.js";
+
+const coursesContainer = document.getElementById("coursesContainer");
+const statusMsg = document.getElementById("status");
 if (coursesContainer) {
   loadCourses(coursesContainer, statusMsg);
       }
