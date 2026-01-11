@@ -12,17 +12,19 @@ const coursesContainer = document.getElementById("coursesContainer");
 const statusMsg = document.getElementById("status");
 
 /* =========================
-   AUTH GUARD (RUN ONCE)
-   👉 Hakuna observeAuth hapa
+   AUTH GUARD
 ========================= */
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.replace("login.html");
+  } else {
+    // user yupo → pakia courses
+    loadCourses(coursesContainer, statusMsg);
   }
 });
 
 /* =========================
-   LOGOUT (SAFE & CLEAN)
+   LOGOUT
 ========================= */
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
@@ -34,14 +36,3 @@ if (logoutBtn) {
     }
   });
 }
-
-/* =========================
-   LOAD COURSES
-========================= */
-import { loadCourses } from "./courses.js";
-
-const coursesContainer = document.getElementById("coursesContainer");
-const statusMsg = document.getElementById("status");
-if (coursesContainer) {
-  loadCourses(coursesContainer, statusMsg);
-      }
