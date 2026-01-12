@@ -9,21 +9,7 @@
 </head>
 
 <body>
-<script type="module">
-  import { db } from './js/auth.js';
-  import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-  async function testCourses() {
-    const coursesCol = collection(db, "courses");
-    const snapshot = await getDocs(coursesCol);
-    console.log("✅ snapshot size:", snapshot.size);
-    snapshot.forEach(doc => {
-      console.log(doc.id, doc.data());
-    });
-  }
-
-  testCourses();
-</script>
 <header class="app-header">
   <img src="icon-192.png" class="app-logo">
   <div>
