@@ -1,3 +1,4 @@
+// js/courses.js
 import { db } from "./auth.js";
 import {
   collection,
@@ -7,30 +8,25 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-let unsubscribeCourses = null;
-
 export function loadCourses(container, statusEl) {
-  console.log("🚀 loadCourses RUNNING");
+  console.log("🚀 loadCourses initialized");
 
   statusEl.textContent = "Loading courses...";
   container.innerHTML = "";
 
-  // 🔴 ZIMA LISTENER YA ZAMANI KAMA IPO
-  if (unsubscribeCourses) {
-    unsubscribeCourses();
-  }
-
+  // Hakikisha una data kwa format sahihi
+  const coursesRef = collection(db, "courses");
   const q = query(
-    collection(db, "courses"),
+    coursesRef,
     where("published", "==", true),
     orderBy("createdAt", "desc")
   );
 
-  unsubscribeCourses = onSnapshot(
+  // onSnapshot inarun na return unsubscribe function
+  const unsubscribe = onSnapshot(
     q,
     (snapshot) => {
       console.log("📦 snapshot size:", snapshot.size);
-
       container.innerHTML = "";
 
       if (snapshot.empty) {
@@ -40,7 +36,7 @@ export function loadCourses(container, statusEl) {
 
       statusEl.textContent = "";
 
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         const c = doc.data();
 
         const card = document.createElement("div");
@@ -64,8 +60,11 @@ export function loadCourses(container, statusEl) {
       });
     },
     (error) => {
-      console.error("🔥 Firestore error:", error);
-      statusEl.textContent = "Failed to load courses";
+      console.error("Firestore snapshot error:", error);
+      statusEl.textContent = "Tatizo ku-load courses, angalia console.";
     }
   );
-          }
+
+  // Return unsubscribe ili tuweze clean up
+  return unsubscribe;
+}
