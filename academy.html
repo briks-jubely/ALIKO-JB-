@@ -1,66 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALIKO JB Academy</title>
-  
-<link rel="stylesheet" href="css/academy.css">
-</head>
+// js/courses.js
+import { db } from "./auth.js";
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-<body>
+let unsubscribeCourses = null;
 
-<header class="app-header">
-  <img src="icon-192.png" class="app-logo">
-  <div>
-    <h1>ALIKO JB Academy</h1>
-    <p>Automotive Engineering • Online Training</p>
-  </div>
-</header>
+export async function loadCourses(container, statusEl) {
+  console.log("🚀 loadCourses initialized");
 
-<nav class="app-nav">
-  <a href="index.html">🔧 Workshop</a>
-  <a href="#courses">🎓 Courses</a>
-  <a href="#community">💬 Community</a>
-</nav>
+  if (unsubscribeCourses) {
+    console.log("🧹 Unsubscribing previous snapshot listener");
+    unsubscribeCourses();
+  }
 
-<section id="courses" class="content">
-  <h2>Online Training Programs</h2>
+  statusEl.textContent = "Loading courses...";
+  container.innerHTML = "";
 
-  <!-- ⚠️ Container sahihi sasa -->
-  <p id="status"></p>
+  const q = query(
+    collection(db, "courses"),
+    where("published", "==", true),
+    orderBy("createdAt", "desc")
+  );
 
-  <div id="coursesContainer" class="courses-grid"></div>
-</section>
+  // **Step 1: Test query with getDocs for index check**
+  try {
+    const testSnap = await getDocs(q);
+    console.log("✅ getDocs test snapshot size:", testSnap.size);
+    if (testSnap.empty) {
+      console.warn("⚠️ Firestore test snapshot empty. Check if data matches query conditions.");
+    }
+  } catch (err) {
+    console.error("🔥 Firestore index/test error:", err);
+    console.warn("💡 If this is a 'requires index' error, follow the link Firestore provides in console to create index.");
+  }
 
-<section id="community" class="content">
-  <h2>Automotive Community & Discussions</h2>
+  // **Step 2: Live snapshot listener**
+  unsubscribeCourses = onSnapshot(q, (snapshot) => {
+    console.log("📦 snapshot received, size:", snapshot.size);
 
-  <div class="card">
-    <h3>Ask Questions</h3>
-    <p>Fundi na wanafunzi wataweza kuuliza maswali na kubadilishana maarifa ya magari.</p>
-  </div>
+    container.innerHTML = "";
 
-  <div class="card">
-    <h3>Knowledge Sharing</h3>
-    <p>Video, diagrams, in real vehicle problems & solutions.</p>
-  </div>
+    if (snapshot.empty) {
+      statusEl.textContent = "Hakuna kozi zilizopo kwa sasa";
+      return;
+    }
 
-  <a class="btn-academy" href="https://wa.me/255620198672">
-    💬 Join Discussion (WhatsApp)
-  </a>
-</section>
+    statusEl.textContent = "";
 
-<button class="logout-btn" id="logoutBtn">⎋ Logout</button>
+    snapshot.forEach(doc => {
+      const c = doc.data();
+      console.log("📝 Course:", c.title, c);
 
-<footer class="footer">
-  <p>© 2025 ALIKO JB Automotive Engineering</p>
-</footer>
+      const card = document.createElement("div");
+      card.className = "course-card";
 
-<!-- 🔥 LINK YA JS -->
-<script type="module" src="js/academy.js"></script>
+      card.innerHTML = `
+        <img src="${c.image || 'icon-192.png'}">
+        <div class="course-content">
+          <span class="badge ${c.free ? 'free' : 'locked'}">
+            ${c.free ? 'FREE' : 'LOCKED'}
+          </span>
+          <h3>${c.title}</h3>
+          <p>${c.description}</p>
+          <div class="course-meta">
+            Level: ${c.level || "All"} • ${c.duration || ""}
+          </div>
+        </div>
+      `;
 
-  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
-</body>
-                       </html>
+      container.appendChild(card);
+    });
+
+  }, (err) => {
+    console.error("🔥 Firestore snapshot error:", err);
+    statusEl.textContent = "Imeshindikana kupakua kozi";
+  });
+}
