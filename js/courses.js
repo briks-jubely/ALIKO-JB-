@@ -14,11 +14,7 @@ export function loadCourses(container, statusEl) {
   statusEl.textContent = "Loading courses...";
   container.innerHTML = "";
 
-  const q = query(
-    collection(db, "courses"),
-    where("published", "==", true),
-    orderBy("createdAt", "desc")
-  );
+  const q = collection(db, "courses");
 
   onSnapshot(q, (snapshot) => {
     console.log("📦 snapshot size:", snapshot.size);
