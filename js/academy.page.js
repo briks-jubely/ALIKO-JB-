@@ -1,43 +1,28 @@
-// js/academy.page.js
 import { auth, logoutUser } from "./auth.js";
 import { onAuthStateChanged } from
   "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 import { loadCourses } from "./courses.js";
 
-/* =========================
-   DOM READY
-========================= */
-document.addEventListener("DOMContentLoaded", () => {
+const logoutBtn = document.getElementById("logoutBtn");
+const coursesContainer = document.getElementById("coursesContainer");
+const statusMsg = document.getElementById("status");
 
-  const logoutBtn = document.getElementById("logoutBtn");
-  const coursesContainer = document.getElementById("coursesContainer");
-  const statusMsg = document.getElementById("status");
+let coursesLoaded = false;
 
-  /* =========================
-     AUTH GUARD
-  ========================= */
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.replace("login.html");
-    }
-  });
-
-  /* =========================
-     LOGOUT
-  ========================= */
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", async () => {
-      await logoutUser();
-      window.location.replace("login.html");
-    });
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.replace("login.html");
+    return;
   }
 
-  /* =========================
-     LOAD COURSES
-  ========================= */
-  if (coursesContainer && statusMsg) {
+  // ✅ LOAD MARA MOJA TU
+  if (!coursesLoaded) {
+    coursesLoaded = true;
     loadCourses(coursesContainer, statusMsg);
-  } else {
-    console.error("❌ coursesContainer or statusMsg missing in HTML");
   }
+});
+
+logoutBtn?.addEventListener("click", async () => {
+  await logoutUser();
+  window.location.replace("login.html");
 });
