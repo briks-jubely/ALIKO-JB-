@@ -5,15 +5,15 @@ import {
   query,
   where,
   orderBy,
-  onSnapshot,
-  getDocs
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-let unsubscribeCourses = null;
+let unsubscribeCourses = null; // for safe unsubscribe
 
-export async function loadCourses(container, statusEl) {
+export function loadCourses(container, statusEl) {
   console.log("🚀 loadCourses initialized");
 
+  // Clear previous listener if exists
   if (unsubscribeCourses) {
     console.log("🧹 Unsubscribing previous snapshot listener");
     unsubscribeCourses();
@@ -22,25 +22,14 @@ export async function loadCourses(container, statusEl) {
   statusEl.textContent = "Loading courses...";
   container.innerHTML = "";
 
+  // Setup query
   const q = query(
     collection(db, "courses"),
     where("published", "==", true),
     orderBy("createdAt", "desc")
   );
 
-  // **Step 1: Test query with getDocs for index check**
-  try {
-    const testSnap = await getDocs(q);
-    console.log("✅ getDocs test snapshot size:", testSnap.size);
-    if (testSnap.empty) {
-      console.warn("⚠️ Firestore test snapshot empty. Check if data matches query conditions.");
-    }
-  } catch (err) {
-    console.error("🔥 Firestore index/test error:", err);
-    console.warn("💡 If this is a 'requires index' error, follow the link Firestore provides in console to create index.");
-  }
-
-  // **Step 2: Live snapshot listener**
+  // Attach listener
   unsubscribeCourses = onSnapshot(q, (snapshot) => {
     console.log("📦 snapshot received, size:", snapshot.size);
 
@@ -48,6 +37,7 @@ export async function loadCourses(container, statusEl) {
 
     if (snapshot.empty) {
       statusEl.textContent = "Hakuna kozi zilizopo kwa sasa";
+      console.warn("⚠️ Firestore returned empty snapshot. Check index & query.");
       return;
     }
 
