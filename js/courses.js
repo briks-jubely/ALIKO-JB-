@@ -24,11 +24,9 @@ export function loadCourses(container, statusEl) {
 
   // Setup query
   const q = query(
-    collection(db, "courses"),
-    where("published", "==", true),
-    orderBy("createdAt", "desc")
-  );
-
+  collection(db, "courses"),
+  where("published", "==", true)
+);
   // Attach listener
   unsubscribeCourses = onSnapshot(q, (snapshot) => {
     console.log("📦 snapshot received, size:", snapshot.size);
