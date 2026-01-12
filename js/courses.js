@@ -1,4 +1,3 @@
-// js/courses.js
 import { db } from "./auth.js";
 import {
   collection,
@@ -8,34 +7,26 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-let unsubscribeCourses = null; // for safe unsubscribe
+let unsubscribeCourses = null;
 
 export function loadCourses(container, statusEl) {
   console.log("🚀 loadCourses initialized");
 
-  // Clear previous listener if exists
-  if (unsubscribeCourses) {
-    console.log("🧹 Unsubscribing previous snapshot listener");
-    unsubscribeCourses();
-  }
+  if (unsubscribeCourses) unsubscribeCourses();
 
   statusEl.textContent = "Loading courses...";
   container.innerHTML = "";
 
-  // Setup query
   const q = query(
-  collection(db, "courses"),
-  where("published", "==", true)
-);
-  // Attach listener
-  unsubscribeCourses = onSnapshot(q, (snapshot) => {
-    console.log("📦 snapshot received, size:", snapshot.size);
+    collection(db, "courses"),
+    where("published", "==", true)
+  );
 
+  unsubscribeCourses = onSnapshot(q, (snapshot) => {
     container.innerHTML = "";
 
     if (snapshot.empty) {
       statusEl.textContent = "Hakuna kozi zilizopo kwa sasa";
-      console.warn("⚠️ Firestore returned empty snapshot. Check index & query.");
       return;
     }
 
@@ -43,13 +34,12 @@ export function loadCourses(container, statusEl) {
 
     snapshot.forEach(doc => {
       const c = doc.data();
-      console.log("📝 Course:", c.title, c);
-
       const card = document.createElement("div");
       card.className = "course-card";
 
+      card.dataset.courseId = doc.id; // 🔑 store course id for interactions
       card.innerHTML = `
-        <img src="${c.image || 'icon-192.png'}">
+        <img src="${c.image || 'icon-192.png'}" class="course-img">
         <div class="course-content">
           <span class="badge ${c.free ? 'free' : 'locked'}">
             ${c.free ? 'FREE' : 'LOCKED'}
@@ -58,6 +48,11 @@ export function loadCourses(container, statusEl) {
           <p>${c.description}</p>
           <div class="course-meta">
             Level: ${c.level || "All"} • ${c.duration || ""}
+          </div>
+          <div class="course-actions">
+            ${c.video ? `<button class="btn-video">Watch Video</button>` : ""}
+            ${c.pdf ? `<button class="btn-pdf">View PDF</button>` : ""}
+            <button class="btn-vote">👍 Vote</button>
           </div>
         </div>
       `;
@@ -69,4 +64,6 @@ export function loadCourses(container, statusEl) {
     console.error("🔥 Firestore snapshot error:", err);
     statusEl.textContent = "Imeshindikana kupakua kozi";
   });
-}
+
+  return unsubscribeCourses; // 🔑 return unsubscribe for cleanup
+                                          }
