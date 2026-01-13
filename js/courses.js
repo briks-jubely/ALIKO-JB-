@@ -57,10 +57,16 @@ export function loadCourses(container, statusEl) {
         </div>
       `;
 card.dataset.courseId = doc.id;
+     card.dataset.type = c.type || "course"; 
 
 if (c.video) card.dataset.video = c.video;
 if (c.pdf) card.dataset.pdf = c.pdf;
 card.dataset.free = c.free ? "true" : "false";
+if (card.dataset.type === "course") {
+  card.addEventListener("click", () => {
+    window.location.href = `course.html?courseId=${doc.id}`;
+  });
+  }
       
       container.appendChild(card);
     });
