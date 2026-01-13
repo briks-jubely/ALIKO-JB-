@@ -3,7 +3,6 @@ import {
   collection,
   query,
   where,
-  orderBy,
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
@@ -12,11 +11,14 @@ let unsubscribeCourses = null;
 export function loadCourses(container, statusEl) {
   console.log("🚀 loadCourses initialized");
 
+  // Cleanup previous listener
   if (unsubscribeCourses) unsubscribeCourses();
 
+  // Clear container and show loading
   statusEl.textContent = "Loading courses...";
   container.innerHTML = "";
 
+  // Firestore query
   const q = query(
     collection(db, "courses"),
     where("published", "==", true)
@@ -34,10 +36,16 @@ export function loadCourses(container, statusEl) {
 
     snapshot.forEach(doc => {
       const c = doc.data();
+
       const card = document.createElement("div");
       card.className = "course-card";
+      card.dataset.courseId = doc.id;
+      card.dataset.type = c.type || "course";
+      card.dataset.free = c.free ? "true" : "false";
 
-      card.dataset.courseId = doc.id; // 🔑 store course id for interactions
+      if (c.video) card.dataset.video = c.video;
+      if (c.pdf) card.dataset.pdf = c.pdf;
+
       card.innerHTML = `
         <img src="${c.image || 'icon-192.png'}" class="course-img">
         <div class="course-content">
@@ -56,28 +64,32 @@ export function loadCourses(container, statusEl) {
           </div>
         </div>
       `;
-card.dataset.courseId = doc.id;
-card.dataset.type = c.type || "course";
 
-if (c.video) card.dataset.video = c.video;
-if (c.pdf) card.dataset.pdf = c.pdf;
-card.dataset.free = c.free ? "true" : "false";
-
-if (card.dataset.type === "course") {
-  card.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") return;
-    window.location.href = `course.html?courseId=${doc.id}`;
-  });
-              }
-      
       container.appendChild(card);
     });
 
- document.dispatchEvent(new CustomEvent("coursesLoaded"));   
+    // Dispatch event after cards loaded
+    document.dispatchEvent(new CustomEvent("coursesLoaded"));
+
   }, (err) => {
     console.error("🔥 Firestore snapshot error:", err);
     statusEl.textContent = "Imeshindikana kupakua kozi";
   });
 
-  return unsubscribeCourses; // 🔑 return unsubscribe for cleanup
-                                          }
+  // -----------------------------
+  // Event Delegation: Click on any course-card
+  // -----------------------------
+  container.addEventListener("click", (e) => {
+    const card = e.target.closest(".course-card");
+    if (!card) return; // si click kwenye card
+    if (e.target.tagName === "BUTTON") return; // ignore buttons
+
+    const courseId = card.dataset.courseId;
+    if (!courseId) return;
+
+    console.log("Opening course:", courseId); // debug
+    window.location.href = `course.html?courseId=${courseId}`;
+  });
+
+  return unsubscribeCourses;
+        }
