@@ -60,6 +60,7 @@ export function loadCourses(container, statusEl) {
       container.appendChild(card);
     });
 
+ document.dispatchEvent(new CustomEvent("coursesLoaded"));   
   }, (err) => {
     console.error("🔥 Firestore snapshot error:", err);
     statusEl.textContent = "Imeshindikana kupakua kozi";
