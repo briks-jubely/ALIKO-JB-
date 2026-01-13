@@ -28,12 +28,11 @@ onAuthStateChanged(auth, (user) => {
     if (unsubscribeCourses) unsubscribeCourses();
     unsubscribeCourses = loadCourses(coursesContainer, statusMsg);
 
-    // 🔥 Add interaction listeners after courses loaded
- document.addEventListener("coursesLoaded", () => {
-  attachCourseListeners(user.uid);
-});
-  }
-});
+    document.addEventListener("coursesLoaded", () => {
+      attachCourseListeners(user.uid);
+    });
+  } // ✅ HII ILIKUWA IMEKOSA
+}); // ✅ HII ILIKUWA IMEKOSA
 
 /* =========================
    LOGOUT
