@@ -256,3 +256,15 @@ body {
     max-height: 180px;
   }
                         }
+.course-card {
+  cursor: pointer;
+}
+
+.course-card * {
+  pointer-events: none;
+}
+
+/* Lakini buttons ziruhusiwe kubonyezwa */
+.course-card button {
+  pointer-events: auto;
+  }
