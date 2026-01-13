@@ -1,7 +1,6 @@
 import { db } from "./auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-// 1️⃣ Get courseId from URL
 const params = new URLSearchParams(window.location.search);
 const courseId = params.get("courseId");
 
@@ -10,12 +9,15 @@ if (!courseId) {
   throw new Error("No courseId found in URL");
 }
 
-// 2️⃣ DOM
 const titleEl = document.getElementById("course-title");
 const descEl = document.getElementById("course-description");
+const levelEl = document.getElementById("course-level");
+const durationEl = document.getElementById("course-duration");
+const badgeEl = document.getElementById("course-badge");
+const imgEl = document.getElementById("course-image");
 const mediaEl = document.getElementById("course-media");
+const lessonsEl = document.getElementById("course-lessons");
 
-// 3️⃣ Fetch from Firestore
 async function loadCourse() {
   try {
     const ref = doc(db, "courses", courseId);
@@ -30,10 +32,16 @@ async function loadCourse() {
 
     titleEl.textContent = c.title;
     descEl.textContent = c.description;
+    levelEl.textContent = c.level || "All";
+    durationEl.textContent = c.duration || "Unknown";
+    imgEl.src = c.image || "icon-192.png";
 
+    badgeEl.textContent = c.free ? "FREE" : "LOCKED";
+    badgeEl.className = `badge ${c.free ? "free" : "locked"}`;
+
+    // Media
     mediaEl.innerHTML = "";
-
-    if (c.video) {
+    if(c.video){
       mediaEl.innerHTML += `
         <h3>Video Lesson</h3>
         <video controls width="100%">
@@ -41,14 +49,20 @@ async function loadCourse() {
         </video>
       `;
     }
-
-    if (c.pdf) {
+    if(c.pdf){
       mediaEl.innerHTML += `
-        <h3>Notes</h3>
+        <h3>Notes / PDF</h3>
         <a href="${c.pdf}" target="_blank" class="btn-open-course">
           Fungua PDF
         </a>
       `;
+    }
+
+    // Lessons list
+    if(c.lessons && c.lessons.length > 0){
+      lessonsEl.innerHTML = `<h3>Lessons</h3><ul>` + 
+        c.lessons.map(l => `<li>${l.title}</li>`).join('') +
+        `</ul>`;
     }
 
   } catch (err) {
