@@ -29,9 +29,9 @@ onAuthStateChanged(auth, (user) => {
     unsubscribeCourses = loadCourses(coursesContainer, statusMsg);
 
     // 🔥 Add interaction listeners after courses loaded
-    setTimeout(() => attachCourseListeners(user.uid), 500);
-  }
-});
+ document.addEventListener("coursesLoaded", () => {
+  attachCourseListeners(user.uid);
+});  
 
 /* =========================
    LOGOUT
