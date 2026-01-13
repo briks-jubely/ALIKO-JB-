@@ -56,7 +56,12 @@ export function loadCourses(container, statusEl) {
           </div>
         </div>
       `;
+card.dataset.courseId = doc.id;
 
+if (c.video) card.dataset.video = c.video;
+if (c.pdf) card.dataset.pdf = c.pdf;
+card.dataset.free = c.free ? "true" : "false";
+      
       container.appendChild(card);
     });
 
@@ -68,8 +73,3 @@ export function loadCourses(container, statusEl) {
 
   return unsubscribeCourses; // 🔑 return unsubscribe for cleanup
                                           }
-card.dataset.courseId = doc.id;
-
-if (c.video) card.dataset.video = c.video;
-if (c.pdf) card.dataset.pdf = c.pdf;
-card.dataset.free = c.free ? "true" : "false";
