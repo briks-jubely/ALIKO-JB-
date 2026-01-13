@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Course Details</title>
-  <link rel="stylesheet" href="css/course.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIKO JB Course Details</title>
+
+<link rel="stylesheet" href="css/course.css">
 </head>
 <body>
 
-  <div class="course-page">
-    <h1 id="course-title">Loading...</h1>
-    <p id="course-description"></p>
+<div class="course-page">
 
-    <div id="course-media"></div>
+  <!-- Hero Image -->
+  <img src="icon-192.png" alt="Course Image" id="course-image">
+
+  <!-- Title -->
+  <h1 id="course-title">Loading...</h1>
+
+  <!-- Metadata -->
+  <div class="course-meta">
+    <span id="course-level">Level</span> • 
+    <span id="course-duration">Duration</span> • 
+    <span id="course-badge" class="badge">FREE/LOCKED</span>
   </div>
 
-  <script type="module" src="js/course.js"></script>
+  <!-- Full Description -->
+  <p id="course-description">Loading course description...</p>
+
+  <!-- Media Section (video, pdf) -->
+  <div class="course-media" id="course-media"></div>
+
+  <!-- Lessons Section -->
+  <div class="course-lessons" id="course-lessons"></div>
+
+</div>
+
+<script type="module" src="js/course.js"></script>
 </body>
-</html>
+  </html>
