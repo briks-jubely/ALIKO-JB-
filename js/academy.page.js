@@ -31,7 +31,9 @@ onAuthStateChanged(auth, (user) => {
     // 🔥 Add interaction listeners after courses loaded
  document.addEventListener("coursesLoaded", () => {
   attachCourseListeners(user.uid);
-});  
+});
+  }
+});
 
 /* =========================
    LOGOUT
