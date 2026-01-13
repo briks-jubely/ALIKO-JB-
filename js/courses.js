@@ -61,6 +61,9 @@ export function loadCourses(container, statusEl) {
             ${c.video ? `<button class="btn-video">Watch Video</button>` : ""}
             ${c.pdf ? `<button class="btn-pdf">View PDF</button>` : ""}
             <button class="btn-vote">👍 Vote</button>
+            <button class="btn-open-course">
+        Fungua Kozi
+      </button>
           </div>
         </div>
       `;
@@ -80,16 +83,24 @@ export function loadCourses(container, statusEl) {
   // Event Delegation: Click on any course-card
   // -----------------------------
   container.addEventListener("click", (e) => {
-    const card = e.target.closest(".course-card");
-    if (!card) return; // si click kwenye card
-    if (e.target.tagName === "BUTTON") return; // ignore buttons
+  const card = e.target.closest(".course-card");
+  if (!card) return;
 
-    const courseId = card.dataset.courseId;
-    if (!courseId) return;
+  const courseId = card.dataset.courseId;
+  if (!courseId) return;
 
-    console.log("Opening course:", courseId); // debug
+  // BUTTON: Fungua Kozi
+  if (e.target.classList.contains("btn-open-course")) {
     window.location.href = `course.html?courseId=${courseId}`;
-  });
+    return;
+  }
+
+  // Ignore buttons nyingine
+  if (e.target.tagName === "BUTTON") return;
+
+  // CLICK POPOTE KWENYE CARD
+  window.location.href = `course.html?courseId=${courseId}`;
+});
 
   return unsubscribeCourses;
         }
