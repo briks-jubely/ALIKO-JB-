@@ -30,44 +30,70 @@ async function loadCourse() {
 
     const c = snap.data();
 
+    // Basic info
     titleEl.textContent = c.title;
     descEl.textContent = c.description;
     levelEl.textContent = c.level || "All";
     durationEl.textContent = c.duration || "Unknown";
     imgEl.src = c.image || "icon-192.png";
 
+    // FREE / PAID badge
     badgeEl.textContent = c.free ? "FREE" : "LOCKED";
     badgeEl.className = `badge ${c.free ? "free" : "locked"}`;
 
-    // Media
+    // Media logic
     mediaEl.innerHTML = "";
-    if(c.video){
-      mediaEl.innerHTML += `
-        <h3>Video Lesson</h3>
-        <video controls width="100%">
-          <source src="${c.video}">
-        </video>
-      `;
-    }
-    if(c.pdf){
-      mediaEl.innerHTML += `
-        <h3>Notes / PDF</h3>
-        <a href="${c.pdf}" target="_blank" class="btn-open-course">
-          Fungua PDF
-        </a>
+
+    if (c.free) {
+      if (c.video) {
+        mediaEl.innerHTML += `
+          <h3>🎥 Video Lesson</h3>
+          <video controls width="100%">
+            <source src="${c.video}">
+          </video>
+        `;
+      }
+
+      if (c.pdf) {
+        mediaEl.innerHTML += `
+          <h3>📄 Notes / PDF</h3>
+          <a href="${c.pdf}" target="_blank" class="btn-open-course">
+            Fungua PDF
+          </a>
+        `;
+      }
+    } else {
+      mediaEl.innerHTML = `
+        <div class="locked-box">
+          <h3>🔒 Course Imefungwa</h3>
+          <p>
+            Hii ni course ya malipo.  
+            Tafadhali lipa au wasiliana na admin ili ufunguliwe.
+          </p>
+          <button class="btn-pay">Lipia Course</button>
+        </div>
       `;
     }
 
-    // Lessons list
-    if(c.lessons && c.lessons.length > 0){
-      lessonsEl.innerHTML = `<h3>Lessons</h3><ul>` + 
-        c.lessons.map(l => `<li>${l.title}</li>`).join('') +
-        `</ul>`;
+    // Lessons
+    lessonsEl.innerHTML = "";
+    if (c.lessons && c.lessons.length > 0) {
+      if (c.free) {
+        lessonsEl.innerHTML =
+          `<h3>📚 Lessons</h3><ul>` +
+          c.lessons.map(l => `<li>${l.title}</li>`).join("") +
+          `</ul>`;
+      } else {
+        lessonsEl.innerHTML = `
+          <h3>📚 Lessons</h3>
+          <p>🔒 Lessons zitafunguliwa baada ya malipo</p>
+        `;
+      }
     }
 
   } catch (err) {
     console.error(err);
-    titleEl.textContent = "Kuna tatizo la kupakia kozi";
+    titleEl.textContent = "Kuna tatizo la kupakia course";
   }
 }
 
