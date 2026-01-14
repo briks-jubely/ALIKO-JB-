@@ -73,7 +73,7 @@ export function loadCourses(container, statusEl) {
 
     // Dispatch event after cards loaded
     document.dispatchEvent(new CustomEvent("coursesLoaded"));
-
+console.log("📌 Adding card:", doc.id, c.title);
   }, (err) => {
     console.error("🔥 Firestore snapshot error:", err);
     statusEl.textContent = "Imeshindikana kupakua kozi";
