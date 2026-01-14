@@ -64,15 +64,17 @@ async function loadCourse() {
       }
     } else {
       mediaEl.innerHTML = `
-        <div class="locked-box">
-          <h3>🔒 Course Imefungwa</h3>
-          <p>
-            Hii ni course ya malipo.  
-            Tafadhali lipa au wasiliana na admin ili ufunguliwe.
-          </p>
-          <button class="btn-pay">Lipia Course</button>
-        </div>
-      `;
+  <div class="locked-box">
+    <h3>🔒 Course Imefungwa</h3>
+    <p>
+      Hii ni course ya malipo.<br>
+      Bonyeza hapa chini kupata maelekezo ya kulipia.
+    </p>
+    <button id="payCourseBtn" class="btn-pay">
+      Lipia Course
+    </button>
+  </div>
+`;
     }
 
     // Lessons
@@ -98,3 +100,14 @@ async function loadCourse() {
 }
 
 loadCourse();
+const payBtn = document.getElementById("payCourseBtn");
+if (payBtn) {
+  payBtn.addEventListener("click", () => {
+    alert(
+      "Ili kulipia course:\n" +255750198672
+      "1. Wasiliana na Admin\n" +255620198672
+      "2. Fanya malipo\n" +255750198672
+      "3. Course itafunguliwa kwenye akaunti yako"
+    );
+  });
+        }
