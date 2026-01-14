@@ -88,8 +88,11 @@ console.log("📌 Adding card:", doc.id, c.title);
 
   // HII NDIO ID HALISI YA CARD HIYO
   const courseId = card.dataset.courseId;
+// 🔹 DEBUG
+  console.log("🖱 Card clicked, courseId:", courseId);
+  console.log("Clicked element:", e.target);
 
-  if (!courseId) {
+    if (!courseId) {
     console.error("❌ courseId haipo kwenye card");
     return;
   }
