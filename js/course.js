@@ -1,14 +1,20 @@
 import { db } from "./auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
+/* ----------------------------------
+   GET courseId FROM URL
+---------------------------------- */
 const params = new URLSearchParams(window.location.search);
 const courseId = params.get("courseId");
 
 if (!courseId) {
-  document.body.innerHTML = "<h2>Course haijachaguliwa</h2>";
+  document.body.innerHTML = "<h2>❌ Course haijachaguliwa</h2>";
   throw new Error("No courseId found in URL");
 }
 
+/* ----------------------------------
+   DOM ELEMENTS
+---------------------------------- */
 const titleEl = document.getElementById("course-title");
 const descEl = document.getElementById("course-description");
 const levelEl = document.getElementById("course-level");
@@ -18,33 +24,41 @@ const imgEl = document.getElementById("course-image");
 const mediaEl = document.getElementById("course-media");
 const lessonsEl = document.getElementById("course-lessons");
 
+/* ----------------------------------
+   LOAD COURSE
+---------------------------------- */
 async function loadCourse() {
   try {
     const ref = doc(db, "courses", courseId);
     const snap = await getDoc(ref);
 
     if (!snap.exists()) {
-      titleEl.textContent = "Course haipo";
+      titleEl.textContent = "❌ Course haipo";
       return;
     }
 
     const c = snap.data();
 
-    // Basic info
-    titleEl.textContent = c.title;
-    descEl.textContent = c.description;
+    /* BASIC INFO */
+    titleEl.textContent = c.title || "Untitled Course";
+    descEl.textContent = c.description || "";
     levelEl.textContent = c.level || "All";
     durationEl.textContent = c.duration || "Unknown";
     imgEl.src = c.image || "icon-192.png";
 
-    // FREE / PAID badge
+    /* FREE / PAID BADGE */
     badgeEl.textContent = c.free ? "FREE" : "LOCKED";
     badgeEl.className = `badge ${c.free ? "free" : "locked"}`;
 
-    // Media logic
+    /* ----------------------------------
+       MEDIA LOGIC
+    ---------------------------------- */
     mediaEl.innerHTML = "";
+    lessonsEl.innerHTML = "";
 
-    if (c.free) {
+    if (c.free === true) {
+
+      /* VIDEO */
       if (c.video) {
         mediaEl.innerHTML += `
           <h3>🎥 Video Lesson</h3>
@@ -54,6 +68,7 @@ async function loadCourse() {
         `;
       }
 
+      /* PDF */
       if (c.pdf) {
         mediaEl.innerHTML += `
           <h3>📄 Notes / PDF</h3>
@@ -62,47 +77,41 @@ async function loadCourse() {
           </a>
         `;
       }
-    } else {
-      mediaEl.innerHTML = `
-  <div class="locked-box">
-    <h3>🔒 Course Imefungwa</h3>
-    <p>
-      Hii ni course ya malipo.<br>
-      Bonyeza hapa chini kupata maelekezo ya kulipia.
-    </p>
-    <button id="payCourseBtn" class="btn-pay">
-      Lipia Course
-    </button>
-  </div>
-`;
-    }
 
-    // Lessons
-    lessonsEl.innerHTML = "";
-    if (c.lessons && c.lessons.length > 0) {
-      if (c.free) {
+      /* LESSONS */
+      if (Array.isArray(c.lessons) && c.lessons.length > 0) {
         lessonsEl.innerHTML =
           `<h3>📚 Lessons</h3><ul>` +
-          c.lessons.map(l => `<li>${l.title}</li>`).join("") +
+          c.lessons.map(l => `<li>${l.title || "Lesson"}</li>`).join("") +
           `</ul>`;
-      } else {
-        lessonsEl.innerHTML = `
-          <h3>📚 Lessons</h3>
-          <p>🔒 Lessons zitafunguliwa baada ya malipo</p>
-        `;
       }
-    }
 
-  } catch (err) {
-    console.error(err);
-    titleEl.textContent = "Kuna tatizo la kupakia course";
-  }
-}
+    } else {
 
-// 🔥 SAHIHI: listener baada ya button kuwepo
-  const payBtn = document.getElementById("payCourseBtn");
-  payBtn.addEventListener("click", () => {
-    alert(`
+      /* PAID COURSE (LOCKED) */
+      mediaEl.innerHTML = `
+        <div class="locked-box">
+          <h3>🔒 Course Imefungwa</h3>
+          <p>
+            Hii ni course ya malipo.<br>
+            Ili kuifungua, fuata hatua zilizo hapa chini.
+          </p>
+          <button id="payCourseBtn" class="btn-pay">
+            Lipia Course
+          </button>
+        </div>
+      `;
+
+      lessonsEl.innerHTML = `
+        <h3>📚 Lessons</h3>
+        <p>🔒 Lessons zitafunguliwa baada ya malipo</p>
+      `;
+
+      /* PAY BUTTON LISTENER (SAFE) */
+      const payBtn = document.getElementById("payCourseBtn");
+      if (payBtn) {
+        payBtn.addEventListener("click", () => {
+          alert(`
 Ili kulipia course:
 
 1. Wasiliana na Admin: 0750 198 672
@@ -111,6 +120,17 @@ Ili kulipia course:
 
 WhatsApp: 0620 198 672
 `);
-  });
+        });
+      }
+    }
+
+  } catch (err) {
+    console.error("🔥 Course load error:", err);
+    titleEl.textContent = "⚠️ Kuna tatizo la kupakia course";
+  }
 }
+
+/* ----------------------------------
+   INIT
+---------------------------------- */
 loadCourse();
