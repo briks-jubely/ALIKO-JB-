@@ -98,8 +98,6 @@ async function loadCourse() {
     titleEl.textContent = "Kuna tatizo la kupakia course";
   }
 }
-
-loadCourse();
 const payBtn = document.getElementById("payCourseBtn");
 if (payBtn) {
   payBtn.addEventListener("click", () => {
@@ -110,4 +108,5 @@ if (payBtn) {
       "3. Course itafunguliwa kwenye akaunti yako"
     );
   });
-        }
+      }
+loadCourse();
