@@ -86,8 +86,13 @@ export function loadCourses(container, statusEl) {
   const card = e.target.closest(".course-card");
   if (!card) return;
 
+  // HII NDIO ID HALISI YA CARD HIYO
   const courseId = card.dataset.courseId;
-  if (!courseId) return;
+
+  if (!courseId) {
+    console.error("❌ courseId haipo kwenye card");
+    return;
+  }
 
   // BUTTON: Fungua Kozi
   if (e.target.classList.contains("btn-open-course")) {
@@ -101,6 +106,5 @@ export function loadCourses(container, statusEl) {
   // CLICK POPOTE KWENYE CARD
   window.location.href = `course.html?courseId=${courseId}`;
 });
-
   return unsubscribeCourses;
         }
