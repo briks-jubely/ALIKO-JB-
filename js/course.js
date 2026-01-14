@@ -98,15 +98,19 @@ async function loadCourse() {
     titleEl.textContent = "Kuna tatizo la kupakia course";
   }
 }
-const payBtn = document.getElementById("payCourseBtn");
-if (payBtn) {
+
+// 🔥 SAHIHI: listener baada ya button kuwepo
+  const payBtn = document.getElementById("payCourseBtn");
   payBtn.addEventListener("click", () => {
-    alert(
-      "Ili kulipia course:\n" +255750198672
-      "1. Wasiliana na Admin\n" +255620198672
-      "2. Fanya malipo\n" +255750198672
-      "3. Course itafunguliwa kwenye akaunti yako"
-    );
+    alert(`
+Ili kulipia course:
+
+1. Wasiliana na Admin: 0750 198 672
+2. Fanya malipo
+3. Course itafunguliwa kwenye akaunti yako
+
+WhatsApp: 0620 198 672
+`);
   });
-      }
+}
 loadCourse();
