@@ -102,7 +102,7 @@ async function loadCourse() {
     sectionsContainer.innerHTML = "";
 
     const sections = [
-      createSection("📖 Description", `<p>${c.fullDescription || c.shortDescription || "No description yet."}</p>`),
+      createSection("📖 Description", `<p>${c.fulldescription || c.description || "No description yet."}</p>`),
       createSection("🎯 Objectives", renderListObjects(c.objectives)),
       createSection("⚙️ System Overview", `<p>${c.systemOverview || "No system overview yet."}</p>`),
       createSection("🔌 Sensors", renderListObjects(c.sensors)),
