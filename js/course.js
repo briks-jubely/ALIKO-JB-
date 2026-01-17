@@ -34,28 +34,39 @@ function createSection(title, contentHtml) {
 }
 
 /* ----------------------------------
-   HELPER: Render Array or Map
+   HELPER: Render Arrays or Array of Objects
 ---------------------------------- */
-function renderList(data, isMap = false) {
+function renderListObjects(data) {
   if (!data) return "<p>No content yet.</p>";
 
+  // Array ya objects au strings
   if (Array.isArray(data) && data.length > 0) {
     return `<ul>${data.map(item => {
-      if (typeof item === "string") return `<li>${item}</li>`;
-      if (item.title) return `<li>${item.title}</li>`;
-      if (item.name && item.description) return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
-      return `<li>${JSON.stringify(item)}</li>`;
+      if (item.name && item.description) {
+        return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
+      } else if (item.title) {
+        return `<li>${item.title}</li>`;
+      } else if (typeof item === "string") {
+        return `<li>${item}</li>`;
+      } else {
+        return `<li>${JSON.stringify(item)}</li>`;
+      }
     }).join("")}</ul>`;
   }
 
-  if (isMap && typeof data === "object") {
-    const html = Object.values(data).map(item => {
-      if (typeof item === "string") return `<li>${item}</li>`;
-      if (item.name && item.description) return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
-      if (item.title) return `<li>${item.title}</li>`;
-      return `<li>${JSON.stringify(item)}</li>`;
-    }).join("");
-    return `<ul>${html}</ul>`;
+  // Map / Object
+  if (typeof data === "object") {
+    return `<ul>${Object.values(data).map(item => {
+      if (item.name && item.description) {
+        return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
+      } else if (item.title) {
+        return `<li>${item.title}</li>`;
+      } else if (typeof item === "string") {
+        return `<li>${item}</li>`;
+      } else {
+        return `<li>${JSON.stringify(item)}</li>`;
+      }
+    }).join("")}</ul>`;
   }
 
   return "<p>No content yet.</p>";
@@ -92,32 +103,35 @@ async function loadCourse() {
 
     const sections = [
       createSection("📖 Description", `<p>${c.fullDescription || c.shortDescription || "No description yet."}</p>`),
-      createSection("🎯 Objectives", renderList(c.objectives, false)),
+      createSection("🎯 Objectives", renderListObjects(c.objectives)),
       createSection("⚙️ System Overview", `<p>${c.systemOverview || "No system overview yet."}</p>`),
-      createSection("🔌 Sensors", renderList(c.sensors, true)),
-      createSection("💉 Actuators", renderList(c.actuators, true)),
-      createSection("🔧 Working Principle", renderList(c.workingPrinciple, false)),
-      createSection("🧰 Diagnostics & Troubleshooting", renderList(c.diagnostics, false)),
-      createSection("📚 Lessons", renderList(c.lessons, true))
+      createSection("🔌 Sensors", renderListObjects(c.sensors)),
+      createSection("💉 Actuators", renderListObjects(c.actuators)),
+      createSection("🔧 Working Principle", renderListObjects(c.workingPrinciple)),
+      createSection("🧰 Diagnostics & Troubleshooting", renderListObjects(c.diagnostics)),
+      createSection("📚 Lessons", renderListObjects(c.lessons))
     ];
 
-    // Append all non-null sections
     sections.forEach(sec => { if (sec) sectionsContainer.appendChild(sec); });
 
-    // Media
+    /* ----------------------------------
+       MEDIA SECTION
+    ---------------------------------- */
     let mediaHtml = "";
-    if (c.video) mediaHtml += `<h3>🎥 Video</h3><video controls width="100%"><source src="${c.video}"></video>`;
-    if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</a>`;
-    if (!mediaHtml) mediaHtml = "<p>No media available.</p>";
-
-    if (c.free === false) {
+    if (c.free === true) {
+      if (c.video) mediaHtml += `<h3>🎥 Video</h3><video controls width="100%"><source src="${c.video}"></video>`;
+      if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</a>`;
+      if (!mediaHtml) mediaHtml = "<p>No media available.</p>";
+    } else {
       mediaHtml = `<div class="locked-box"><h3>🔒 Course Imefungwa</h3><p>Hii ni course ya malipo. Ili kuifungua, fuata hatua zilizo hapa chini.</p><button id="payCourseBtn" class="btn-pay">Lipia Course</button></div>`;
     }
 
     const mediaSection = createSection("🎥 Media", mediaHtml);
     if (mediaSection) sectionsContainer.appendChild(mediaSection);
 
-    // Instructor & Certificate
+    /* ----------------------------------
+       INSTRUCTOR & CERTIFICATE
+    ---------------------------------- */
     let instHtml = "";
     if (c.instructor) instHtml += `<p>${c.instructor}</p>`;
     if (c.certificate) instHtml += `<p>Certificate of Completion Available</p>`;
@@ -125,7 +139,9 @@ async function loadCourse() {
     const instSection = createSection("👨‍🏫 Instructor", instHtml);
     if (instSection) sectionsContainer.appendChild(instSection);
 
-    // Pay button listener
+    /* ----------------------------------
+       PAY BUTTON LISTENER
+    ---------------------------------- */
     if (c.free === false) {
       const payBtn = document.getElementById("payCourseBtn");
       if (payBtn) {
