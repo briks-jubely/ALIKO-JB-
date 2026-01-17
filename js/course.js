@@ -23,14 +23,42 @@ const imgEl = document.getElementById("course-image");
 const sectionsContainer = document.getElementById("course-sections");
 
 /* ----------------------------------
-   SECTION CREATION HELPER
+   SECTION HELPER
 ---------------------------------- */
 function createSection(title, contentHtml) {
-  if (!contentHtml) return null;
+  if (!contentHtml || contentHtml.trim() === "") return null;
   const section = document.createElement("section");
   section.className = "course-section";
   section.innerHTML = `<h2>${title}</h2>${contentHtml}`;
   return section;
+}
+
+/* ----------------------------------
+   HELPER: Render Array or Map
+---------------------------------- */
+function renderList(data, isMap = false) {
+  if (!data) return "<p>No content yet.</p>";
+
+  if (Array.isArray(data) && data.length > 0) {
+    return `<ul>${data.map(item => {
+      if (typeof item === "string") return `<li>${item}</li>`;
+      if (item.title) return `<li>${item.title}</li>`;
+      if (item.name && item.description) return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
+      return `<li>${JSON.stringify(item)}</li>`;
+    }).join("")}</ul>`;
+  }
+
+  if (isMap && typeof data === "object") {
+    const html = Object.values(data).map(item => {
+      if (typeof item === "string") return `<li>${item}</li>`;
+      if (item.name && item.description) return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
+      if (item.title) return `<li>${item.title}</li>`;
+      return `<li>${JSON.stringify(item)}</li>`;
+    }).join("");
+    return `<ul>${html}</ul>`;
+  }
+
+  return "<p>No content yet.</p>";
 }
 
 /* ----------------------------------
@@ -58,74 +86,46 @@ async function loadCourse() {
     badgeEl.className = `badge ${c.free ? "free" : "locked"}`;
 
     /* ----------------------------------
-       RENDER DYNAMIC SECTIONS
+       RENDER SECTIONS
     ---------------------------------- */
-    sectionsContainer.innerHTML = ""; // clear
+    sectionsContainer.innerHTML = "";
 
-    // Description
-    const descSection = createSection("📖 Description", `<p>${c.fulldescription || c.description || ""}</p>`);
-    if (descSection) sectionsContainer.appendChild(descSection);
+    const sections = [
+      createSection("📖 Description", `<p>${c.fullDescription || c.shortDescription || "No description yet."}</p>`),
+      createSection("🎯 Objectives", renderList(c.objectives, false)),
+      createSection("⚙️ System Overview", `<p>${c.systemOverview || "No system overview yet."}</p>`),
+      createSection("🔌 Sensors", renderList(c.sensors, true)),
+      createSection("💉 Actuators", renderList(c.actuators, true)),
+      createSection("🔧 Working Principle", renderList(c.workingPrinciple, false)),
+      createSection("🧰 Diagnostics & Troubleshooting", renderList(c.diagnostics, false)),
+      createSection("📚 Lessons", renderList(c.lessons, true))
+    ];
 
-    // Objectives
-    if (Array.isArray(c.objectives) && c.objectives.length) {
-      const html = `<ul>${c.objectives.map(o => `<li>${o}</li>`).join("")}</ul>`;
-      sectionsContainer.appendChild(createSection("🎯 Objectives", html));
-    }
-
-    // System Overview
-    if (c.systemOverview) {
-      sectionsContainer.appendChild(createSection("⚙️ System Overview", `<p>${c.systemOverview}</p>`));
-    }
-
-    // Sensors
-    if (map.ismap(c.sensors) && c.sensors.length) {
-      const html = `<ul>${c.sensors.map(s => `<li><strong>${s.name}:</strong> ${s.description}</li>`).join("")}</ul>`;
-      sectionsContainer.appendChild(createSection("🔌 Sensors", html));
-    }
-
-    // Actuators
-    if (map.ismap(c.actuators) && c.actuators.length) {
-      const html = `<ul>${c.actuators.map(a => `<li><strong>${a.name}:</strong> ${a.description}</li>`).join("")}</ul>`;
-      sectionsContainer.appendChild(createSection("💉 Actuators", html));
-    }
-
-    // Working Principle
-    if (map.ismap(c.workingPrinciple) && c.workingPrinciple.length) {
-      const html = `<ul>${c.workingPrinciple.map(step => `<li>${step}</li>`).join("")}</ul>`;
-      sectionsContainer.appendChild(createSection("🔧 Working Principle", html));
-    }
-
-    // Diagnostics
-    if (Array.isArray(c.diagnostics) && c.diagnostics.length) {
-      const html = `<ul>${c.diagnostics.map(d => `<li>${d}</li>`).join("")}</ul>`;
-      sectionsContainer.appendChild(createSection("🧰 Diagnostics & Troubleshooting", html));
-    }
-
-    // Lessons
-    if (Array.isArray(c.lessons) && c.lessons.length) {
-      const html = `<ul>${c.lessons.map(l => `<li>${l.title}</li>`).join("")}</ul>`;
-      sectionsContainer.appendChild(createSection("📚 Lessons", html));
-    }
+    // Append all non-null sections
+    sections.forEach(sec => { if (sec) sectionsContainer.appendChild(sec); });
 
     // Media
     let mediaHtml = "";
     if (c.video) mediaHtml += `<h3>🎥 Video</h3><video controls width="100%"><source src="${c.video}"></video>`;
-    if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</>`;
+    if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</a>`;
+    if (!mediaHtml) mediaHtml = "<p>No media available.</p>";
 
-    if (mediaHtml) {
-      if (c.free === false) {
-        mediaHtml = `<div class="locked-box"><h3>🔒 Course Imefungwa</h3><p>Hii ni course ya malipo. Ili kuifungua, fuata hatua zilizo hapa chini.</p><button id="payCourseBtn" class="btn-pay">Lipia Course</button></div>`;
-      }
-      sectionsContainer.appendChild(createSection("🎥 Media", mediaHtml));
+    if (c.free === false) {
+      mediaHtml = `<div class="locked-box"><h3>🔒 Course Imefungwa</h3><p>Hii ni course ya malipo. Ili kuifungua, fuata hatua zilizo hapa chini.</p><button id="payCourseBtn" class="btn-pay">Lipia Course</button></div>`;
     }
+
+    const mediaSection = createSection("🎥 Media", mediaHtml);
+    if (mediaSection) sectionsContainer.appendChild(mediaSection);
 
     // Instructor & Certificate
     let instHtml = "";
     if (c.instructor) instHtml += `<p>${c.instructor}</p>`;
     if (c.certificate) instHtml += `<p>Certificate of Completion Available</p>`;
-    if (instHtml) sectionsContainer.appendChild(createSection("👨‍🏫 Instructor", instHtml));
+    if (!instHtml) instHtml = `<p>No instructor info yet.</p>`;
+    const instSection = createSection("👨‍🏫 Instructor", instHtml);
+    if (instSection) sectionsContainer.appendChild(instSection);
 
-    // Pay Button Listener (for locked courses)
+    // Pay button listener
     if (c.free === false) {
       const payBtn = document.getElementById("payCourseBtn");
       if (payBtn) {
