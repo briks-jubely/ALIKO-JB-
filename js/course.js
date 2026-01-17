@@ -24,6 +24,16 @@ const imgEl = document.getElementById("course-image");
 const mediaEl = document.getElementById("course-media");
 const lessonsEl = document.getElementById("course-lessons");
 
+/* OPTIONAL SECTIONS */
+const objectivesEl = document.getElementById("course-objectives");
+const systemEl = document.getElementById("course-system-overview");
+const sensorsEl = document.getElementById("course-sensors");
+const actuatorsEl = document.getElementById("course-actuators");
+const wpEl = document.getElementById("course-working-principle");
+const diagEl = document.getElementById("course-diagnostics");
+const instructorEl = document.getElementById("course-instructor");
+const certificateEl = document.getElementById("course-certificate");
+
 /* ----------------------------------
    LOAD COURSE
 ---------------------------------- */
@@ -41,7 +51,7 @@ async function loadCourse() {
 
     /* BASIC INFO */
     titleEl.textContent = c.title || "Untitled Course";
-    descEl.textContent = c.description || "";
+    descEl.textContent = c.fullDescription || c.shortDescription || "";
     levelEl.textContent = c.level || "All";
     durationEl.textContent = c.duration || "Unknown";
     imgEl.src = c.image || "icon-192.png";
@@ -50,8 +60,61 @@ async function loadCourse() {
     badgeEl.textContent = c.free ? "FREE" : "LOCKED";
     badgeEl.className = `badge ${c.free ? "free" : "locked"}`;
 
+    /* OPTIONAL SECTIONS RENDERING */
+    if (objectivesEl && Array.isArray(c.objectives)) {
+      objectivesEl.innerHTML = "";
+      c.objectives.forEach(o => {
+        const li = document.createElement("li");
+        li.textContent = o;
+        objectivesEl.appendChild(li);
+      });
+    }
+
+    if (systemEl && c.systemOverview) {
+      systemEl.textContent = c.systemOverview;
+    }
+
+    if (sensorsEl && Array.isArray(c.sensors)) {
+      sensorsEl.innerHTML = "";
+      c.sensors.forEach(s => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${s.name}:</strong> ${s.description}`;
+        sensorsEl.appendChild(li);
+      });
+    }
+
+    if (actuatorsEl && Array.isArray(c.actuators)) {
+      actuatorsEl.innerHTML = "";
+      c.actuators.forEach(a => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${a.name}:</strong> ${a.description}`;
+        actuatorsEl.appendChild(li);
+      });
+    }
+
+    if (wpEl && Array.isArray(c.workingPrinciple)) {
+      wpEl.innerHTML = "";
+      c.workingPrinciple.forEach(step => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        wpEl.appendChild(li);
+      });
+    }
+
+    if (diagEl && Array.isArray(c.diagnostics)) {
+      diagEl.innerHTML = "";
+      c.diagnostics.forEach(d => {
+        const li = document.createElement("li");
+        li.textContent = d;
+        diagEl.appendChild(li);
+      });
+    }
+
+    if (instructorEl) instructorEl.textContent = c.instructor || "";
+    if (certificateEl) certificateEl.textContent = c.certificate ? "Certificate of Completion Available" : "";
+
     /* ----------------------------------
-       MEDIA LOGIC
+       MEDIA & LESSONS LOGIC
     ---------------------------------- */
     mediaEl.innerHTML = "";
     lessonsEl.innerHTML = "";
