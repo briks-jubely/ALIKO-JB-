@@ -63,7 +63,7 @@ async function loadCourse() {
     sectionsContainer.innerHTML = ""; // clear
 
     // Description
-    const descSection = createSection("📖 Description", `<p>${c.fullDescription || c.shortDescription || ""}</p>`);
+    const descSection = createSection("📖 Description", `<p>${c.fulldescription || c.description || ""}</p>`);
     if (descSection) sectionsContainer.appendChild(descSection);
 
     // Objectives
@@ -78,19 +78,19 @@ async function loadCourse() {
     }
 
     // Sensors
-    if (Array.isArray(c.sensors) && c.sensors.length) {
+    if (map.ismap(c.sensors) && c.sensors.length) {
       const html = `<ul>${c.sensors.map(s => `<li><strong>${s.name}:</strong> ${s.description}</li>`).join("")}</ul>`;
       sectionsContainer.appendChild(createSection("🔌 Sensors", html));
     }
 
     // Actuators
-    if (Array.isArray(c.actuators) && c.actuators.length) {
+    if (map.ismap(c.actuators) && c.actuators.length) {
       const html = `<ul>${c.actuators.map(a => `<li><strong>${a.name}:</strong> ${a.description}</li>`).join("")}</ul>`;
       sectionsContainer.appendChild(createSection("💉 Actuators", html));
     }
 
     // Working Principle
-    if (Array.isArray(c.workingPrinciple) && c.workingPrinciple.length) {
+    if (map.ismap(c.workingPrinciple) && c.workingPrinciple.length) {
       const html = `<ul>${c.workingPrinciple.map(step => `<li>${step}</li>`).join("")}</ul>`;
       sectionsContainer.appendChild(createSection("🔧 Working Principle", html));
     }
@@ -110,7 +110,7 @@ async function loadCourse() {
     // Media
     let mediaHtml = "";
     if (c.video) mediaHtml += `<h3>🎥 Video</h3><video controls width="100%"><source src="${c.video}"></video>`;
-    if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</a>`;
+    if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</>`;
 
     if (mediaHtml) {
       if (c.free === false) {
