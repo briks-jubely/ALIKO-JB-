@@ -16,23 +16,22 @@ if (!courseId) {
    DOM ELEMENTS
 ---------------------------------- */
 const titleEl = document.getElementById("course-title");
-const descEl = document.getElementById("course-description");
 const levelEl = document.getElementById("course-level");
 const durationEl = document.getElementById("course-duration");
 const badgeEl = document.getElementById("course-badge");
 const imgEl = document.getElementById("course-image");
-const mediaEl = document.getElementById("course-media");
-const lessonsEl = document.getElementById("course-lessons");
+const sectionsContainer = document.getElementById("course-sections");
 
-/* OPTIONAL SECTIONS */
-const objectivesEl = document.getElementById("course-objectives");
-const systemEl = document.getElementById("course-system-overview");
-const sensorsEl = document.getElementById("course-sensors");
-const actuatorsEl = document.getElementById("course-actuators");
-const wpEl = document.getElementById("course-working-principle");
-const diagEl = document.getElementById("course-diagnostics");
-const instructorEl = document.getElementById("course-instructor");
-const certificateEl = document.getElementById("course-certificate");
+/* ----------------------------------
+   SECTION CREATION HELPER
+---------------------------------- */
+function createSection(title, contentHtml) {
+  if (!contentHtml) return null;
+  const section = document.createElement("section");
+  section.className = "course-section";
+  section.innerHTML = `<h2>${title}</h2>${contentHtml}`;
+  return section;
+}
 
 /* ----------------------------------
    LOAD COURSE
@@ -51,126 +50,83 @@ async function loadCourse() {
 
     /* BASIC INFO */
     titleEl.textContent = c.title || "Untitled Course";
-    descEl.textContent = c.fullDescription || c.shortDescription || "";
     levelEl.textContent = c.level || "All";
     durationEl.textContent = c.duration || "Unknown";
     imgEl.src = c.image || "icon-192.png";
 
-    /* FREE / PAID BADGE */
     badgeEl.textContent = c.free ? "FREE" : "LOCKED";
     badgeEl.className = `badge ${c.free ? "free" : "locked"}`;
 
-    /* OPTIONAL SECTIONS RENDERING */
-    if (objectivesEl && Array.isArray(c.objectives)) {
-      objectivesEl.innerHTML = "";
-      c.objectives.forEach(o => {
-        const li = document.createElement("li");
-        li.textContent = o;
-        objectivesEl.appendChild(li);
-      });
-    }
-
-    if (systemEl && c.systemOverview) {
-      systemEl.textContent = c.systemOverview;
-    }
-
-    if (sensorsEl && Array.isArray(c.sensors)) {
-      sensorsEl.innerHTML = "";
-      c.sensors.forEach(s => {
-        const li = document.createElement("li");
-        li.innerHTML = `<strong>${s.name}:</strong> ${s.description}`;
-        sensorsEl.appendChild(li);
-      });
-    }
-
-    if (actuatorsEl && Array.isArray(c.actuators)) {
-      actuatorsEl.innerHTML = "";
-      c.actuators.forEach(a => {
-        const li = document.createElement("li");
-        li.innerHTML = `<strong>${a.name}:</strong> ${a.description}`;
-        actuatorsEl.appendChild(li);
-      });
-    }
-
-    if (wpEl && Array.isArray(c.workingPrinciple)) {
-      wpEl.innerHTML = "";
-      c.workingPrinciple.forEach(step => {
-        const li = document.createElement("li");
-        li.textContent = step;
-        wpEl.appendChild(li);
-      });
-    }
-
-    if (diagEl && Array.isArray(c.diagnostics)) {
-      diagEl.innerHTML = "";
-      c.diagnostics.forEach(d => {
-        const li = document.createElement("li");
-        li.textContent = d;
-        diagEl.appendChild(li);
-      });
-    }
-
-    if (instructorEl) instructorEl.textContent = c.instructor || "";
-    if (certificateEl) certificateEl.textContent = c.certificate ? "Certificate of Completion Available" : "";
-
     /* ----------------------------------
-       MEDIA & LESSONS LOGIC
+       RENDER DYNAMIC SECTIONS
     ---------------------------------- */
-    mediaEl.innerHTML = "";
-    lessonsEl.innerHTML = "";
+    sectionsContainer.innerHTML = ""; // clear
 
-    if (c.free === true) {
+    // Description
+    const descSection = createSection("📖 Description", `<p>${c.fullDescription || c.shortDescription || ""}</p>`);
+    if (descSection) sectionsContainer.appendChild(descSection);
 
-      /* VIDEO */
-      if (c.video) {
-        mediaEl.innerHTML += `
-          <h3>🎥 Video Lesson</h3>
-          <video controls width="100%">
-            <source src="${c.video}">
-          </video>
-        `;
+    // Objectives
+    if (Array.isArray(c.objectives) && c.objectives.length) {
+      const html = `<ul>${c.objectives.map(o => `<li>${o}</li>`).join("")}</ul>`;
+      sectionsContainer.appendChild(createSection("🎯 Objectives", html));
+    }
+
+    // System Overview
+    if (c.systemOverview) {
+      sectionsContainer.appendChild(createSection("⚙️ System Overview", `<p>${c.systemOverview}</p>`));
+    }
+
+    // Sensors
+    if (Array.isArray(c.sensors) && c.sensors.length) {
+      const html = `<ul>${c.sensors.map(s => `<li><strong>${s.name}:</strong> ${s.description}</li>`).join("")}</ul>`;
+      sectionsContainer.appendChild(createSection("🔌 Sensors", html));
+    }
+
+    // Actuators
+    if (Array.isArray(c.actuators) && c.actuators.length) {
+      const html = `<ul>${c.actuators.map(a => `<li><strong>${a.name}:</strong> ${a.description}</li>`).join("")}</ul>`;
+      sectionsContainer.appendChild(createSection("💉 Actuators", html));
+    }
+
+    // Working Principle
+    if (Array.isArray(c.workingPrinciple) && c.workingPrinciple.length) {
+      const html = `<ul>${c.workingPrinciple.map(step => `<li>${step}</li>`).join("")}</ul>`;
+      sectionsContainer.appendChild(createSection("🔧 Working Principle", html));
+    }
+
+    // Diagnostics
+    if (Array.isArray(c.diagnostics) && c.diagnostics.length) {
+      const html = `<ul>${c.diagnostics.map(d => `<li>${d}</li>`).join("")}</ul>`;
+      sectionsContainer.appendChild(createSection("🧰 Diagnostics & Troubleshooting", html));
+    }
+
+    // Lessons
+    if (Array.isArray(c.lessons) && c.lessons.length) {
+      const html = `<ul>${c.lessons.map(l => `<li>${l.title}</li>`).join("")}</ul>`;
+      sectionsContainer.appendChild(createSection("📚 Lessons", html));
+    }
+
+    // Media
+    let mediaHtml = "";
+    if (c.video) mediaHtml += `<h3>🎥 Video</h3><video controls width="100%"><source src="${c.video}"></video>`;
+    if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</a>`;
+
+    if (mediaHtml) {
+      if (c.free === false) {
+        mediaHtml = `<div class="locked-box"><h3>🔒 Course Imefungwa</h3><p>Hii ni course ya malipo. Ili kuifungua, fuata hatua zilizo hapa chini.</p><button id="payCourseBtn" class="btn-pay">Lipia Course</button></div>`;
       }
+      sectionsContainer.appendChild(createSection("🎥 Media", mediaHtml));
+    }
 
-      /* PDF */
-      if (c.pdf) {
-        mediaEl.innerHTML += `
-          <h3>📄 Notes / PDF</h3>
-          <a href="${c.pdf}" target="_blank" class="btn-open-course">
-            Fungua PDF
-          </a>
-        `;
-      }
+    // Instructor & Certificate
+    let instHtml = "";
+    if (c.instructor) instHtml += `<p>${c.instructor}</p>`;
+    if (c.certificate) instHtml += `<p>Certificate of Completion Available</p>`;
+    if (instHtml) sectionsContainer.appendChild(createSection("👨‍🏫 Instructor", instHtml));
 
-      /* LESSONS */
-      if (Array.isArray(c.lessons) && c.lessons.length > 0) {
-        lessonsEl.innerHTML =
-          `<h3>📚 Lessons</h3><ul>` +
-          c.lessons.map(l => `<li>${l.title || "Lesson"}</li>`).join("") +
-          `</ul>`;
-      }
-
-    } else {
-
-      /* PAID COURSE (LOCKED) */
-      mediaEl.innerHTML = `
-        <div class="locked-box">
-          <h3>🔒 Course Imefungwa</h3>
-          <p>
-            Hii ni course ya malipo.<br>
-            Ili kuifungua, fuata hatua zilizo hapa chini.
-          </p>
-          <button id="payCourseBtn" class="btn-pay">
-            Lipia Course
-          </button>
-        </div>
-      `;
-
-      lessonsEl.innerHTML = `
-        <h3>📚 Lessons</h3>
-        <p>🔒 Lessons zitafunguliwa baada ya malipo</p>
-      `;
-
-      /* PAY BUTTON LISTENER (SAFE) */
+    // Pay Button Listener (for locked courses)
+    if (c.free === false) {
       const payBtn = document.getElementById("payCourseBtn");
       if (payBtn) {
         payBtn.addEventListener("click", () => {
