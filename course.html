@@ -1,93 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALIKO JB Course Details</title>
-
-<link rel="stylesheet" href="css/course.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALIKO JB Course Details</title>
+  <link rel="stylesheet" href="css/course.css">
 </head>
 <body>
 
 <div class="course-page">
 
-  <!-- Hero Image -->
+  <!-- Hero & Basic Info -->
   <img src="icon-192.png" alt="Course Image" id="course-image">
 
-  <!-- Title -->
   <h1 id="course-title">Loading...</h1>
 
-  <!-- Metadata -->
   <div class="course-meta">
     <span id="course-level">Level</span> • 
     <span id="course-duration">Duration</span> • 
     <span id="course-badge" class="badge">FREE/LOCKED</span>
   </div>
 
-  <!-- Short / Core Description -->
-  <p id="course-description">Loading course description...</p>
-
-  <!-- Objectives -->
-  <div class="course-section">
-    <h2>What You Will Learn</h2>
-    <ul id="course-objectives"></ul>
+  <!-- Dynamic Sections Container -->
+  <div id="course-sections">
+    <!-- JS itaunda sections zote dynamic -->
   </div>
 
-  <!-- System Overview -->
-  <div class="course-section">
-    <h2>System Overview</h2>
-    <p id="course-system-overview"></p>
-  </div>
-
-  <!-- Sensors -->
-  <div class="course-section">
-    <h2>Sensors</h2>
-    <ul id="course-sensors"></ul>
-  </div>
-
-  <!-- Actuators -->
-  <div class="course-section">
-    <h2>Actuators</h2>
-    <ul id="course-actuators"></ul>
-  </div>
-
-  <!-- Working Principle -->
-  <div class="course-section">
-    <h2>Working Principle</h2>
-    <ol id="course-working-principle"></ol>
-  </div>
-
-  <!-- Diagnostics -->
-  <div class="course-section">
-    <h2>Diagnostics & Troubleshooting</h2>
-    <ul id="course-diagnostics"></ul>
-  </div>
-
-  <!-- Lessons -->
-  <div class="course-section">
-    <h2>Lessons</h2>
-    <ul id="course-lessons"></ul>
-  </div>
-
-  <!-- Media -->
-  <div class="course-section">
-    <h2>Media</h2>
-    <div id="course-media"></div>
-  </div>
-
-  <!-- Instructor & Certificate -->
-  <div class="course-section">
-    <h2>Instructor</h2>
-    <p id="course-instructor"></p>
-    <p id="course-certificate"></p>
-  </div>
-
-  </div>
+</div>
 
 <script type="module" src="js/course.js"></script>
 
-  <!-- 🔍 ERUDA CONSOLE (DEBUG TOOL) -->
+<!-- 🔍 ERUDA CONSOLE (DEBUG TOOL) -->
 <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>  
+
 </body>
-  </html>
+</html>
