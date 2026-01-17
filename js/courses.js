@@ -60,7 +60,7 @@ export function loadCourses(container, statusEl) {
           <div class="course-actions">
             ${c.video ? `<button class="btn-video">Watch Video</button>` : ""}
             ${c.pdf ? `<button class="btn-pdf">View PDF</button>` : ""}
-            <button class="btn-vote">👍 Vote</button>
+            <button class="btn-vote">👍 Like</button>
             <button class="btn-open-course">
         Fungua Kozi
       </button>
