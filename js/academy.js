@@ -1,6 +1,6 @@
-import { db } from "./auth.js";
-import { loadCourses } from "./academy.page.js";
-
+import "./academy.page.js";
+import "./courses.js";
+/* ===================== AI CHAT LOGIC ===================== */
 // Chat box references
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userQuestion");
