@@ -3,7 +3,7 @@ import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 dotenv.config();
-
+app.use(cors()); // ruhusu frontend kufanya request
 const app = express();
 app.use(express.json());
 
@@ -16,7 +16,7 @@ app.post("/ask-ai", async (req, res) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY=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}`
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
