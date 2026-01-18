@@ -39,38 +39,56 @@ function createSection(title, contentHtml) {
 function renderListObjects(data) {
   if (!data) return "<p>No content yet.</p>";
 
-  // Array ya objects au strings
-  if (Array.isArray(data) && data.length > 0) {
-    return `<ul>${data.map(item => {
-      if (item.name && item.description) {
-        return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
-      } else if (item.title) {
-        return `<li>${item.title}</li>`;
-      } else if (typeof item === "string") {
-        return `<li>${item}</li>`;
-      } else {
-        return `<li>${JSON.stringify(item)}</li>`;
-      }
-    }).join("")}</ul>`;
+  let itemsHtml = "";
+
+  // ARRAY
+  if (Array.isArray(data)) {
+    itemsHtml = data
+      .map(item => {
+        // STRING
+        if (typeof item === "string" && item.trim() !== "") {
+          return `<li>${item}</li>`;
+        }
+
+        // OBJECT with name + description
+        if (typeof item === "object" && item !== null) {
+          const title = item.name || item.title || item.step;
+          const desc = item.description || "";
+          if (title || desc) {
+            return `<li>
+              ${title ? `<strong>${title}</strong>` : ""}
+              ${desc ? `<p>${desc}</p>` : ""}
+            </li>`;
+          }
+        }
+
+        return "";
+      })
+      .join("");
   }
 
-  // Map / Object
-  if (typeof data === "object") {
-    return `<ul>${Object.values(data).map(item => {
-      if (item.name && item.description) {
-        return `<li><strong>${item.name}:</strong> ${item.description}</li>`;
-      } else if (item.title) {
-        return `<li>${item.title}</li>`;
-      } else if (typeof item === "string") {
-        return `<li>${item}</li>`;
-      } else {
-        return `<li>${JSON.stringify(item)}</li>`;
-      }
-    }).join("")}</ul>`;
+  // MAP / OBJECT
+  if (!itemsHtml && typeof data === "object") {
+    itemsHtml = Object.values(data)
+      .map(item => {
+        if (typeof item === "string" && item.trim() !== "") {
+          return `<li>${item}</li>`;
+        }
+        if (item?.name || item?.title) {
+          return `<li><strong>${item.name || item.title}</strong> ${item.description || ""}</li>`;
+        }
+        return "";
+      })
+      .join("");
   }
 
-  return "<p>No content yet.</p>";
-}
+  if (!itemsHtml.trim()) {
+    return "<p>No content yet.</p>";
+  }
+
+  return `<ul>${itemsHtml}</ul>`;
+             }
+
 
 /* ----------------------------------
    LOAD COURSE
