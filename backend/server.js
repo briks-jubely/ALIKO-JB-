@@ -1,14 +1,16 @@
-// server.js
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import cors from "cors";
+
 dotenv.config();
-app.use(cors()); // ruhusu frontend kufanya request
 const app = express();
+app.use(cors());
 app.use(express.json());
 
+// ⚡ POST endpoint ya AI
 app.post("/ask-ai", async (req, res) => {
-  const { question, courseId } = req.body;
+  const { question } = req.body;
   if (!question) return res.status(400).json({ error: "Question required" });
 
   try {
@@ -16,7 +18,7 @@ app.post("/ask-ai", async (req, res) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY=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}`
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
@@ -24,10 +26,9 @@ app.post("/ask-ai", async (req, res) => {
           {
             role: "system",
             content: `
-You are an Automotive AI Assistant.
-Answer questions about EFI, Sensors, Actuators, Diagnostics.
-Use Kiswahili if user asks in Kiswahili, English if user asks in English.
-Be clear and concise.
+You are an Automotive Expert AI Assistant.
+Answer any question about cars, engines, EFI systems, sensors, actuators, diagnostics, repairs, and general automotive knowledge.
+Use Kiswahili if the user asks in Kiswahili, English if the user asks in English.
 `
           },
           { role: "user", content: question }
@@ -39,6 +40,7 @@ Be clear and concise.
     const data = await response.json();
     const answer = data.choices?.[0]?.message?.content || "Samahani, nilikosa kujibu.";
     res.json({ answer });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ answer: "⚠️ Kuna tatizo la server" });
