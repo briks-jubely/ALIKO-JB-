@@ -292,12 +292,13 @@ body {
 }
 
 .chat-box {
-  height: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  height: 200px;
   overflow-y: auto;
-  background: #050914;
-  border-radius: 12px;
-  padding: 12px;
-  margin: 12px 0;
+  background: #f9f9f9;
+  margin-bottom: 8px;
 }
 
 .msg {
