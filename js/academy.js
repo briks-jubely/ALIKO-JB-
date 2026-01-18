@@ -1,43 +1,36 @@
-import "./academy.page.js";
-import "./courses.js";
-/* ===================== AI CHAT LOGIC ===================== */
+// Chat box references
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userQuestion");
 const sendBtn = document.getElementById("sendBtn");
 
-if (chatBox && input && sendBtn) {
-  sendBtn.addEventListener("click", sendMessage);
+sendBtn.addEventListener("click", async () => {
+  const question = input.value.trim();
+  if (!question) return;
 
-  function sendMessage() {
-    const text = input.value.trim();
-    if (!text) return;
+  addMessage(question, "user");
+  input.value = "";
 
-    addMessage(text, "user");
-    input.value = "";
+  const typingMsg = addMessage("⏳ AI inafikiria...", "ai");
 
-    const typingMsg = addMessage("⏳ AI inafikiria...", "ai");
-
-    fetch("/ask-ai", {
+  try {
+    const res = await fetch("http://localhost:3000/ask-ai", {  // <--- hii inatungwa local
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: text })
-    })
-      .then(res => res.json())
-      .then(data => {
-        typingMsg.textContent = data.answer || "Samahani, nilikosa kujibu.";
-      })
-      .catch(err => {
-        console.error(err);
-        typingMsg.textContent = "⚠️ Kuna tatizo la kuwasiliana na AI";
-      });
+      body: JSON.stringify({ question })
+    });
+    const data = await res.json();
+    typingMsg.textContent = data.answer;
+  } catch (err) {
+    console.error(err);
+    typingMsg.textContent = "⚠️ Kuna tatizo la kuwasiliana na AI";
   }
+});
 
-  function addMessage(text, type) {
-    const div = document.createElement("div");
-    div.className = `msg ${type}`;
-    div.textContent = text;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
-    return div;
-  }
-             }
+function addMessage(text, type) {
+  const div = document.createElement("div");
+  div.className = `msg ${type}`;
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+  return div;
+}
