@@ -1,3 +1,6 @@
+import { db } from "./auth.js";
+import { loadCourses } from "./academy.page.js";
+
 // Chat box references
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userQuestion");
