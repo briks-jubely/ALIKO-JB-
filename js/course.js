@@ -87,8 +87,30 @@ function renderListObjects(data) {
   }
 
   return `<ul>${itemsHtml}</ul>`;
-             }
+}
 
+/* ----------------------------------
+   HELPER: Render Working Principle as STEPS
+   (NEW – this fixes the issue)
+---------------------------------- */
+function renderSteps(data) {
+  if (!Array.isArray(data) || data.length === 0) {
+    return "<p>No content yet.</p>";
+  }
+
+  return `
+    <ol class="working-steps">
+      ${data
+        .map(step => {
+          if (typeof step === "string" && step.trim() !== "") {
+            return `<li>${step}</li>`;
+          }
+          return "";
+        })
+        .join("")}
+    </ol>
+  `;
+}
 
 /* ----------------------------------
    LOAD COURSE
@@ -125,7 +147,10 @@ async function loadCourse() {
       createSection("⚙️ System Overview", `<p>${c.systemOverview || "No system overview yet."}</p>`),
       createSection("🔌 Sensors", renderListObjects(c.sensors)),
       createSection("💉 Actuators", renderListObjects(c.actuators)),
-      createSection("🔧 Working Principle", renderListObjects(c.workingPrinciple)),
+
+      // 🔴 HAPA NDIPO MABADILIKO YALIPO (renderSteps badala ya renderListObjects)
+      createSection("🔧 Working Principle", renderSteps(c.workingPrinciple)),
+
       createSection("🧰 Diagnostics & Troubleshooting", renderListObjects(c.diagnostics)),
       createSection("📚 Lessons", renderListObjects(c.lessons))
     ];
@@ -141,7 +166,13 @@ async function loadCourse() {
       if (c.pdf) mediaHtml += `<h3>📄 PDF</h3><a href="${c.pdf}" target="_blank" class="btn-open-course">Fungua PDF</a>`;
       if (!mediaHtml) mediaHtml = "<p>No media available.</p>";
     } else {
-      mediaHtml = `<div class="locked-box"><h3>🔒 Course Imefungwa</h3><p>Hii ni course ya malipo. Ili kuifungua, fuata hatua zilizo hapa chini.</p><button id="payCourseBtn" class="btn-pay">Lipia Course</button></div>`;
+      mediaHtml = `
+        <div class="locked-box">
+          <h3>🔒 Course Imefungwa</h3>
+          <p>Hii ni course ya malipo. Ili kuifungua, fuata hatua zilizo hapa chini.</p>
+          <button id="payCourseBtn" class="btn-pay">Lipia Course</button>
+        </div>
+      `;
     }
 
     const mediaSection = createSection("🎥 Media", mediaHtml);
