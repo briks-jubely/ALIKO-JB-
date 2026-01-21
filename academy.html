@@ -35,14 +35,20 @@
 
 <section id="community" class="content">
   <h2>Automotive Community & Discussions</h2>
-<!-- ===================== AI CHAT SECTION ===================== -->
-<div class="card">
+
+  <!-- ===================== AI CHAT SECTION ===================== -->
+<div class="card ai-chat-card">
   <h3>Ask AI</h3>
   <p>Uliza swali lolote kuhusu magari, EFI, sensors, actuators, diagnostics, n.k.</p>
-  <input type="text" id="aiQuestion" placeholder="Andika swali lako hapa" style="width: 80%;">
-  <button id="askAiBtn">Tuma</button>
-  <p id="aiAnswer" style="margin-top:10px; font-weight:bold;"></p>
-    </div>
+
+  <div class="chat-input" style="margin-top:10px;">
+    <input type="text" id="aiQuestion" placeholder="Andika swali lako hapa">
+    <button id="askAiBtn">Tuma</button>
+  </div>
+
+  <div id="aiAnswer" style="margin-top:12px; font-weight:bold; min-height:40px;">
+    <!-- Jibu la AI litakuwepo hapa -->
+  </div>
 </div>
 <!-- ================= END AI CHAT ================= -->
 
