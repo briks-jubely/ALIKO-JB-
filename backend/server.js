@@ -47,4 +47,5 @@ Use Kiswahili if the user asks in Kiswahili, English if the user asks in English
   }
 });
 
+// ⚡ Badilisha localhost -> 0.0.0.0 ili ipatikanwe kwenye network
 app.listen(3000, "0.0.0.0", () => console.log("AI backend running on port 3000"));
