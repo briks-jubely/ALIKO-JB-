@@ -47,4 +47,4 @@ Use Kiswahili if the user asks in Kiswahili, English if the user asks in English
   }
 });
 
-app.listen(3000, () => console.log("AI backend running on port 3000"));
+app.listen(3000, "0.0.0.0", () => console.log("AI backend running on port 3000"));
