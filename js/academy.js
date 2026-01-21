@@ -1,11 +1,10 @@
 // ===================== academy.js =====================
 
-// 🔥 Imports (kama unatumia module system)
+// 🔥 Imports ya module kama unatumia module system
 import "./academy.page.js";
 import "./courses.js";
 
-// ===================== AI CHAT LOGIC =====================
-
+// ===================== AI CHAT FUNCTION =====================
 async function askAI(question) {
   try {
     const response = await fetch("http://10.55.0.158:3000/ask-ai", { // Badilisha IP kama inahitajika
@@ -22,12 +21,12 @@ async function askAI(question) {
   }
 }
 
-// ===================== DOM Elements =====================
+// ===================== DOM ELEMENTS =====================
 const askAiBtn = document.getElementById("askAiBtn");
 const aiQuestionInput = document.getElementById("aiQuestion");
 const aiAnswerEl = document.getElementById("aiAnswer");
 
-// ===================== Event Listener =====================
+// ===================== EVENT LISTENER YA BUTTON =====================
 askAiBtn.addEventListener("click", async () => {
   const question = aiQuestionInput.value.trim();
   if (!question) {
@@ -41,7 +40,7 @@ askAiBtn.addEventListener("click", async () => {
   aiAnswerEl.textContent = answer;
 });
 
-// ===================== Optional: Press Enter to Ask =====================
+// ===================== EVENT LISTENER YA ENTER KEY =====================
 aiQuestionInput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     askAiBtn.click();
