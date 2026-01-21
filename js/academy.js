@@ -20,6 +20,8 @@ function addMessage(content, sender = "ai") {
   chatBox.appendChild(msgEl);
   chatBox.scrollTop = chatBox.scrollHeight; // auto scroll down
 }
+// ===================== AI greeting message =====================
+addMessage("👋Niulize chochote, usichoelewa nitakusaidia kwa kina...", "ai");
 
 // ===================== SEND QUESTION FUNCTION =====================
 async function sendQuestion() {
