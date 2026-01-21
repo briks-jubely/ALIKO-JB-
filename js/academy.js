@@ -29,3 +29,36 @@ askBtn.addEventListener("click", async () => {
   const answer = await askAI(question);
   answerBox.textContent = answer;
 });
+const askBtn = document.getElementById("askAiBtn");
+const questionInput = document.getElementById("aiQuestion");
+const answerEl = document.getElementById("aiAnswer");
+
+// Badilisha IP kwa IP ya backend yako kwenye network
+const AI_API_URL = "http://10.55.0.158:3000/ask-ai";
+
+askBtn.addEventListener("click", async () => {
+  const question = questionInput.value.trim();
+  if (!question) {
+    answerEl.textContent = "Tafadhali andika swali kwanza!";
+    return;
+  }
+
+  answerEl.textContent = "🤖 Inatuma swali, subiri...";
+
+  try {
+    const res = await fetch(AI_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question })
+    });
+
+    if (!res.ok) throw new Error("Server haikuweza kutoa jibu");
+
+    const data = await res.json();
+    answerEl.textContent = data.answer || "Samahani, nilikosa kujibu.";
+
+  } catch (err) {
+    console.error(err);
+    answerEl.textContent = "⚠️ Kuna tatizo la kuwasiliana na AI backend";
+  }
+});
