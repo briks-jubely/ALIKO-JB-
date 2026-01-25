@@ -14,24 +14,28 @@
 
 <body>
 
-<header>
-    <img src="../assets/images/icon-192.png" alt="ALIKO JB Logo">
-    <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
+<header class="app-header">
+  <div class="nav-container">
+
+    <!-- Logo -->
+    <div class="logo">
+      <img src="../assets/images/icon-192.png" class="app-logo" alt="ALIKO JB Logo">
+      <span class="brand-title">ALIKO JB AUTOMOTIVE ENGINEERING</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="app-nav">
+      <a href="index.html">Home</a>
+      <a href="Workshop.html">Workshop</a>
+      <a href="academy.html">Academy</a>
+      <a href="Services.html">Services</a>
+    </nav>
+
+    <!-- Install Button -->
+    <button id="installBtn" class="install-btn" onclick="installApp()">Install App</button>
+
+  </div>
 </header>
-
-<nav>
-  <a href="Workshop.html" id="workshopLink">
-    Workshop
-  </a>
-
-  <a href="academy.html" id="academyLink">
-     Academy
-  </a>
-</nav>
-
-<button id="installBtn" onclick="installApp()" style="display:none">
-  Install App
-</button>
 
 <section>
     <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
