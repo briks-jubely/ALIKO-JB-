@@ -1,0 +1,14 @@
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.col {
+  flex: 1;
+  min-width: 200px;
+}

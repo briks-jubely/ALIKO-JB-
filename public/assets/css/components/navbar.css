@@ -1,0 +1,19 @@
+.app-header, .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: #fff;
+}
+.app-header img {
+  width: 50px;
+}
+.app-nav a {
+  margin-left: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+.app-nav a:hover {
+  color: var(--accent-color);
+}

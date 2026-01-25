@@ -1,0 +1,9 @@
+section {
+  padding: 4rem 0;
+}
+footer {
+  padding: 2rem 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+}
