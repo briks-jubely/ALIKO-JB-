@@ -1,0 +1,27 @@
+/* ===============================
+   GLOBAL LAYOUT SYSTEM
+   =============================== */
+
+header {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+footer {
+  background: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
