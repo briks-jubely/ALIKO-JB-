@@ -17,3 +17,42 @@
 .app-nav a:hover {
   color: var(--accent-color);
 }
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #064c3b;
+  color: #fff;
+}
+
+header img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+header h1 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 14px;
+}
+
+nav a {
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#installBtn {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  background: #0aa37f;
+}
