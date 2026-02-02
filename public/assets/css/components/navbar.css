@@ -1,58 +1,81 @@
-.app-header, .nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* =========================
+   NAVBAR COMPONENT
+========================= */
+
+/* Header wrapper */
+.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--primary-color, #064c3b); /* default if --primary-color not defined */
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Container inside header */
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
   padding: 1rem 2rem;
-  background: var(--primary-color);
-  color: #fff;
-}
-.app-header img {
-  width: 50px;
-}
-.app-nav a {
-  margin-left: 1rem;
-  color: #fff;
-  font-weight: bold;
-}
-.app-nav a:hover {
-  color: var(--accent-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header {
+/* Logo */
+.app-header .logo {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  background: #064c3b;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
   color: #fff;
 }
 
-header img {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+.app-header .logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-header h1 {
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-nav {
+/* Navigation links */
+.app-nav {
   display: flex;
-  gap: 14px;
+  gap: 1.5rem;
 }
 
-nav a {
-  font-size: 0.9rem;
-  padding: 6px 10px;
+.app-nav a {
   color: #fff;
+  font-weight: 600;
   text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.25s;
 }
 
-#installBtn {
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  border-radius: 8px;
-  background: #0aa37f;
+.app-nav a:hover {
+  background: rgba(255,255,255,0.15);
+  color: var(--accent-color, #00c8ff); /* default accent */
+}
+
+/* Responsive: shrink navbar on mobile */
+@media screen and (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .app-nav {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-nav a {
+    width: 100%;
+    display: block;
+  }
 }
