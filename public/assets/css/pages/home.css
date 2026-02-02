@@ -6,3 +6,7 @@
   display: block;
   margin: 15px auto;
 }
+
+section.hero {
+  margin-top: 80px; /* adjust kulingana na urefu halisi wa header yako */
+}

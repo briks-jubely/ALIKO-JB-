@@ -16,7 +16,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: var(--primary-color);
+  background: rgba(6,76,59,0.85); /* semi-transparent */
+  backdrop-filter: blur(6px);
   color: var(--text-light);
   position: fixed;
   width: 100%;
@@ -30,13 +31,16 @@
   height: 50px;
 }
 
+/* =========================
+   NAVIGATION
+========================= */
 .nav-container {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: row; /* horizontal by default */
   align-items: center;
+  gap: 1.5rem;
 }
 
-/* Navbar links */
 .nav-container a {
   font-weight: bold;
   color: var(--text-light);
@@ -67,16 +71,32 @@
 }
 
 /* =========================
+   HERO & MAIN PAGE ADJUSTMENT
+========================= */
+section.hero {
+  margin-top: 80px; /* adjust according to header height */
+}
+
+/* =========================
    RESPONSIVE MOBILE
 ========================= */
 @media (max-width: 768px) {
   .nav-container {
+    flex-direction: row; /* horizontal nav on mobile */
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 60px;
+    background: rgba(6,76,59,0.85); /* maintain transparency */
+    padding: 10px 16px;
+  }
+}
+
+/* Desktop vertical nav */
+@media (min-width: 769px) {
+  .nav-container {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    background: var(--primary-color);
-    padding: 10px 16px;
-    margin-top: 60px;
   }
 }
 
@@ -92,7 +112,7 @@
   }
 
   .app-header, header {
-    background: var(--primary-color);
+    background: rgba(6,76,59,0.85);
     color: var(--text-light);
   }
 
