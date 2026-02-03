@@ -1,0 +1,12 @@
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+
+rmnet1: flags=193<UP,RUNNING,NOARP>  mtu 1500
+        inet 10.64.131.17  netmask 255.255.255.0
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+
+rmnet4: flags=193<UP,RUNNING,NOARP>  mtu 1500
+        inet 10.55.158.216  netmask 255.255.255.0
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+
