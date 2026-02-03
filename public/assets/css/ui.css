@@ -1,7 +1,12 @@
+/* =========================
+   UI CSS
+========================= */
+
 /* Base */
 @import "./base/reset.css";
 @import "./base/variables.css";
 @import "./base/base.css";
+@import "./base/theme.css"; /* <-- add this */
 
 /* Layouts */
 @import "./layouts/grid.css";
@@ -17,4 +22,5 @@
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
+  font-family: var(--font-sans);
 }
