@@ -12,3 +12,9 @@
 @import "./components/cards.css";
 @import "./components/navbar.css";
 @import "./components/footer.css";
+
+/* Global Theme Control */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
