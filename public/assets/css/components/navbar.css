@@ -9,6 +9,20 @@
 }
 
 /* =========================
+   GLOBAL BODY FIX
+========================= */
+body {
+  padding-top: 70px; /* height of header on desktop */
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 150px; /* taller header on mobile */
+  }
+}
+
+/* =========================
    NAVBAR / HEADER
 ========================= */
 .app-header, header {
@@ -16,8 +30,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: rgba(6,76,59,0.85); /* semi-transparent */
-  backdrop-filter: blur(6px);
+  background: var(--primary-color);
   color: var(--text-light);
   position: fixed;
   width: 100%;
@@ -31,14 +44,11 @@
   height: 50px;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
 .nav-container {
   display: flex;
-  flex-direction: row; /* horizontal by default */
-  align-items: center;
   gap: 1.5rem;
+  align-items: center;
+  flex-direction: row; /* horizontal on desktop */
 }
 
 .nav-container a {
@@ -71,32 +81,16 @@
 }
 
 /* =========================
-   HERO & MAIN PAGE ADJUSTMENT
-========================= */
-section.hero {
-  margin-top: 30px; /* adjust according to header height */
-}
-
-/* =========================
    RESPONSIVE MOBILE
 ========================= */
 @media (max-width: 768px) {
   .nav-container {
-    flex-direction: row; /* horizontal nav on mobile */
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 60px;
-    background: rgba(6,76,59,0.85); /* maintain transparency */
-    padding: 10px 16px;
-  }
-}
-
-/* Desktop vertical nav */
-@media (min-width: 769px) {
-  .nav-container {
-    flex-direction: column;
+    flex-direction: column; /* vertical nav on mobile */
     align-items: flex-start;
     gap: 10px;
+    background: var(--primary-color);
+    padding: 10px 16px;
+    margin-top: 0;
   }
 }
 
@@ -112,7 +106,7 @@ section.hero {
   }
 
   .app-header, header {
-    background: rgba(6,76,59,0.85);
+    background: var(--primary-color);
     color: var(--text-light);
   }
 
