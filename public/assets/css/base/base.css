@@ -1,14 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
 body {
-  font-family: var(--font-sans);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
 }
-a {
-  text-decoration: none;
-  color: var(--primary-color);
-}
-img {
-  max-width: 100%;
-  display: block;
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
