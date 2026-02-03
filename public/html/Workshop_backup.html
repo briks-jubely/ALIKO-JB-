@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../assets/css/ui.css">
+    <link rel="stylesheet" href="../assets/css/ui.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALIKO JB Automotive Engineering</title>
+
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#020617">
+
+  <link rel="stylesheet" href="../css/workshop.css">
+</head>
+
+<body>
+<header class="app-header">
+  <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
+  <p>Professional Vehicle Diagnostics & Electrical Solutions</p>
+</header>
+
+<main class="app-content">
+
+<section id="home">
+<h2>About Us</h2>
+<p>
+ALIKO JB Automotive Engineering ni workshop ya kitaalamu
+inayojihusisha na utambuzi wa magari (diagnostics),
+mifumo ya umeme wa magari, ECU, transmission na technology ya kisasa ya magari.
+</p>
+<a href="#" onclick="goToAcademy()" class="btn-academy">🎓 CLICK TO JOIN ALIKO JB Academy</a>
+</section>
+
+<section id="services">
+<h2>Our Services</h2>
+
+<div class="service-box">
+<h3>Vehicle Diagnostics</h3>
+<p>Scanning ECU, reading fault codes, live data analysis.</p>
+</div>
+
+<div class="service-box">
+<h3>Automotive Electrical Systems</h3>
+<p>Wiring, sensors, actuators, CAN bus troubleshooting.</p>
+</div>
+
+<div class="service-box">
+<h3>ECU Programming</h3>
+<p>ECU testing, repair, coding & software related issues.</p>
+</div>
+
+<div class="service-box">
+<h3>Transmission & Gear Systems</h3>
+<p>Automatic & manual transmission diagnostics and repair.</p>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: jubelybriks@gmail.com</p>
+<p>Location: Tanzania</p>
+
+<button onclick="contactUs()">📞 Wasiliana Sasa</button>
+</section>
+
+</main>
+
+<nav class="app-nav">
+<button onclick="showSection('home')">🏠 Home</button>
+<button onclick="showSection('services')">🛠 Services</button>
+<button onclick="showSection('contact')">📞 Contact</button>
+</nav>
+
+<footer>
+<p>© 2025 ALIKO JB Automotive Engineering</p>
+</footer>
+
+<script>
+function contactUs() {
+ alert("📞 ALIKO JB AUTOMOTIVE\n0750 198 672\n📧 jubelybriks@gmail.com");
+}
+
+function showSection(id) {
+ document.querySelectorAll("section").forEach(s=>s.style.display="none");
+ document.getElementById(id).style.display="block";
+}
+
+function goToAcademy() {
+ const user = localStorage.getItem("loggedInUser");
+ window.location.href = user ? "academy.html" : "login.html";
+}
+</script>
+
+</body>
+  </html>

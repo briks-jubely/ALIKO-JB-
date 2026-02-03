@@ -1,0 +1,119 @@
+/* =========================
+   VARIABLES
+========================= */
+:root {
+  --card-bg: #1c1c1c;
+  --card-radius: 12px;
+  --card-padding: 20px;
+  --hero-max-height: 280px;
+  --accent-color: #00c8ff;
+  --text-light: #fff;
+  --text-muted: #aaa;
+}
+
+/* =========================
+   HERO IMAGE
+========================= */
+.hero-image {
+  width: 100%;
+  max-height: var(--hero-max-height);
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  margin-top: 90px; /* margin-top for fixed header */
+}
+
+/* =========================
+   FEATURE CARDS
+========================= */
+.feature-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  margin: 20px auto;
+  max-width: 900px;
+  box-shadow:
+    0 4px 20px rgba(0,140,255,0.1),
+    inset 0 0 15px rgba(0,80,255,0.05);
+  transition: 0.35s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 6px 30px rgba(0,160,255,0.2),
+    inset 0 0 20px rgba(0,110,255,0.1);
+}
+
+.feature-card img.card-img {
+  width: 100%;
+  max-height: var(--hero-max-height);
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  margin-bottom: 15px;
+}
+
+/* Card title with icon */
+.feature-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.feature-card h3 img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Card paragraph */
+.feature-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+/* Card link */
+.feature-card a {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
+@media (max-width: 768px) {
+  .hero-image {
+    margin-top: 20px;
+  }
+
+  .feature-card {
+    padding: 16px;
+    margin: 16px 12px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================
+   DARK MODE SUPPORT
+========================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: #1c1c1c;
+    --accent-color: #00c8ff;
+    --text-light: #fff;
+    --text-muted: #aaa;
+  }
+
+  .feature-card {
+    background: var(--card-bg);
+  }
+
+  .feature-card p {
+    color: var(--text-muted);
+  }
+}

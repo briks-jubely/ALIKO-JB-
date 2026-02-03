@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIKO JB Academy</title>
+  
+<link rel="stylesheet" href="../css/academy.css">
+</head>
+
+<body>
+
+<header class="app-header">
+  <div class="nav-container">
+
+    <div class="logo">
+      <img src="../assets/images/icon-192.png" class="app-logo" alt="ALIKO JB Logo">
+      <span class="brand-title">ALIKO JB AUTOMOTIVE ENGINEERING</span>
+    </div>
+
+    <nav class="app-nav">
+      <a href="index.html">Home</a>
+      <a href="Workshop.html">Workshop</a>
+      <a href="academy.html">Academy</a>
+      <a href="Services.html">Services</a>
+    </nav>
+
+  </div>
+</header>
+
+<section id="courses" class="content">
+  <h2>Online Training Programs</h2>
+
+  <!-- ⚠️ Container sahihi sasa -->
+  <div id="coursesContainer" class="courses-container"></div>
+
+  <p id="status"></p>
+</section>
+
+<section id="community" class="content">
+  <h2>Automotive Community & Discussions</h2>
+
+  <!-- ===================== AI CHAT SECTION ===================== -->
+<div class="card ai-chat-card">
+  <h3>🤖 Ask AI</h3>
+  <p>Uliza swali lolote kuhusu magari, EFI, sensors, actuators, diagnostics, n.k.</p>
+  
+  <div class="chat-box" id="chatBox">
+    <!-- Messages zitaonekana hapa -->
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="aiQuestion" placeholder="Andika swali lako hapa...">
+    <button id="askAiBtn">Tuma</button>
+  </div>
+</div>
+<!-- ================= END AI CHAT ================= -->
+
+  <div class="card">
+    <h3>Knowledge Sharing</h3>
+    <p>Video, diagrams, in real vehicle problems & solutions.</p>
+  </div>
+
+  <a class="btn-academy" href="https://wa.me/255620198672">
+    💬 Join Discussion (WhatsApp)
+  </a>
+</section>
+
+<button class="logout-btn" id="logoutBtn">⎋ Logout</button>
+
+<footer class="footer">
+  <p>© 2025 ALIKO JB Automotive Engineering</p>
+</footer>
+
+<!-- 🔥 LINK YA COURSES.JS -->
+<script type="module" src="../assets/images/../js/academy.js"></script>
+
+<script src="../assets/images/https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>  
+</body>
+  </html>
