@@ -1,12 +1,62 @@
-button, .btn {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--secondary-color);
-  color: #fff;
+/* =========================
+   BUTTON SYSTEM
+========================= */
+
+button,
+.btn {
+  font-family: var(--font-sans);
   border: none;
-  border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
 }
-button:hover, .btn:hover {
-  background-color: var(--accent-color);
+
+/* Primary button */
+.main-btn,
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: var(--color-bg);
+}
+
+.main-btn:hover,
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Accent button */
+.btn-academy,
+.install-btn {
+  background: var(--color-accent);
+  color: var(--color-text);
+}
+
+.btn-academy:hover,
+.install-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Ghost / logout button */
+.logout-btn {
+  background: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-muted);
+}
+
+.logout-btn:hover {
+  background: var(--color-muted);
+  color: var(--color-bg);
+}
+
+/* Disabled */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

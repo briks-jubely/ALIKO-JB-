@@ -1,45 +1,45 @@
+/* =========================
+   FORM SYSTEM
+========================= */
+
 .form {
-  display: none;
-}
-
-.form.active {
-  display: block;
-}
-
-input {
   width: 100%;
-  padding: 15px;
-  margin-top: 14px;
-  border-radius: 18px;
-  border: none;
-  background-color: var(--color-bg);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-top: 0.8rem;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background: var(--color-bg);
   color: var(--color-text);
-  font-size: 15px;
-  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  transition: border 0.25s, background 0.25s;
 }
 
-input:focus {
-  outline: 2px solid var(--color-accent);
+input::placeholder {
+  color: var(--color-muted);
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Messages */
 .msg {
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
   text-align: center;
-  color: var(--color-accent);
+  color: #ef4444; /* error */
 }
 
-.success {
-  color: var(--color-secondary);
-}
-
-.main-btn {
-  width: 100%;
-  padding: 15px;
-  margin-top: 18px;
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-  font-weight: 800;
-  font-size: 16px;
-  border-radius: 20px;
+.msg.success {
+  color: #22c55e;
 }

@@ -1,0 +1,14 @@
+/* =========================
+   COURSE PAGE
+========================= */
+.course-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.course-meta {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+

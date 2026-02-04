@@ -1,26 +1,22 @@
-/* =========================
-   UI CSS
-========================= */
-
 /* Base */
 @import "./base/reset.css";
 @import "./base/variables.css";
 @import "./base/base.css";
-@import "./base/theme.css"; /* <-- add this */
+@import "./base/theme.css";
 
 /* Layouts */
-@import "./layouts/grid.css";
 @import "./layouts/sections.css";
-
+@import "./layouts/layout.css";
+@import "./layouts/hero.css";
+@import "./layouts/grids.css";
+@import "./layouts/course.css";
 /* Components */
 @import "./components/buttons.css";
 @import "./components/cards.css";
 @import "./components/navbar.css";
 @import "./components/footer.css";
+@import "./components/forms.css";
+@import "./components/tabs.css";
 
-/* Global Theme Control */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-}
+/* Pages */
+@import "./pages/login.css";
