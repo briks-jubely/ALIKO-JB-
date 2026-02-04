@@ -114,3 +114,26 @@ body {
     color: var(--text-light);
   }
 }
+
+/* =========================
+   NAV BASE
+========================= */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-bg);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] .nav {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Logo inside nav */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

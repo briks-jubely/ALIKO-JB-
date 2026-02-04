@@ -18,3 +18,23 @@ button {
   border-radius: 6px;
   transition: all 0.3s ease;
 }
+
+/* =========================
+   BRANDING
+========================= */
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .brand-title {
+  color: var(--color-accent);
+}
