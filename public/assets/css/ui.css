@@ -1,23 +1,33 @@
-/* Base */
+/* =========================
+   CSS MASTER FILE - ui.css
+   ========================= */
+
+/* -------- RESET & BASE -------- */
 @import "./base/reset.css";
 @import "./base/variables.css";
-@import "./base/base.css";
 @import "./base/theme.css";
-@import "./base/utilities.css";
+@import "./base/base.css";
 
-/* Layouts */
-@import "./layouts/sections.css";
+/* -------- LAYOUTS -------- */
 @import "./layouts/layout.css";
-@import "./layouts/hero.css";
+@import "./layouts/grid.css";
 @import "./layouts/grids.css";
+@import "./layouts/sections.css";
+@import "./layouts/hero.css";
 @import "./layouts/course.css";
-/* Components */
+
+/* -------- COMPONENTS -------- */
+@import "./components/navbar.css";
 @import "./components/buttons.css";
 @import "./components/cards.css";
-@import "./components/navbar.css";
-@import "./components/footer.css";
 @import "./components/forms.css";
 @import "./components/tabs.css";
+@import "./components/footer.css";
 
-/* Pages */
+/* -------- PAGES -------- */
+@import "./pages/index.css";
+@import "./pages/home.css";
+@import "./pages/academy.css";
+@import "./pages/course.css";
+@import "./pages/workshop.css";
 @import "./pages/login.css";
