@@ -35,3 +35,14 @@ google-services.json
 
 node_modules/
 .env
+
+# CSS coverage tools
+check-css-coverage.sh
+css_selectors.txt
+css-selectors.txt
+html_classes.txt
+missing
+.css_coverage_progress
+
+# Editor temp files
+*.swp

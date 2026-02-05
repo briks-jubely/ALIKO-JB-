@@ -3,6 +3,7 @@
 @import "./base/variables.css";
 @import "./base/base.css";
 @import "./base/theme.css";
+@import "./base/utilities.css";
 
 /* Layouts */
 @import "./layouts/sections.css";
