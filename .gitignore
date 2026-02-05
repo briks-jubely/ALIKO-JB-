@@ -46,3 +46,8 @@ missing
 
 # Editor temp files
 *.swp
+*.bak
+backup_css/
+backup_old_css/
+add-header.sh
+check-scroll.sh
