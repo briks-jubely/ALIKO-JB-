@@ -1,22 +1,70 @@
+/* Container ya login/register forms */
 .app {
-  width: 100%;
-  max-width: 380px;
-  padding: 28px 22px 32px;
-  background-color: var(--color-bg);
-  border-radius: 26px;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.65);
+  background-color: #1e1e1e; /* dark background */
+  padding: 40px 30px;
+  max-width: 400px;
+  margin: 60px auto; /* center vertically na horizontally */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  text-align: center;
+  color: #fff;
 }
 
+/* Titles */
 .app h1 {
-  font-size: 22px;
-  text-align: center;
-  margin-bottom: 8px;
-  color: var(--color-text);
+  font-size: 1.8rem;
+  margin-bottom: 5px;
 }
 
 .app p {
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 18px;
-  color: var(--color-muted);
+  font-size: 0.95rem;
+  color: #aaa;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.app input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #121212;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+/* Button */
+.app button.main-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #008060, #004d40);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.app button.main-btn:hover {
+  background: linear-gradient(90deg, #00a070, #00664d);
+}
+
+/* Messages */
+.msg {
+  font-size: 0.85rem;
+  margin-top: 10px;
+  color: #ff6b6b;
+}
+
+/* Links */
+.app a {
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+.app a:hover {
+  text-decoration: underline;
 }
