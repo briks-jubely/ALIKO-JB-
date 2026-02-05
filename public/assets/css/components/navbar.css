@@ -1,139 +1,79 @@
-/* =========================
-   VARIABLES
-========================= */
-:root {
-  --primary-color: #064c3b;
-  --accent-color: #00c8ff;
-  --text-light: #fff;
-  --text-muted: #ccc;
+/* ================= Header + Nav ================= */
+
+/* Header container */
+.site-header {
+  background-color: #28a745; /* green background */
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-/* =========================
-   GLOBAL BODY FIX
-========================= */
-body {
-  padding-top: 70px; /* height of header on desktop */
+/* Logo + Name + Tagline */
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-header .logo h1 {
   margin: 0;
-}
-
-@media (max-width: 768px) {
-  body {
-    padding-top: 150px; /* taller header on mobile */
-  }
-}
-
-/* =========================
-   NAVBAR / HEADER
-========================= */
-.app-header, header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  background: var(--primary-color);
-  color: var(--text-light);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.app-header img {
-  width: 50px;
-  height: 50px;
-}
-
-.nav-container {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  flex-direction: row; /* horizontal on desktop */
-}
-
-.nav-container a {
+  font-size: 1.8rem;
   font-weight: bold;
-  color: var(--text-light);
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.nav-container a:hover {
-  background-color: rgba(0,200,255,0.15);
-  color: var(--accent-color);
-}
-
-/* Install App button */
-#installBtn {
-  background-color: var(--accent-color);
   color: #fff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-weight: bold;
+}
+
+.site-header .logo p {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* Main navigation */
+.main-nav {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.main-nav a:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Install button (only on index.html) */
+.install-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #28a745;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-#installBtn:hover {
-  background-color: #009de0;
-  transform: translateY(-2px);
+.install-btn:hover {
+  background-color: #e6e6e6;
+  transform: scale(1.05);
 }
 
-/* =========================
-   RESPONSIVE MOBILE
-========================= */
+/* Optional: make header responsive */
 @media (max-width: 768px) {
-  .nav-container {
-    flex-direction: column; /* vertical nav on mobile */
+  .site-header .logo {
+    flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    background: var(--primary-color);
-    padding: 10px 16px;
-    margin-top: 0;
   }
-}
-
-/* =========================
-   DARK MODE SUPPORT
-========================= */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #064c3b;
-    --accent-color: #00c8ff;
-    --text-light: #fff;
-    --text-muted: #aaa;
+  .main-nav {
+    flex-direction: column;
+    gap: 1rem;
   }
-
-  .app-header, header {
-    background: var(--primary-color);
-    color: var(--text-light);
-  }
-
-  .nav-container a {
-    color: var(--text-light);
-  }
-}
-
-/* =========================
-   NAV BASE
-========================= */
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1.25rem;
-  background: var(--color-bg);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-
-[data-theme="dark"] .nav {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Logo inside nav */
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
