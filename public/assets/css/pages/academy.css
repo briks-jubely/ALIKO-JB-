@@ -327,7 +327,7 @@ body {
 
 /* Messages */
 .msg {
-  max-width: 80%;
+  max-width: 100%;
   padding: 10px 14px;
   border-radius: 12px;
   font-size: 14px;
@@ -408,6 +408,6 @@ body {
   }
 
   .msg {
-    max-width: 90%;
+    max-width: 100%;
   }
 }
