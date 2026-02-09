@@ -22,3 +22,11 @@
   gap: 28px;
   margin-top: 40px;
 }
+/* ===== FORCE MOBILE SINGLE COLUMN ===== */
+@media (max-width: 768px) {
+  .grid,
+  .grids {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
