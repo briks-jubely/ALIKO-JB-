@@ -17,3 +17,7 @@
 .app.narrow {
   max-width: 420px;
 }
+
+html, body {width:100%; overflow-x:hidden;}
+* {box-sizing:border-box; max-width:100%;}
+
