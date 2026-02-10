@@ -411,3 +411,13 @@ body {
     max-width: 100%;
   }
 }
+
+@media (max-width: 768px) {
+  .logout-btn {
+    position: static;
+    width: 100%;
+    margin: 20px auto;
+    justify-content: center;
+  }
+}
+
