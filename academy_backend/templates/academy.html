@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ALIKO JB Academy</title>
   
-    <link rel="stylesheet" href="../assets/css/ui.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ui.css') }}">
 </head>
 
 <body>
@@ -17,10 +17,10 @@
     <p>Professional Vehicle Diagnostics & Electrical Solutions</p>
   </div>
   <nav class="main-nav">
-    <a href="index.html">Home</a>
-    <a href="Workshop.html">Workshop</a>
-    <a href="academy.html">Academy</a>
-    <a href="Services.html">Services</a>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('workshop') }}">Workshop</a>
+    <a href="{{ url_for('academy') }}">Academy</a>
+    <a href="{{ url_for('services') }}">Services</a>
   </nav>
   
 </header>
@@ -70,7 +70,7 @@
 </footer>
 
 <!-- 🔥 LINK YA COURSES.JS -->
-<script type="module" src="../js/academy.js"></script>
+<script type="module" src="{{ url_for('static', filename='js/academy.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();<

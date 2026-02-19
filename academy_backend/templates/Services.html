@@ -2,19 +2,19 @@
 <html>
 <head>
   <title>Services | ALIKO JB</title>
-    <link rel="stylesheet" href="../assets/css/ui.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ui.css') }}">
 </head>
 <nav class="nav">
   <div class="nav-logo">
-    <img src="../assets/images/logo.png" alt="ALIKO JB">
+    <img src="{{ url_for('static', filename='assets/images/logo.png') }}" alt="ALIKO JB">
     <span>ALIKO JB</span>
   </div>
 
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('services') }}">Services</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('contact.html') }}">Contact</a></li>
   </ul>
 </nav>
   <body>
@@ -42,6 +42,6 @@
 </section>
 
     <button id="theme-toggle-btn" style="cursor:pointer; padding:6px 12px; border-radius:6px;">Toggle Theme</button>
-    <script src="../assets/js/theme-toggle.js"></script>
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
 </body>
 </html>

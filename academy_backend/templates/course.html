@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ALIKO JB Course Details</title>
-    <link rel="stylesheet" href="../assets/css/ui.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ui.css') }}">
 </head>
 <body>
 
 <div class="course-page">
 
   <!-- Hero & Basic Info -->
-  <img src="../assets/images/icon-192.png" alt="Course Image" id="course-image">
+  <img src="{{ url_for('static', filename='assets/images/icon-192.png') }}" alt="Course Image" id="course-image">
 
   <h1 id="course-title">Loading...</h1>
 
@@ -28,13 +28,13 @@
 
 </div>
 
-<script type="module" src="../js/course.js"></script>
+<script type="module" src="{{ url_for('static', filename='js/course.js') }}"></script>
 
 <!-- 🔍 ERUDA CONSOLE (DEBUG TOOL) -->
 <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>  
 
     <button id="theme-toggle-btn" style="cursor:pointer; padding:6px 12px; border-radius:6px;">Toggle Theme</button>
-    <script src="../assets/js/theme-toggle.js"></script>
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
 </body>
 </html>
