@@ -12,7 +12,7 @@
 @media (max-width: 768px) {
   .grid,
   .grids {
-    display: flex !important;
-    flex-direction: column !important;
+    display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
