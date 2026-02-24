@@ -1,53 +1,6 @@
-# Gradle files
-.gradle/
-build/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Log/OS Files
-*.log
-
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
-
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
-
-# Keystore files
-*.jks
-*.keystore
-
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
-
+venv/
 node_modules/
-.env
-
-# CSS coverage tools
-check-css-coverage.sh
-css_selectors.txt
-css-selectors.txt
-html_classes.txt
-missing
-.css_coverage_progress
-
-# Editor temp files
-*.swp
+*.log
+*.tmp
 *.bak
-backup_css/
-backup_old_css/
-add-header.sh
-check-scroll.sh
+*.pyc
