@@ -1,0 +1,32 @@
+.container {
+  width: 90%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.col {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* =========================
+   FEATURE GRID
+========================= */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+/* ===== FORCE MOBILE SINGLE COLUMN ===== */
+@media (max-width: 768px) {
+  .grid,
+  .grids {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}

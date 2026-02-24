@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALIKO JB Course Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ui.css') }}">
+</head>
+<body>
+
+<div class="course-page">
+
+  <!-- Hero & Basic Info -->
+  <img src="{{ url_for('static', filename='assets/images/icon-192.png') }}" alt="Course Image" id="course-image">
+
+  <h1 id="course-title">Loading...</h1>
+
+  <div class="course-meta">
+    <span id="course-level">Level</span> • 
+    <span id="course-duration">Duration</span> • 
+    <span id="course-badge" class="badge">FREE/LOCKED</span>
+  </div>
+
+  <!-- Dynamic Sections Container -->
+  <div id="course-sections">
+    <!-- JS itaunda sections zote dynamic -->
+  </div>
+
+</div>
+
+<script type="module" src="{{ url_for('static', filename='js/course.js') }}"></script>
+
+<!-- 🔍 ERUDA CONSOLE (DEBUG TOOL) -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>  
+
+    <button id="theme-toggle-btn" style="cursor:pointer; padding:6px 12px; border-radius:6px;">Toggle Theme</button>
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+</body>
+</html>

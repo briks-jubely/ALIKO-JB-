@@ -1,0 +1,23 @@
+/* =========================
+   APP LAYOUT
+========================= */
+.app {
+  max-width: 100%; width: 100%;
+  margin: 0;
+  padding: 1.5rem;
+}
+
+/* Page content wrapper */
+.content,
+.app-content {
+  margin-top: 1.5rem;
+}
+
+/* Centered narrow layout (login, auth) */
+.app.narrow {
+  max-width: 420px;
+}
+
+html, body {width:100%; overflow-x:hidden;}
+* {box-sizing:border-box; max-width:100%;}
+

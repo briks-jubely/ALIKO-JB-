@@ -1,0 +1,33 @@
+/* =========================
+   CSS MASTER FILE - ui.css
+   ========================= */
+
+/* -------- RESET & BASE -------- */
+@import "./base/reset.css";
+@import "./base/variables.css";
+@import "./base/theme.css";
+@import "./base/base.css";
+
+/* -------- LAYOUTS -------- */
+@import "./layouts/layout.css";
+@import "./layouts/grid.css";
+@import "./layouts/grids.css";
+@import "./layouts/sections.css";
+@import "./layouts/hero.css";
+@import "./layouts/course.css";
+
+/* -------- COMPONENTS -------- */
+@import "./components/navbar.css";
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/forms.css";
+@import "./components/tabs.css";
+@import "./components/footer.css";
+
+/* -------- PAGES -------- */
+@import "./pages/index.css";
+@import "./pages/home.css";
+@import "./pages/academy.css";
+@import "./pages/course.css";
+@import "./pages/workshop.css";
+@import "./pages/login.css";

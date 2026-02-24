@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIKO JB AUTOMOTIVE ENGINEERING</title>
+
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ui.css') }}">
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <h1>ALIKO JB AUTOMOTIVE ENGINEERING</h1>
+    <p>Professional Vehicle Diagnostics & Electrical Solutions</p>
+  </div>
+  <nav class="main-nav">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('workshop') }}">Workshop</a>
+    <a href="{{ url_for('academy') }}">Academy</a>
+    <a href="{{ url_for('services') }}">Services</a>
+  </nav>
+  <button id="installBtn" class="install-btn" onclick="installApp()">Install App</button>
+</header>
+
+<!-- HERO IMAGE -->
+<div class="hero">
+  <img 
+    src="{{ url_for('static', filename='assets/images/hero.png') }}"
+    class="hero-image"
+    alt="ALIKO JB Hero">
+</div>
+
+<!-- MAIN CONTENT -->
+<section>
+  <h2>Welcome to ALIKO JB AUTOMOTIVE ENGINEERING</h2>
+  <p>
+    Karibu kwenye ALIKO JB AUTOMOTIVE ENGINEERING, tunatoa huduma za hali ya juu
+    katika urekebishaji wa magari, mafunzo ya umeme wa magari, na teknolojia za kisasa.
+  </p>
+
+<div class="features-grid">
+
+  <!-- WORKSHOP CARD -->
+  <div class="feature-card">
+    <img 
+      src="{{ url_for('static', filename='assets/images/workshop_pht.png') }}"
+      class="card-img"
+      alt="Workshop Image">
+
+    <h3>
+      <img src="{{ url_for('static', filename='assets/images/icon-192.png') }}" alt="">
+      Workshop
+    </h3>
+
+    <p>
+      ALIKO JB Workshop inatoa huduma kamili za magari ikijumuisha ECU calibration,
+      reprogramming na matengenezo ya kitaalamu.
+    </p>
+
+    <a href="{{ url_for('workshop') }}">Explore Workshop</a>
+  </div>
+
+  <!-- ACADEMY CARD -->
+  <div class="feature-card">
+    <img 
+      src="{{ url_for('static', filename='assets/images/academy_pht.png') }}"
+      class="card-img"
+      alt="Academy Image">
+
+    <h3>
+      <img src="{{ url_for('static', filename='assets/images/icon-192.png') }}" alt="">
+      Academy
+    </h3>
+
+    <p>
+      ALIKO JB Academy inatoa mafunzo ya umeme wa magari, ECU coding,
+      diagnostics na automotive electronics.
+    </p>
+
+    <a href="{{ url_for('academy') }}">Explore Academy</a>
+  </div>
+
+</div>
+</section>
+
+<footer>
+    &copy; 2025 ALIKO JB AUTOMOTIVE ENGINEERING. All Rights Reserved.
+</footer>
+    
+<!-- JS -->
+<script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+    <button id="theme-toggle-btn" style="cursor:pointer; padding:6px 12px; border-radius:6px;">Toggle Theme</button>
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+</body>
+        </html>
