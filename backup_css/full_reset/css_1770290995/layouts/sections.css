@@ -1,0 +1,26 @@
+section {
+  padding: 4rem 0;
+}
+footer {
+  padding: 2rem 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero {
+  max-width: 1100px;
+  margin: 120px auto 40px;
+  padding: 0 16px;
+}
+
+.hero-image {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}

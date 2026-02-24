@@ -1,0 +1,19 @@
+/* =========================
+   APP LAYOUT
+========================= */
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Page content wrapper */
+.content,
+.app-content {
+  margin-top: 1.5rem;
+}
+
+/* Centered narrow layout (login, auth) */
+.app.narrow {
+  max-width: 420px;
+}
