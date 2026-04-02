@@ -1,32 +1,101 @@
-.container {
-  width: 90%;
-  max-width: 100%;
-  margin: 0 auto;
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.col {
-  flex: 1;
-  min-width: 200px;
+
+body {
+  font-family: Arial, sans-serif;
 }
 
 /* =========================
-   FEATURE GRID
+   CONTAINER
+========================= */
+.container {
+  width: 100%;
+  padding: 0 15px;
+}
+
+/* =========================
+   FULL WIDTH STACK (NO COLUMNS)
+========================= */
+.stack {
+  display: block;
+}
+
+/* =========================
+   ROW (FORCED SINGLE COLUMN)
+========================= */
+.row {
+  display: block; /* ❌ no flex */
+}
+
+/* =========================
+   COLUMN (NOW FULL WIDTH)
+========================= */
+.col {
+  width: 100%;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* =========================
+   FEATURES (ALSO STACKED)
 ========================= */
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
-  margin-top: 40px;
+  display: block;
 }
-/* ===== FORCE MOBILE SINGLE COLUMN ===== */
-@media (max-width: 768px) {
-  .grid,
-  .grids {
-    display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+.features-grid > * {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card {
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+
+/* =========================
+   NAVBAR (STACKED)
+========================= */
+.site-header {
+  background: #28a745;
+  padding: 1rem;
+  color: #fff;
+}
+
+.navbar {
+  display: block;
+}
+
+.navbar a {
+  display: block;
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
   }
-}
